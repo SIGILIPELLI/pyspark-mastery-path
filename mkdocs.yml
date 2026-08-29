@@ -47,12 +47,6 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
-# --- auto-pruned stub levels (see AdSense low-value-content fix) ---
-exclude_docs: |
-  level-2/[0-9]*
-  level-3/[0-9]*
-  level-4/[0-9]*
-# --- end auto-pruned stub levels ---
 
 nav:
   - Home: index.md
@@ -75,3 +69,39 @@ nav:
       - Overview: level-3/index.md
   - "Level 4 · Master":
       - Overview: level-4/index.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "01 · Joins Broadcast Vs Shuffle": level-2/01-joins-broadcast-vs-shuffle.md
+      - "02 · Window Functions": level-2/02-window-functions.md
+      - "03 · Udfs": level-2/03-udfs.md
+      - "04 · Partitioning Strategy": level-2/04-partitioning-strategy.md
+      - "05 · Caching Persistence": level-2/05-caching-persistence.md
+      - "06 · Spark SQL Basics": level-2/06-spark-sql-basics.md
+      - "07 · SQL And Dataframe API": level-2/07-sql-and-dataframe-api.md
+      - "08 · Nulls Data Cleaning": level-2/08-nulls-data-cleaning.md
+      - "09 · Nested Complex Types": level-2/09-nested-complex-types.md
+      - "10 · Capstone Multi Source Join": level-2/10-capstone-multi-source-join.md
+  - "Level 3 · Advanced":
+      - Overview: level-3/index.md
+      - "01 · Execution Plan Explain": level-3/01-execution-plan-explain.md
+      - "02 · Shuffle Optimization": level-3/02-shuffle-optimization.md
+      - "03 · Handling Skewed Data": level-3/03-handling-skewed-data.md
+      - "04 · Structured Streaming Basics": level-3/04-structured-streaming-basics.md
+      - "05 · Performance Tuning": level-3/05-performance-tuning.md
+      - "06 · Adaptive Query Execution": level-3/06-adaptive-query-execution.md
+      - "07 · Broadcast Joins At Scale": level-3/07-broadcast-joins-at-scale.md
+      - "08 · Monitoring Spark UI": level-3/08-monitoring-spark-ui.md
+      - "09 · Checkpointing Fault Tolerance": level-3/09-checkpointing-fault-tolerance.md
+      - "10 · Capstone Tuned Batch Pipeline": level-3/10-capstone-tuned-batch-pipeline.md
+  - "Level 4 · Master":
+      - Overview: level-4/index.md
+      - "01 · Delta Lake Lakehouse Patterns": level-4/01-delta-lake-lakehouse-patterns.md
+      - "02 · Orchestration Airflow Integration": level-4/02-orchestration-airflow-integration.md
+      - "03 · Cost Performance Tradeoffs": level-4/03-cost-performance-tradeoffs.md
+      - "04 · Debugging Failed Spark Jobs": level-4/04-debugging-failed-spark-jobs.md
+      - "05 · Schema Evolution Production": level-4/05-schema-evolution-production.md
+      - "06 · Multi Tenant Cluster Strategy": level-4/06-multi-tenant-cluster-strategy.md
+      - "07 · Data Quality Gates": level-4/07-data-quality-gates.md
+      - "08 · CI/CD for Spark Jobs": level-4/08-cicd-for-spark-jobs.md
+      - "09 · Career Growth Big Data": level-4/09-career-growth-big-data.md
+      - "10 · Capstone Production Lakehouse": level-4/10-capstone-production-lakehouse.md
