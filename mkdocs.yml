@@ -1,0 +1,77 @@
+site_name: PySpark Mastery Path
+site_description: A structured, module-wise training program on Apache Spark's Python API for big-data processing — from your first PySpark script to production-grade Spark jobs, with real code in every module.
+site_url: https://sigilipelli.github.io/pyspark-mastery-path/
+repo_url: https://github.com/SIGILIPELLI/pyspark-mastery-path
+repo_name: pyspark-mastery-path
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+# --- auto-pruned stub levels (see AdSense low-value-content fix) ---
+exclude_docs: |
+  level-2/[0-9]*
+  level-3/[0-9]*
+  level-4/[0-9]*
+# --- end auto-pruned stub levels ---
+
+nav:
+  - Home: index.md
+  - Privacy Policy: privacy.md
+  - "Level 1 · Entry":
+      - Overview: level-1/index.md
+      - "01 · What Is Spark & Why Distributed Processing": level-1/01-what-is-spark-distributed-processing.md
+      - "02 · Spark Architecture (Driver, Executors, Cluster Manager)": level-1/02-spark-architecture.md
+      - "03 · SparkSession & Your First PySpark Script": level-1/03-sparksession-first-script.md
+      - "04 · RDDs vs. DataFrames": level-1/04-rdds-vs-dataframes.md
+      - "05 · Reading Data (CSV, JSON, Parquet)": level-1/05-reading-data.md
+      - "06 · DataFrame Basics (select, filter, withColumn)": level-1/06-dataframe-basics.md
+      - "07 · Schemas & Data Types": level-1/07-schemas-data-types.md
+      - "08 · Basic Aggregations (groupBy, agg)": level-1/08-basic-aggregations.md
+      - "09 · Writing Data Out": level-1/09-writing-data-out.md
+      - "10 · Capstone — CSV-to-Parquet ETL Script": level-1/10-capstone-csv-to-parquet-etl.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+  - "Level 3 · Advanced":
+      - Overview: level-3/index.md
+  - "Level 4 · Master":
+      - Overview: level-4/index.md
