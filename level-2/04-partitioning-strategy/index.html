@@ -1299,6 +1299,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Partitioning Strategy
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1315,6 +1333,124 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-memory-partitions-how-many-and-why-it-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-memory partitions: how many, and why it matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repartition-full-shuffle-even-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        repartition(): full shuffle, even distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coalesce-cheap-partition-reduction-no-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coalesce(): cheap partition reduction, no shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repartition-vs-coalesce-when-to-use-which" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        repartition vs. coalesce: when to use which
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partition-pruning-filtering-on-disk-partition-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Partition pruning: filtering on disk-partition columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-partition-columns-wisely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing partition columns wisely
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skew-preview-uneven-partitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skew preview: uneven partitions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-right-sizing-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: right-sizing a pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2400,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-memory-partitions-how-many-and-why-it-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In-memory partitions: how many, and why it matters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repartition-full-shuffle-even-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        repartition(): full shuffle, even distribution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coalesce-cheap-partition-reduction-no-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        coalesce(): cheap partition reduction, no shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repartition-vs-coalesce-when-to-use-which" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        repartition vs. coalesce: when to use which
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partition-pruning-filtering-on-disk-partition-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Partition pruning: filtering on disk-partition columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-partition-columns-wisely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing partition columns wisely
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skew-preview-uneven-partitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skew preview: uneven partitions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-right-sizing-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: right-sizing a pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2526,178 @@
 
 
 <h1 id="04-partitioning-strategy">04 · Partitioning Strategy<a class="headerlink" href="#04-partitioning-strategy" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Partitioning determines how a DataFrame's rows are split across executors
+in memory (in-memory partitions) and how output files are split on disk
+(partition columns / files). Getting this wrong is the #1 cause of slow or
+failing Spark jobs at scale — this module covers both meanings and how to
+control each.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"user_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"region_id"</span><span class="p">,</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"amount"</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="in-memory-partitions-how-many-and-why-it-matters">In-memory partitions: how many, and why it matters<a class="headerlink" href="#in-memory-partitions-how-many-and-why-it-matters" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># depends on spark.default.parallelism / how the DataFrame was created;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># commonly matches the number of cores available locally, e.g. 8</span>
+</code></pre></div>
+<p>Each in-memory partition is processed by one task on one executor core.
+Too few partitions means you're not using all your cores (bad
+parallelism); too many means excessive scheduling overhead and small,
+inefficient tasks. As a rule of thumb, aim for 2-4x as many partitions as
+you have executor cores for CPU-bound work, and larger partitions (closer
+to 128MB-1GB each) for I/O-bound file writes.</p>
+<h2 id="repartition-full-shuffle-even-distribution">repartition(): full shuffle, even distribution<a class="headerlink" href="#repartition-full-shuffle-even-distribution" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df2</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 4</span>
+</code></pre></div>
+<p><code>repartition(n)</code> triggers a full shuffle to redistribute rows as evenly as
+possible across <code>n</code> partitions (roughly round-robin, unless you also pass
+column(s)). Use it when you need to <em>increase</em> partition count, or need
+partitions genuinely balanced regardless of key distribution.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Repartition BY a column: rows with the same key land in the same partition</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">df3</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"region_id"</span><span class="p">)</span>
+</code></pre></div>
+<p>This is the version to use before a <code>groupBy</code>/join on <code>region_id</code> when you
+know you'll do several operations keyed on it — paying the shuffle cost
+once up front, rather than implicitly on every downstream operation.</p>
+<h2 id="coalesce-cheap-partition-reduction-no-shuffle">coalesce(): cheap partition reduction, no shuffle<a class="headerlink" href="#coalesce-cheap-partition-reduction-no-shuffle" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df4</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">df4</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># 2</span>
+</code></pre></div>
+<p><code>coalesce(n)</code> (for <code>n</code> less than the current partition count) merges
+existing partitions together <em>without</em> a full shuffle — it just combines
+partitions locally, which is much cheaper than <code>repartition</code>. Use it when
+you only need <em>fewer</em> partitions (e.g. before writing output, to avoid
+producing hundreds of tiny files) and don't need perfectly even
+distribution. <code>coalesce</code> cannot increase partition count — calling
+<code>coalesce(20)</code> on a 4-partition DataFrame silently does nothing (stays
+at 4), since it can only merge, not split.</p>
+<h2 id="repartition-vs-coalesce-when-to-use-which">repartition vs. coalesce: when to use which<a class="headerlink" href="#repartition-vs-coalesce-when-to-use-which" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>shuffle?</th>
+<th>can increase count?</th>
+<th>balance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repartition(n)</code></td>
+<td>yes, full shuffle</td>
+<td>yes</td>
+<td>even (or by key)</td>
+</tr>
+<tr>
+<td><code>coalesce(n)</code></td>
+<td>no (local merge)</td>
+<td>no, only decreases</td>
+<td>may be uneven</td>
+</tr>
+</tbody>
+</table>
+<p>The classic pattern: process data with a partition count suited to
+parallel compute (<code>repartition</code> up), then <code>coalesce</code> down right before
+writing output, to avoid the "small files problem" (thousands of tiny
+output files that are expensive for downstream readers to open).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="s2">"region_id"</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>   <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"region_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   <span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>   <span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"/tmp/region_counts"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="partition-pruning-filtering-on-disk-partition-columns">Partition pruning: filtering on disk-partition columns<a class="headerlink" href="#partition-pruning-filtering-on-disk-partition-columns" title="Permanent link">&para;</a></h2>
+<p>When data is written partitioned by a column (see Level 1's write module),
+Spark can skip entire directories at read time if your filter matches the
+partition column — this is <strong>partition pruning</strong>, and it's one of the
+biggest wins available for large datasets.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"region_id"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/sales_by_region"</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Reading back with a filter on the partition column:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">filtered</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/sales_by_region"</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"region_id = 2"</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">filtered</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># *(1) Scan parquet [id,user,amount,region_id] ...</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># PartitionFilters: [isnotnull(region_id#5), (region_id#5 = 2)]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># PushedFilters: []</span>
+</code></pre></div>
+<p><code>PartitionFilters</code> shown in the plan confirms Spark skipped reading the
+<code>region_id=0</code>, <code>region_id=1</code>, <code>region_id=3</code> directories entirely — no I/O
+was spent on rows that couldn't match. Filtering on a <em>non</em>-partition
+column instead shows up under <code>PushedFilters</code> (a Parquet-level predicate
+pushdown, still helpful, but requiring at least a file-level read).</p>
+<h2 id="choosing-partition-columns-wisely">Choosing partition columns wisely<a class="headerlink" href="#choosing-partition-columns-wisely" title="Permanent link">&para;</a></h2>
+<p>Bad choices for <code>partitionBy</code>:</p>
+<ul>
+<li><strong>High-cardinality columns</strong> (e.g. <code>user_id</code> with millions of values) —
+  produces millions of tiny directories, crushing the filesystem/metastore
+  and the small-files problem.</li>
+<li><strong>Columns rarely used in filters</strong> — you pay the write-time cost of
+  splitting into directories but gain no read-time pruning benefit.</li>
+</ul>
+<p>Good choices: low-to-medium cardinality columns that queries commonly
+filter on — <code>region_id</code>, <code>event_date</code>, <code>country</code> — where each partition
+value has enough rows to produce reasonably-sized files.</p>
+<h2 id="skew-preview-uneven-partitions">Skew preview: uneven partitions<a class="headerlink" href="#skew-preview-uneven-partitions" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">skewed</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">+</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"region"</span><span class="p">]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">skewed</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"region"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># +------+-----+</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># |region|count|</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># +------+-----+</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># |     A| 1000|</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># |     B|   10|</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="c1"># +------+-----+</span>
+</code></pre></div>
+<p>If <code>region_id</code> were used as a shuffle/repartition key here, one task would
+process 1000 rows while another processes 10 — the job's wall-clock time
+is bounded by the slowest (largest) task. This is <strong>data skew</strong>, covered
+in depth (with salting and AQE-based fixes) in Level 3.</p>
+<h2 id="worked-example-right-sizing-a-pipeline">Worked example: right-sizing a pipeline<a class="headerlink" href="#worked-example-right-sizing-a-pipeline" title="Permanent link">&para;</a></h2>
+<p>Task: <code>df</code> (20 rows, illustrative — imagine millions in production) needs
+to be grouped by <code>region_id</code>, aggregated, and written out without
+producing tiny files, while also being pruned efficiently for future
+reads filtered on <code>region_id</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="nb">sum</span> <span class="k">as</span> <span class="n">spark_sum</span><span class="p">,</span> <span class="n">count</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"region_id"</span><span class="p">)</span>           <span class="c1"># even shuffle, keyed for the groupBy</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>      <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"region_id"</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>      <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n"</span><span class="p">),</span> <span class="n">spark_sum</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total"</span><span class="p">))</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                           <span class="c1"># small result set -&gt; 1 output file</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>       <span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>       <span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"region_id"</span><span class="p">)</span>              <span class="c1"># enables pruning on future reads</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>       <span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/region_summary"</span><span class="p">))</span>
+</code></pre></div>
+<p>Note <code>coalesce(1)</code> here only makes sense because <code>result</code> is a small,
+already-aggregated DataFrame (one row per region) — never <code>coalesce(1)</code> a
+large, unaggregated DataFrame before writing, or you'll force everything
+through a single task and lose all parallelism on the write.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>df</code> from the top of this module:</p>
+<ol>
+<li>Check <code>df.rdd.getNumPartitions()</code>, then <code>repartition(6)</code> and confirm
+   the new count.</li>
+<li>Repartition <code>df</code> by <code>region_id</code> into 4 partitions, then use
+   <code>spark_partition_id()</code> (from <code>pyspark.sql.functions</code>) grouped by
+   <code>region_id</code> to confirm all rows sharing a <code>region_id</code> land in the same
+   partition.</li>
+<li>Write <code>df</code> partitioned by <code>region_id</code> to a local path, then read it
+   back with a filter on <code>region_id</code> and confirm <code>PartitionFilters</code>
+   appears (not just <code>PushedFilters</code>) in <code>.explain()</code>.</li>
+<li>Explain in a comment why <code>coalesce(1)</code> before a large unaggregated
+   write is usually a mistake, referencing task parallelism.</li>
+</ol>
 
 
 

@@ -1617,6 +1617,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Shuffle Optimization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1633,6 +1651,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-triggers-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What triggers a shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparksqlshufflepartitions-the-single-biggest-shuffle-knob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        spark.sql.shuffle.partitions: the single biggest shuffle knob
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repartition-vs-coalesce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        repartition() vs coalesce()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reducing-shuffle-volume-aggregate-before-you-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reducing shuffle volume: aggregate before you shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map-side-combine-with-reducebykey-style-aggregation-rdd-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map-side combine with reduceByKey-style aggregation (RDD API)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-tuning-a-groupby-for-a-known-cardinality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: tuning a groupBy for a known cardinality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2378,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-triggers-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What triggers a shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparksqlshufflepartitions-the-single-biggest-shuffle-knob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        spark.sql.shuffle.partitions: the single biggest shuffle knob
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repartition-vs-coalesce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        repartition() vs coalesce()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reducing-shuffle-volume-aggregate-before-you-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reducing shuffle volume: aggregate before you shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map-side-combine-with-reducebykey-style-aggregation-rdd-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map-side combine with reduceByKey-style aggregation (RDD API)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-tuning-a-groupby-for-a-known-cardinality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: tuning a groupBy for a known cardinality
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2482,151 @@
 
 
 <h1 id="02-shuffle-optimization">02 · Shuffle Optimization<a class="headerlink" href="#02-shuffle-optimization" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Shuffles — repartitioning data across the network so rows with the same
+key land together — are usually the most expensive stages in a Spark job.
+This module covers the knobs that control shuffle behavior and the
+patterns that reduce how much data actually has to move.</p>
+<h2 id="what-triggers-a-shuffle">What triggers a shuffle<a class="headerlink" href="#what-triggers-a-shuffle" title="Permanent link">&para;</a></h2>
+<p>Any wide transformation — one where an output partition can depend on
+data from many input partitions — triggers a shuffle: <code>groupBy</code>, <code>join</code>
+(unless broadcast), <code>distinct</code>, <code>orderBy</code>, <code>repartition</code>. Narrow
+transformations (<code>filter</code>, <code>select</code>, <code>withColumn</code>, <code>map</code>) never shuffle.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="nb">sum</span> <span class="k">as</span> <span class="n">spark_sum</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"shuffle-tuning"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">sales</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">50</span><span class="p">))</span> \
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">97</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"double"</span><span class="p">))</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">sales</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_sum</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># *(2) HashAggregate(keys=[store_id#..], functions=[sum(amount#..)])</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># +- Exchange hashpartitioning(store_id#.., 200), ...</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1">#    +- *(1) HashAggregate(keys=[store_id#..], functions=[partial_sum(amount#..)])</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1">#       +- *(1) Project [...]</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1">#          +- *(1) Range (0, 1000000, step=1, splits=8)</span>
+</code></pre></div>
+<p>The <code>Exchange hashpartitioning(store_id#.., 200)</code> line is the shuffle:
+200 is the default number of post-shuffle partitions, set by
+<code>spark.sql.shuffle.partitions</code>.</p>
+<h2 id="sparksqlshufflepartitions-the-single-biggest-shuffle-knob"><code>spark.sql.shuffle.partitions</code>: the single biggest shuffle knob<a class="headerlink" href="#sparksqlshufflepartitions-the-single-biggest-shuffle-knob" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">)</span>   <span class="c1"># '200' by default</span>
+</code></pre></div>
+<p>200 is a fixed default written for a much larger cluster than most jobs
+run on. With only 50 distinct <code>store_id</code> values above, 200 output
+partitions means 150 of them are empty — wasted task scheduling overhead.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">sales</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_sum</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Exchange hashpartitioning(store_id#.., 50), ...</span>
+</code></pre></div>
+<p>Rule of thumb for batch jobs: aim for shuffle partitions where each
+partition holds roughly 100–200 MB of shuffled data post-aggregation.
+Too few → each task handles too much data and risks spill/OOM. Too many →
+scheduling overhead and small-file proliferation on write.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Rough sizing formula:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># shuffle_partitions ≈ total_shuffle_bytes / target_partition_size (128 MB)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">total_shuffle_mb</span> <span class="o">=</span> <span class="mi">8_000</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">target_mb</span> <span class="o">=</span> <span class="mi">128</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">recommended_partitions</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">total_shuffle_mb</span> <span class="o">//</span> <span class="n">target_mb</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">recommended_partitions</span><span class="p">)</span>   <span class="c1"># 62</span>
+</code></pre></div>
+<h2 id="repartition-vs-coalesce"><code>repartition()</code> vs <code>coalesce()</code><a class="headerlink" href="#repartition-vs-coalesce" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># repartition(): always a full shuffle, can increase or decrease partitions,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># results in evenly balanced partitions.</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">even</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># coalesce(): merges existing partitions WITHOUT a full shuffle when</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># reducing partition count — much cheaper, but can leave partitions</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># unevenly sized because it only combines adjacent partitions.</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">merged</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">even</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">())</span>    <span class="c1"># 4</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">merged</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">())</span>  <span class="c1"># 2</span>
+</code></pre></div>
+<p>Use <code>coalesce()</code> when writing final output and you only need <em>fewer</em>
+files (e.g., after a filter dramatically shrank the dataset). Use
+<code>repartition()</code> when you need an even distribution before a shuffle-heavy
+operation, or when increasing partition count (<code>coalesce</code> cannot increase
+partitions).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Repartitioning by a column, not just a count — colocates rows sharing</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># a key BEFORE a downstream groupBy/join, useful when you'll do several</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># operations keyed on the same column in sequence.</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">by_store</span> <span class="o">=</span> <span class="n">sales</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="s2">"store_id"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="reducing-shuffle-volume-aggregate-before-you-shuffle">Reducing shuffle volume: aggregate before you shuffle<a class="headerlink" href="#reducing-shuffle-volume-aggregate-before-you-shuffle" title="Permanent link">&para;</a></h2>
+<p>Spark already does partial aggregation automatically for <code>groupBy().agg()</code>
+(seen in the <code>partial_sum</code> node above). But when you control the pipeline
+shape, filtering and projecting down to only needed columns <em>before</em> a
+join or groupBy shrinks what has to cross the network:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Worse — shuffles all columns of orders, including unused ones</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">bad</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="s2">"customer_id"</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Better — project down to only what's needed before the wide op</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">good</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">orders</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">),</span> <span class="s2">"customer_id"</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">)</span>
+</code></pre></div>
+<h2 id="map-side-combine-with-reducebykey-style-aggregation-rdd-api">Map-side combine with <code>reduceByKey</code>-style aggregation (RDD API)<a class="headerlink" href="#map-side-combine-with-reducebykey-style-aggregation-rdd-api" title="Permanent link">&para;</a></h2>
+<p>If you ever drop to the RDD API, prefer <code>reduceByKey</code> over
+<code>groupByKey</code> — <code>reduceByKey</code> combines values per key on the map side
+before shuffling, while <code>groupByKey</code> shuffles every raw value first and
+combines after:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">pairs</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="p">[(</span><span class="s2">"a"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># groupByKey: ships every individual value across the network</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">grouped</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">groupByKey</span><span class="p">()</span><span class="o">.</span><span class="n">mapValues</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># reduceByKey: sums locally per partition first, ships only partial sums</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">reduced</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">reduced</span><span class="p">))</span>  <span class="c1"># [('a', 3), ('b', 2)]</span>
+</code></pre></div>
+<p>On the DataFrame API this optimization is automatic (the <code>partial_sum</code>
+pattern above) — this matters only if you're working with raw RDDs.</p>
+<h2 id="worked-example-tuning-a-groupby-for-a-known-cardinality">Worked example: tuning a groupBy for a known cardinality<a class="headerlink" href="#worked-example-tuning-a-groupby-for-a-known-cardinality" title="Permanent link">&para;</a></h2>
+<p>Task: aggregate <code>sales</code> by <code>store_id</code> (50 distinct values, ~1M rows), and
+choose <code>shuffle.partitions</code> sized for the actual data rather than the
+200 default.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="n">sales</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="s2">"store_id"</span><span class="p">)</span>          <span class="c1"># pre-shuffle once, evenly, by key</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_sum</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_amount"</span><span class="p">))</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">result</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># Exchange hashpartitioning(store_id#.., 50) appears exactly once —</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="c1"># the groupBy reuses the existing store_id partitioning, no second shuffle.</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">())</span>  <span class="c1"># 50, matched to actual cardinality</span>
+</code></pre></div>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Given a dataset with 5 distinct grouping keys and 500 GB of data,
+   compute a reasonable <code>spark.sql.shuffle.partitions</code> value using the
+   ~128 MB-per-partition rule of thumb, and justify the number.</li>
+<li>Take a pipeline that does <code>.filter()</code> after a <code>.join()</code> and rewrite it
+   to filter both sides <em>before</em> the join — explain why this reduces
+   shuffle volume even though the final row count is identical.</li>
+<li>Explain, in your own words, why <code>coalesce(1)</code> right before a
+   <code>.write()</code> on a large DataFrame is usually a performance trap, and
+   what symptom you'd see in the Spark UI if you did it anyway.</li>
+</ol>
 
 
 

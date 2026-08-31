@@ -1645,6 +1645,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Handling Skewed Data
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1661,6 +1679,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-deliberately-skewed-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building a deliberately skewed dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detecting-skew-the-spark-ui-symptom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecting skew: the Spark UI symptom
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technique-1-salting-the-skewed-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technique 1: salting the skewed key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technique-2-salting-a-skewed-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technique 2: salting a skewed join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technique-3-isolate-and-handle-the-hot-key-separately" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technique 3: isolate and handle the hot key separately
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adaptive-query-executions-built-in-skew-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adaptive Query Execution's built-in skew handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2378,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#building-a-deliberately-skewed-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building a deliberately skewed dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detecting-skew-the-spark-ui-symptom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecting skew: the Spark UI symptom
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technique-1-salting-the-skewed-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technique 1: salting the skewed key
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technique-2-salting-a-skewed-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technique 2: salting a skewed join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technique-3-isolate-and-handle-the-hot-key-separately" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technique 3: isolate and handle the hot key separately
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adaptive-query-executions-built-in-skew-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adaptive Query Execution's built-in skew handling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2482,161 @@
 
 
 <h1 id="03-handling-skewed-data">03 · Handling Skewed Data<a class="headerlink" href="#03-handling-skewed-data" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Data skew is when one or a few keys hold a disproportionate share of the
+rows. A <code>groupBy</code> or <code>join</code> on a skewed key sends most of the data to a
+single task while the other 199 tasks finish in seconds and one straggler
+runs for an hour. This module covers how to detect skew and the three
+main techniques to fix it.</p>
+<h2 id="building-a-deliberately-skewed-dataset">Building a deliberately skewed dataset<a class="headerlink" href="#building-a-deliberately-skewed-dataset" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">floor</span><span class="p">,</span> <span class="n">rand</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"skew-handling"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># 90% of rows belong to store_id=1 ("hot key"); the rest spread over 49 stores.</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">1_000_000</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">events</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="s2">"store_id"</span><span class="p">,</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">49</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"double"</span><span class="p">))</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">events</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"count"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># +--------+------+</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># |store_id| count|</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="c1"># +--------+------+</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># |       1|900000|</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="c1"># |       2| 18367|</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="c1"># |       3| 18367|</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="c1"># |       4| 18367|</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c1"># |       5| 18367|</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="c1"># +--------+------+</span>
+</code></pre></div>
+<p><code>store_id=1</code> holds 90% of the data — a task processing that key's
+partition will take roughly 49x longer than a task handling an average
+key.</p>
+<h2 id="detecting-skew-the-spark-ui-symptom">Detecting skew: the Spark UI symptom<a class="headerlink" href="#detecting-skew-the-spark-ui-symptom" title="Permanent link">&para;</a></h2>
+<p>Before fixing skew you have to confirm it's actually skew. In the Spark
+UI's Stages tab, a skewed stage shows a huge gap between the <strong>median</strong>
+task duration and the <strong>max</strong> task duration — e.g. median 2s, max 40min,
+with one task's "Shuffle Read Size" dwarfing the rest. (Module 8 covers
+the Spark UI in depth.) In code, you can approximate this check yourself:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">counts</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">stats</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">"percentile_approx(count, 0.5) as median_count"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">"max(count) as max_count"</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">stats</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># +------------+---------+</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># |median_count|max_count|</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># +------------+---------+</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># |       18367|   900000|</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># +------------+---------+</span>
+</code></pre></div>
+<p>A max/median ratio this large (≈49x) is a strong skew signal before you
+even run the job.</p>
+<h2 id="technique-1-salting-the-skewed-key">Technique 1: salting the skewed key<a class="headerlink" href="#technique-1-salting-the-skewed-key" title="Permanent link">&para;</a></h2>
+<p>Split the hot key into several synthetic sub-keys, aggregate on the
+salted key, then combine the partial results.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">NUM_SALTS</span> <span class="o">=</span> <span class="mi">20</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">salted</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">"salt"</span><span class="p">,</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span> <span class="o">*</span> <span class="n">NUM_SALTS</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">"salted_store_id"</span><span class="p">,</span> <span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"string"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"_"</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"salt"</span><span class="p">))</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># Stage 1: aggregate on the salted key — spreads store_id=1's rows across</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># 20 sub-keys instead of one, so no single task gets 900k rows.</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">partial</span> <span class="o">=</span> <span class="n">salted</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"salted_store_id"</span><span class="p">,</span> <span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># Stage 2: re-aggregate by the real key to combine the salted partials.</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">final</span> <span class="o">=</span> <span class="n">partial</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">"count"</span><span class="p">:</span> <span class="s2">"sum"</span><span class="p">})</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"sum(count)"</span><span class="p">,</span> <span class="s2">"count"</span><span class="p">)</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">final</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"count"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># +--------+------+</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># |store_id| count|</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="c1"># +--------+------+</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1"># |       1|900000|</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1"># |       2| 18367|</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># ...</span>
+</code></pre></div>
+<p>Salting adds a second shuffle stage, but each individual shuffle is now
+balanced — a net win once the skew ratio is large enough that the
+straggler task would otherwise dominate wall-clock time.</p>
+<h2 id="technique-2-salting-a-skewed-join">Technique 2: salting a skewed join<a class="headerlink" href="#technique-2-salting-a-skewed-join" title="Permanent link">&para;</a></h2>
+<p>Salting matters most for joins, where a hot key on the large side means
+one reducer does a disproportionate amount of the join work.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">stores</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Store </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">)],</span> <span class="p">[</span><span class="s2">"store_id"</span><span class="p">,</span> <span class="s2">"store_name"</span><span class="p">]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Explode the small side to match every possible salt value of the large side,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># so each salted partition of the large side has a matching small-side row.</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">stores_salted</span> <span class="o">=</span> <span class="n">stores</span><span class="o">.</span><span class="n">crossJoin</span><span class="p">(</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NUM_SALTS</span><span class="p">)</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"salt"</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="s2">"salted_store_id"</span><span class="p">,</span> <span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"string"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"_"</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"salt"</span><span class="p">))</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">events_salted</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="s2">"salt"</span><span class="p">,</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span> <span class="o">*</span> <span class="n">NUM_SALTS</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="s2">"salted_store_id"</span><span class="p">,</span> <span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"string"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"_"</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"salt"</span><span class="p">))</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="p">)</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="n">joined</span> <span class="o">=</span> <span class="n">events_salted</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="n">stores_salted</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"salted_store_id"</span><span class="p">,</span> <span class="s2">"store_name"</span><span class="p">),</span> <span class="s2">"salted_store_id"</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="p">)</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="n">joined</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">,</span> <span class="s2">"store_name"</span><span class="p">,</span> <span class="s2">"amount"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p>If <code>stores</code> is small enough to broadcast outright (it is here — 50 rows),
+plain <code>broadcast()</code> is simpler and preferable; salting a join is worth the
+complexity specifically when <strong>both</strong> sides are too large to broadcast
+and one side is still skewed.</p>
+<h2 id="technique-3-isolate-and-handle-the-hot-key-separately">Technique 3: isolate and handle the hot key separately<a class="headerlink" href="#technique-3-isolate-and-handle-the-hot-key-separately" title="Permanent link">&para;</a></h2>
+<p>Sometimes the simplest fix is to split the DataFrame, process the hot key
+with different parallelism, and union the results back.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">hot_key_value</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">hot</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span> <span class="o">==</span> <span class="n">hot_key_value</span><span class="p">)</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">cold</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span> <span class="o">!=</span> <span class="n">hot_key_value</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">hot_result</span> <span class="o">=</span> <span class="n">hot</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">cold_result</span> <span class="o">=</span> <span class="n">cold</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"store_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">combined</span> <span class="o">=</span> <span class="n">hot_result</span><span class="o">.</span><span class="n">unionByName</span><span class="p">(</span><span class="n">cold_result</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">combined</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"count"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<p>Repartitioning just the hot-key slice to 200 partitions spreads its
+900,000 rows across many tasks, while the cold slice (already well
+distributed across 49 keys) doesn't need the extra shuffle overhead.</p>
+<h2 id="adaptive-query-executions-built-in-skew-handling">Adaptive Query Execution's built-in skew handling<a class="headerlink" href="#adaptive-query-executions-built-in-skew-handling" title="Permanent link">&para;</a></h2>
+<p>Spark 3.x's AQE can detect and split skewed partitions automatically at
+runtime — covered in depth in module 6 — via:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>With AQE skew join handling on, Spark inspects post-shuffle partition
+sizes and automatically splits oversized ones into smaller sub-tasks,
+often making manual salting unnecessary for join skew specifically (it
+does not help with <code>groupBy</code> skew — salting is still the tool there).</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Using the <code>events</code> DataFrame above, measure the max/median partition
+   size ratio before and after applying the salting technique from
+   Technique 1 — confirm the ratio drops close to 1.</li>
+<li>Explain why salting a <code>groupBy</code> requires a second aggregation stage
+   but a broadcast join does not require any equivalent "combine" step.</li>
+<li>For the skewed join in Technique 2, what happens to correctness if you
+   forget to give the small side the <em>same</em> <code>NUM_SALTS</code> value used to
+   salt the large side? Trace through with a concrete example.</li>
+</ol>
 
 
 

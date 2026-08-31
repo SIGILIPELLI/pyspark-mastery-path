@@ -1963,6 +1963,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Delta Lake Lakehouse Patterns
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1979,6 +1997,124 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-and-reading-a-delta-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing and reading a Delta table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#merge-into-upserts-without-rewriting-the-whole-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MERGE INTO: upserts without rewriting the whole table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-and-delete-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UPDATE and DELETE directly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-travel-querying-a-previous-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time travel: querying a previous version
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-enforcement-and-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema enforcement and evolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimize-and-vacuum-file-compaction-and-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPTIMIZE and VACUUM: file compaction and cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-nightly-upsert-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a nightly upsert pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2400,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-and-reading-a-delta-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing and reading a Delta table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#merge-into-upserts-without-rewriting-the-whole-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MERGE INTO: upserts without rewriting the whole table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-and-delete-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UPDATE and DELETE directly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-travel-querying-a-previous-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time travel: querying a previous version
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-enforcement-and-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema enforcement and evolution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimize-and-vacuum-file-compaction-and-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPTIMIZE and VACUUM: file compaction and cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-nightly-upsert-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a nightly upsert pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2526,192 @@
 
 
 <h1 id="01-delta-lake-lakehouse-patterns">01 · Delta Lake Lakehouse Patterns<a class="headerlink" href="#01-delta-lake-lakehouse-patterns" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 4 · Master.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented
+Delta Lake / PySpark behavior, not run against a live cluster here.</p>
+</div>
+<p>Plain Parquet on object storage gives you columnar storage and predicate
+pushdown, but no transactions, no reliable schema enforcement, and no way
+to update or delete rows without rewriting whole files. Delta Lake adds a
+transaction log on top of Parquet that gives you ACID writes, time travel,
+and efficient upserts — the foundation of a "lakehouse." This module
+covers the operations you'll use daily.</p>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">spark</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"delta-lakehouse"</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.sql.extensions"</span><span class="p">,</span> <span class="s2">"io.delta.sql.DeltaSparkSessionExtension"</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.sql.catalog.spark_catalog"</span><span class="p">,</span> <span class="s2">"org.apache.spark.sql.delta.catalog.DeltaCatalog"</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
+</code></pre></div>
+<h2 id="writing-and-reading-a-delta-table">Writing and reading a Delta table<a class="headerlink" href="#writing-and-reading-a-delta-table" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">,</span> <span class="mf">250.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"Carla"</span><span class="p">,</span> <span class="s2">"DE"</span><span class="p">,</span> <span class="mf">75.0</span><span class="p">)],</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="p">[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">,</span> <span class="s2">"lifetime_value"</span><span class="p">],</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">customers</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># +-----------+-----+-------+--------------+</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># |customer_id| name|country|lifetime_value|</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># +-----------+-----+-------+--------------+</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c1"># |          1|Alice|     US|         100.0|</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># |          2|  Bob|     IN|         250.0|</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c1"># |          3|Carla|     DE|          75.0|</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1"># +-----------+-----+-------+--------------+</span>
+</code></pre></div>
+<p>On disk, this looks like a normal Parquet directory plus a <code>_delta_log/</code>
+subdirectory holding JSON commit files (<code>00000000000000000000.json</code>, ...)
+— each write appends a new commit describing exactly which Parquet files
+were added/removed, which is what makes every operation atomic.</p>
+<h2 id="merge-into-upserts-without-rewriting-the-whole-table"><code>MERGE INTO</code>: upserts without rewriting the whole table<a class="headerlink" href="#merge-into-upserts-without-rewriting-the-whole-table" title="Permanent link">&para;</a></h2>
+<p>This is the operation plain Parquet fundamentally cannot do atomically —
+Delta's <code>MERGE</code> matches incoming rows against existing ones by key and
+updates, inserts, or deletes as instructed, rewriting only the affected
+files.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">delta.tables</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeltaTable</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">delta_customers</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forPath</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">updates</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">),</span>      <span class="c1"># existing customer, LTV changed</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>     <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"Dane"</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)],</span>     <span class="c1"># new customer</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="p">[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">,</span> <span class="s2">"lifetime_value"</span><span class="p">],</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">(</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">delta_customers</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"target"</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">updates</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"source"</span><span class="p">),</span> <span class="s2">"target.customer_id = source.customer_id"</span><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="o">.</span><span class="n">whenMatchedUpdateAll</span><span class="p">()</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="o">.</span><span class="n">whenNotMatchedInsertAll</span><span class="p">()</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="p">)</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="n">delta_customers</span><span class="o">.</span><span class="n">toDF</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1"># +-----------+-----+-------+--------------+</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1"># |customer_id| name|country|lifetime_value|</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># +-----------+-----+-------+--------------+</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="c1"># |          1|Alice|     US|         100.0|</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="c1"># |          2|  Bob|     IN|         300.0|   &lt;- updated</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="c1"># |          3|Carla|     DE|          75.0|</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="c1"># |          4| Dane|     US|          50.0|   &lt;- inserted</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="c1"># +-----------+-----+-------+--------------+</span>
+</code></pre></div>
+<p><code>whenMatchedUpdateAll()</code>/<code>whenNotMatchedInsertAll()</code> are the common case;
+you can also pass explicit column maps or conditions
+(<code>.whenMatchedUpdate(condition=..., set={...})</code>) for partial or
+conditional updates.</p>
+<h2 id="update-and-delete-directly"><code>UPDATE</code> and <code>DELETE</code> directly<a class="headerlink" href="#update-and-delete-directly" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">delta_customers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">condition</span><span class="o">=</span><span class="s2">"country = 'DE'"</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="nb">set</span><span class="o">=</span><span class="p">{</span><span class="s2">"lifetime_value"</span><span class="p">:</span> <span class="s2">"lifetime_value * 1.1"</span><span class="p">},</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">delta_customers</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">condition</span><span class="o">=</span><span class="s2">"lifetime_value &lt; 60"</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">delta_customers</span><span class="o">.</span><span class="n">toDF</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># customer_id=4 (lifetime_value=50.0) removed; customer_id=3's value bumped ~10%</span>
+</code></pre></div>
+<p>Both operations are transactional — a concurrent reader never sees a
+partially-updated table, and a failed <code>UPDATE</code>/<code>DELETE</code> leaves the table
+exactly as it was before the operation started.</p>
+<h2 id="time-travel-querying-a-previous-version">Time travel: querying a previous version<a class="headerlink" href="#time-travel-querying-a-previous-version" title="Permanent link">&para;</a></h2>
+<p>Every commit is a numbered version. You can query any historical version
+either by version number or timestamp:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">history</span> <span class="o">=</span> <span class="n">delta_customers</span><span class="o">.</span><span class="n">history</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">history</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"version"</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">,</span> <span class="s2">"operation"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># +-------+-----------------------+---------------+</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># |version|timestamp              |operation      |</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># +-------+-----------------------+---------------+</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># |3      |2024-01-15 10:04:02    |DELETE         |</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># |2      |2024-01-15 10:03:11    |UPDATE         |</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># |1      |2024-01-15 10:02:45    |MERGE          |</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># |0      |2024-01-15 10:01:00    |WRITE          |</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># +-------+-----------------------+---------------+</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">as_of_v1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"versionAsOf"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">as_of_v1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   <span class="c1"># the table exactly as it looked right after the MERGE, before UPDATE/DELETE</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># Or by timestamp:</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">as_of_ts</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)</span> \
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"timestampAsOf"</span><span class="p">,</span> <span class="s2">"2024-01-15 10:02:00"</span><span class="p">)</span> \
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+</code></pre></div>
+<p>Time travel is invaluable for debugging ("what did this table look like
+before yesterday's bad load?") and for reproducible ML training sets, but
+it's not unlimited — old files eventually get physically deleted by
+<code>VACUUM</code> (below), after which old versions referencing them can no longer
+be read.</p>
+<h2 id="schema-enforcement-and-evolution">Schema enforcement and evolution<a class="headerlink" href="#schema-enforcement-and-evolution" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">bad_schema</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"Eve"</span><span class="p">)],</span> <span class="p">[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">])</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># bad_schema.write.format("delta").mode("append").save("/data/lakehouse/customers")</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># AnalysisException: A schema mismatch detected when writing to the Delta table.</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># ... missing fields: country, lifetime_value</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Opt in explicitly when the schema change is intentional:</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">bad_schema</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"append"</span><span class="p">)</span> \
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"mergeSchema"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">)</span> \
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+</code></pre></div>
+<p>Schema enforcement by default is a deliberate safety feature — it's what
+prevents a silent, buggy upstream change from corrupting a table's
+structure without anyone noticing (module 5 covers this in far more
+depth for production evolution scenarios).</p>
+<h2 id="optimize-and-vacuum-file-compaction-and-cleanup"><code>OPTIMIZE</code> and <code>VACUUM</code>: file compaction and cleanup<a class="headerlink" href="#optimize-and-vacuum-file-compaction-and-cleanup" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Frequent small writes (e.g., from streaming or many small MERGEs) leave</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># behind many small files. OPTIMIZE compacts them into fewer, larger ones.</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"OPTIMIZE delta.`/data/lakehouse/customers`"</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># Z-ORDER co-locates related data within files for columns you filter on often —</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># improves data-skipping effectiveness beyond simple compaction.</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"OPTIMIZE delta.`/data/lakehouse/customers` ZORDER BY (country)"</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># VACUUM physically deletes files no longer referenced by the current table</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># state and older than the retention threshold (default 7 days) --</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1"># this is what actually reclaims storage, and what eventually cuts off time travel.</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"VACUUM delta.`/data/lakehouse/customers` RETAIN 168 HOURS"</span><span class="p">)</span>
+</code></pre></div>
+<p>Never run <code>VACUUM</code> with a retention window shorter than any
+concurrently-running long read or time-travel query might need — doing so
+can delete files a running query still expects to find.</p>
+<h2 id="worked-example-a-nightly-upsert-pipeline">Worked example: a nightly upsert pipeline<a class="headerlink" href="#worked-example-a-nightly-upsert-pipeline" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nightly_upsert</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="n">incoming_df</span><span class="p">,</span> <span class="n">table_path</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">delta_table</span> <span class="o">=</span> <span class="n">DeltaTable</span><span class="o">.</span><span class="n">forPath</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="n">table_path</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="p">(</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="n">delta_table</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"t"</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">incoming_df</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"s"</span><span class="p">),</span> <span class="s2">"t.customer_id = s.customer_id"</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="o">.</span><span class="n">whenMatchedUpdateAll</span><span class="p">()</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="o">.</span><span class="n">whenNotMatchedInsertAll</span><span class="p">()</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="c1"># Compact roughly weekly, not every run, to avoid over-optimizing small deltas.</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">if</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">"OPTIMIZE delta.`</span><span class="si">{</span><span class="n">table_path</span><span class="si">}</span><span class="s2">` ZORDER BY (country)"</span><span class="p">)</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="n">nightly_upsert</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="n">updates</span><span class="p">,</span> <span class="s2">"/data/lakehouse/customers"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Run a <code>MERGE</code> that also deletes target rows not present in the source
+   (<code>whenNotMatchedBySourceDelete</code>) — write the PySpark call and explain
+   what real-world scenario this "full sync" pattern fits.</li>
+<li>Query <code>customers</code> <code>versionAsOf</code> version 0, then run <code>VACUUM ... RETAIN
+   0 HOURS</code> (force immediate cleanup) — explain what happens if you then
+   try to re-read version 0.</li>
+<li>Explain why <code>mergeSchema=true</code> should be a deliberate per-write opt-in
+   rather than a default-on setting, in terms of what upstream bug it
+   would otherwise mask.</li>
+</ol>
 
 
 

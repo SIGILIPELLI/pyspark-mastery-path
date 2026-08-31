@@ -1785,6 +1785,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Monitoring Spark UI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1801,6 +1819,124 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finding-and-confirming-the-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding and confirming the UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jobs-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jobs tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stages-tab-where-skew-and-shuffle-problems-show-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stages tab: where skew and shuffle problems show up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-dataframe-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL / DataFrame tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executors-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executors tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-diagnosing-a-stuck-job-with-the-ui-alone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: diagnosing a stuck job with the UI alone
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2400,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finding-and-confirming-the-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding and confirming the UI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jobs-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jobs tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stages-tab-where-skew-and-shuffle-problems-show-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stages tab: where skew and shuffle problems show up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-dataframe-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL / DataFrame tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executors-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executors tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment tab
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-diagnosing-a-stuck-job-with-the-ui-alone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: diagnosing a stuck job with the UI alone
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2526,141 @@
 
 
 <h1 id="08-monitoring-spark-ui">08 · Monitoring Spark UI<a class="headerlink" href="#08-monitoring-spark-ui" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Descriptions below walk through the Spark UI's standard tabs and
+fields as documented, since no live cluster UI is reachable in this
+environment — treat screenshots-in-words as a guide for what to look
+for on your own cluster.</p>
+</div>
+<p>Every SparkSession serves a web UI, by default at <code>http://&lt;driver&gt;:4040</code>
+(incrementing to <code>4041</code>, <code>4042</code>, ... if the port is taken). This module is
+a tour of the tabs you'll actually use when diagnosing a slow or failing
+job, tied back to the concepts from modules 1–7.</p>
+<h2 id="finding-and-confirming-the-ui">Finding and confirming the UI<a class="headerlink" href="#finding-and-confirming-the-ui" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"ui-tour"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">uiWebUrl</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 'http://driver-host:4040'</span>
+</code></pre></div>
+<p>For a finished application (on YARN/standalone with history server
+enabled), the same information is available after the fact through the
+<strong>Spark History Server</strong>, since the live UI disappears when the driver
+process exits.</p>
+<h2 id="jobs-tab">Jobs tab<a class="headerlink" href="#jobs-tab" title="Permanent link">&para;</a></h2>
+<p>Each <em>action</em> (<code>.collect()</code>, <code>.show()</code>, <code>.write()</code>, ...) creates one Job.
+The Jobs tab lists them with duration, number of stages, and number of
+tasks. This is the first place to look when a script "runs slow" but you
+don't know which action is the culprit — sort by duration.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10_000_000</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">id</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">))</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>   <span class="c1"># this line -&gt; one Job entry</span>
+</code></pre></div>
+<p>Clicking into a Job shows its <strong>DAG visualization</strong> — the sequence of
+stages, with a box drawn around operations that got fused via whole-stage
+codegen (matching the <code>*(N)</code> markers from <code>.explain()</code> in module 1).</p>
+<h2 id="stages-tab-where-skew-and-shuffle-problems-show-up">Stages tab: where skew and shuffle problems show up<a class="headerlink" href="#stages-tab-where-skew-and-shuffle-problems-show-up" title="Permanent link">&para;</a></h2>
+<p>Each Job breaks into Stages at shuffle boundaries. The Stages tab's
+per-stage summary is the primary skew-detection tool referenced in
+module 3:</p>
+<ul>
+<li><strong>Duration</strong> column, sorted descending, shows which stage dominates
+  wall-clock time.</li>
+<li>Clicking into a stage shows a <strong>task duration histogram</strong> — a long tail
+  (max task duration far exceeding the 75th percentile) is the classic
+  skew signature.</li>
+<li><strong>Shuffle Read Size / Records</strong> per task — if one task's shuffle read is
+  10-100x the median, that task's partition holds a hot key.</li>
+<li><strong>Summary Metrics</strong> table gives Min/25th/Median/75th/Max for task
+  duration, GC time, and shuffle read/write — always check GC time here
+  too: a stage where tasks spend 30%+ of their time in GC usually means
+  under-provisioned executor memory (module 5), not a shuffle problem.</li>
+</ul>
+<h2 id="sql-dataframe-tab">SQL / DataFrame tab<a class="headerlink" href="#sql-dataframe-tab" title="Permanent link">&para;</a></h2>
+<p>For DataFrame and SQL API queries, the SQL tab shows the same physical
+plan <code>.explain()</code> prints, but annotated with <strong>live runtime metrics</strong> at
+each node — actual rows produced, actual data size, actual time spent —
+overlaid directly on the plan graph. This is the single best place to
+confirm AQE's <code>isFinalPlan=true</code> behavior from module 6: the SQL tab shows
+the plan Spark actually executed, including any runtime join-strategy
+switch or skew-partition split, not just the initial estimate.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"""</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s2">    SELECT bucket, COUNT(*) FROM (</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s2">        SELECT id % 100 AS bucket FROM range(0, 10000000)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s2">    ) GROUP BY bucket</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s2">"""</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</code></pre></div>
+<p>Clicking this query's entry in the SQL tab and expanding each node shows
+"number of output rows" actually produced at that node — compare it
+against what you expected from the logical query to catch a join
+producing unexpected row multiplication (a common symptom of an
+accidental many-to-many join key).</p>
+<h2 id="storage-tab">Storage tab<a class="headerlink" href="#storage-tab" title="Permanent link">&para;</a></h2>
+<p>Lists every RDD/DataFrame you've <code>.cache()</code>d or <code>.persist()</code>d, with size
+in memory, size on disk (if spilled), and fraction cached. If a cached
+DataFrame shows less than 100% cached, some partitions didn't fit and
+either spilled to disk (<code>MEMORY_AND_DISK</code>) or were dropped and will
+recompute from lineage on next access (<code>MEMORY_ONLY</code>) — this tab is how
+you catch a caching strategy that isn't actually helping (module 5).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">big</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50_000_000</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">big</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">big</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Storage tab now shows one entry: "*Range" with a cached fraction — check it's 100%</span>
+</code></pre></div>
+<h2 id="executors-tab">Executors tab<a class="headerlink" href="#executors-tab" title="Permanent link">&para;</a></h2>
+<p>Per-executor breakdown: active tasks, completed tasks, task time, input
+size, shuffle read/write, and <strong>storage memory used</strong> vs. available. Two
+things worth checking routinely:</p>
+<ul>
+<li><strong>Task distribution</strong> across executors — if one executor is doing
+  visibly more work than others over the whole job's lifetime (not just
+  one stage), that's a data-locality or partitioning problem, not a
+  single-stage skew problem.</li>
+<li>A <strong>"Dead" executor</strong> entry with a reason (<code>OOMKilled</code>, <code>Executor lost</code>)
+  is your first clue when a job fails partway through — click into it for
+  the stderr/stdout logs from that specific executor.</li>
+</ul>
+<h2 id="environment-tab">Environment tab<a class="headerlink" href="#environment-tab" title="Permanent link">&para;</a></h2>
+<p>A dump of every effective Spark configuration property for this
+application — the fastest way to confirm a <code>spark.conf.set(...)</code> call
+earlier in your script actually took effect, since some properties are
+only settable at session-creation time and silently ignore a later
+<code>.set()</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># Confirm on the Environment tab that spark.sql.shuffle.partitions actually reads 50,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># not still 200 — this property IS settable at runtime, but others (like</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># spark.executor.memory) are not and require a fresh SparkSession.</span>
+</code></pre></div>
+<h2 id="worked-example-diagnosing-a-stuck-job-with-the-ui-alone">Worked example: diagnosing a stuck job with the UI alone<a class="headerlink" href="#worked-example-diagnosing-a-stuck-job-with-the-ui-alone" title="Permanent link">&para;</a></h2>
+<p>Given: a job has been "running" for 45 minutes with no error, and one
+stage's progress bar shows 199/200 tasks complete.</p>
+<ol>
+<li><strong>Stages tab</strong> → click the stuck stage → sort tasks by duration
+   descending. One task shows <code>Status: RUNNING</code> for the full 45 minutes
+   while the other 199 finished in under a minute each.</li>
+<li><strong>Shuffle Read Size</strong> for that one task is 40 GB versus ~200 MB median
+   — confirms skew (module 3), not a hang or deadlock.</li>
+<li><strong>Executors tab</strong> for the executor running that task shows GC time
+   climbing steadily — the executor is likely also memory-thrashing on
+   top of the raw data volume.</li>
+<li>Fix: apply salting (module 3) or verify AQE skew-join handling is
+   enabled (module 6) and re-run; watch the same Stages tab for a task
+   duration histogram that's now tight around the median.</li>
+</ol>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>In the Stages tab's Summary Metrics for a stage, you see: Min 1s,
+   25th 2s, Median 2s, 75th 3s, Max 340s. Name the specific concept this
+   pattern indicates and where else in the app you'd go to confirm it.</li>
+<li>Explain what it means, specifically, if a cached DataFrame's Storage
+   tab entry shows "60% cached" with the remainder listed under
+   "disk-only" fraction, and what config change would raise that
+   percentage.</li>
+<li>A job's SQL tab shows a join node's "number of output rows" as 50x
+   larger than either input side's row count. What kind of bug does this
+   almost always indicate?</li>
+</ol>
 
 
 

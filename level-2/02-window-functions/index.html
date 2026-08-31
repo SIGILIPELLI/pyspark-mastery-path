@@ -1243,6 +1243,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Window Functions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1259,6 +1277,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-a-window-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining a window spec
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ranking-functions-rank-dense_rank-row_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ranking functions: rank, dense_rank, row_number
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top-n-per-group-with-row_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top-N per group with row_number
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aggregates-over-a-window-running-totals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aggregates over a window: running totals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#row-to-row-comparisons-lag-and-lead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Row-to-row comparisons: lag and lead
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-percentage-of-category-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: percentage of category total
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2378,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-a-window-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining a window spec
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ranking-functions-rank-dense_rank-row_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ranking functions: rank, dense_rank, row_number
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#top-n-per-group-with-row_number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top-N per group with row_number
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aggregates-over-a-window-running-totals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aggregates over a window: running totals
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#row-to-row-comparisons-lag-and-lead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Row-to-row comparisons: lag and lead
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-percentage-of-category-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: percentage of category total
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2482,172 @@
 
 
 <h1 id="02-window-functions">02 · Window Functions<a class="headerlink" href="#02-window-functions" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Window functions compute a value per row using a "window" of related rows
+— e.g. rank within a group, running total, previous row's value — without
+collapsing rows the way <code>groupBy</code> does. This is the tool for "top N per
+group", running totals, and row-to-row comparisons.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"electronics"</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">),</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="p">(</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"electronics"</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">(</span><span class="s2">"Carla"</span><span class="p">,</span> <span class="s2">"electronics"</span><span class="p">,</span> <span class="mf">450.0</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="p">(</span><span class="s2">"Deepak"</span><span class="p">,</span> <span class="s2">"books"</span><span class="p">,</span> <span class="mf">40.0</span><span class="p">),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="p">(</span><span class="s2">"Elena"</span><span class="p">,</span> <span class="s2">"books"</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">),</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="p">(</span><span class="s2">"Frank"</span><span class="p">,</span> <span class="s2">"books"</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">),</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">]</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">"salesperson"</span><span class="p">,</span> <span class="s2">"category"</span><span class="p">,</span> <span class="s2">"revenue"</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="defining-a-window-spec">Defining a window spec<a class="headerlink" href="#defining-a-window-spec" title="Permanent link">&para;</a></h2>
+<p>A <code>Window</code> spec has three optional pieces: <code>partitionBy</code> (which rows are
+compared together — like <code>groupBy</code>'s key), <code>orderBy</code> (the ordering inside
+each partition), and a frame (which rows around the current one are
+included — default is the whole partition for ranking functions).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">rank</span><span class="p">,</span> <span class="n">dense_rank</span><span class="p">,</span> <span class="n">row_number</span><span class="p">,</span> <span class="n">col</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="ranking-functions-rank-dense_rank-row_number">Ranking functions: rank, dense_rank, row_number<a class="headerlink" href="#ranking-functions-rank-dense_rank-row_number" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">ranked</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"rank"</span><span class="p">,</span> <span class="n">rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> \
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>           <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"dense_rank"</span><span class="p">,</span> <span class="n">dense_rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> \
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>           <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"row_number"</span><span class="p">,</span> <span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">ranked</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">,</span> <span class="s2">"rank"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># +-----------+-----------+-------+----+----------+----------+</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># |salesperson|   category|revenue|rank|dense_rank|row_number|</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># +-----------+-----------+-------+----+----------+----------+</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># |      Elena|      books|   60.0|   1|         1|         1|</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># |      Frank|      books|   60.0|   1|         1|         2|</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># |     Deepak|      books|   40.0|   3|         2|         3|</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1"># |     Carla |electronics|  450.0|   1|         1|         1|</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># |      Alice|electronics|  300.0|   2|         2|         2|</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1"># |        Bob|electronics|  150.0|   3|         3|         3|</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># +-----------+-----------+-------+----+----------+----------+</span>
+</code></pre></div>
+<p>Elena and Frank tie at 60.0. <code>rank()</code> gives both rank 1 and <em>skips</em> rank 2
+(Deepak gets 3); <code>dense_rank()</code> gives both rank 1 and Deepak gets 2 (no
+gap); <code>row_number()</code> breaks the tie arbitrarily (by physical row order)
+and always produces distinct, sequential numbers 1..N per partition. Use
+<code>row_number()</code> when you need exactly one row per group ("top 1 per
+group"); use <code>rank</code>/<code>dense_rank</code> when ties should be reported as ties.</p>
+<h2 id="top-n-per-group-with-row_number">Top-N per group with row_number<a class="headerlink" href="#top-n-per-group-with-row_number" title="Permanent link">&para;</a></h2>
+<p>The single most common use of window functions: get the top 2
+salespeople by revenue in each category.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">top2</span> <span class="o">=</span> <span class="n">ranked</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"row_number"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s2">"category"</span><span class="p">,</span> <span class="s2">"salesperson"</span><span class="p">,</span> <span class="s2">"revenue"</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">,</span> <span class="s2">"revenue"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">top2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># +-----------+-----------+-------+</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># |   category|salesperson|revenue|</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># +-----------+-----------+-------+</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># |      books|      Elena|   60.0|</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># |      books|      Frank|   60.0|</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># |electronics|     Carla |  450.0|</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># |electronics|      Alice|  300.0|</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># +-----------+-----------+-------+</span>
+</code></pre></div>
+<p>Filtering on a window column requires <code>.filter()</code> after the
+<code>.withColumn(...).over(w)</code> call — you cannot filter inside the <code>over()</code>
+clause itself.</p>
+<h2 id="aggregates-over-a-window-running-totals">Aggregates over a window: running totals<a class="headerlink" href="#aggregates-over-a-window-running-totals" title="Permanent link">&para;</a></h2>
+<p>Aggregate functions also work <code>.over(w)</code> — this is how you compute a
+running total without a self-join.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="nb">sum</span> <span class="k">as</span> <span class="n">spark_sum</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">running</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span> \
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="o">.</span><span class="n">rowsBetween</span><span class="p">(</span><span class="n">Window</span><span class="o">.</span><span class="n">unboundedPreceding</span><span class="p">,</span> <span class="n">Window</span><span class="o">.</span><span class="n">currentRow</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"running_total"</span><span class="p">,</span> <span class="n">spark_sum</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">running</span><span class="p">))</span> \
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># +-----------+-----------+-------+-------------+</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># |salesperson|   category|revenue|running_total|</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># +-----------+-----------+-------+-------------+</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># |      Elena|      books|   60.0|         60.0|</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># |      Frank|      books|   60.0|        120.0|</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># |     Deepak|      books|   40.0|        160.0|</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># |     Carla |electronics|  450.0|        450.0|</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="c1"># |      Alice|electronics|  300.0|        750.0|</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1"># |        Bob|electronics|  150.0|        900.0|</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># +-----------+-----------+-------+-------------+</span>
+</code></pre></div>
+<p><code>rowsBetween(Window.unboundedPreceding, Window.currentRow)</code> says "include
+every row from the start of the partition up to and including the current
+row" — the classic running-total frame. Without specifying a frame,
+aggregate window functions default to this same range-based frame when an
+<code>orderBy</code> is present, so <code>spark_sum("revenue").over(w)</code> (with plain <code>w</code>
+from earlier) would actually give the same running total — but it's best
+practice to be explicit with <code>rowsBetween</code> so the frame is unambiguous to
+future readers.</p>
+<h2 id="row-to-row-comparisons-lag-and-lead">Row-to-row comparisons: lag and lead<a class="headerlink" href="#row-to-row-comparisons-lag-and-lead" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">lag</span><span class="p">,</span> <span class="n">lead</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">w2</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"prev_revenue"</span><span class="p">,</span> <span class="n">lag</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w2</span><span class="p">))</span> \
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"next_revenue"</span><span class="p">,</span> <span class="n">lead</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w2</span><span class="p">))</span> \
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># +-----------+-----------+-------+------------+------------+</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># |salesperson|   category|revenue|prev_revenue|next_revenue|</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1"># +-----------+-----------+-------+------------+------------+</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1"># |      Elena|      books|   60.0|        null|        60.0|</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># |      Frank|      books|   60.0|        60.0|        40.0|</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># |     Deepak|      books|   40.0|        60.0|        null|</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># |     Carla |electronics|  450.0|        null|       300.0|</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c1"># |      Alice|electronics|  300.0|       450.0|       150.0|</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># |        Bob|electronics|  150.0|       300.0|        null|</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1"># +-----------+-----------+-------+------------+------------+</span>
+</code></pre></div>
+<p><code>lag(col, n)</code> reaches back <code>n</code> rows within the partition's order; <code>lead</code>
+reaches forward. Both return <code>null</code> when there's no such row — the first
+row of each partition has no <code>prev_revenue</code>, and the last has no
+<code>next_revenue</code>. A common use: computing period-over-period deltas
+(<code>col("revenue") - lag("revenue", 1).over(w2)</code>).</p>
+<h2 id="worked-example-percentage-of-category-total">Worked example: percentage of category total<a class="headerlink" href="#worked-example-percentage-of-category-total" title="Permanent link">&para;</a></h2>
+<p>Task: for each row, compute what percentage of its category's total
+revenue that salesperson contributed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">category_total</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">pct</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="s2">"pct_of_category"</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span> <span class="o">/</span> <span class="n">spark_sum</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">category_total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"category"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"revenue"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">pct</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># +-----------+-----------+-------+------------------+</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># |salesperson|   category|revenue|  pct_of_category|</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1"># +-----------+-----------+-------+------------------+</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="c1"># |      Elena|      books|   60.0| 37.5             |</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># |      Frank|      books|   60.0| 37.5             |</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># |     Deepak|      books|   40.0| 25.0             |</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="c1"># |     Carla |electronics|  450.0| 50.0             |</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1"># |      Alice|electronics|  300.0|33.333333333333336|</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="c1"># |        Bob|electronics|  150.0|16.666666666666668|</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="c1"># +-----------+-----------+-------+------------------+</span>
+</code></pre></div>
+<p>Note <code>category_total</code> has no <code>orderBy</code> — because we want the sum over the
+<em>entire</em> partition, not a running total, and the default frame for an
+aggregate window function with no <code>orderBy</code> is the whole partition.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>df</code> from the top of this module:</p>
+<ol>
+<li>Add a <code>dense_rank</code> column ranking salespeople within each category by
+   revenue descending, and list only rank-1 rows (expect a tie in <code>books</code>).</li>
+<li>Compute a running total ordered by revenue <em>ascending</em> within each
+   category and confirm the final row's running total equals the
+   category's overall total.</li>
+<li>Use <code>lag</code> to compute, for each row (ordered by revenue descending
+   within category), the revenue gap to the next-highest performer.</li>
+<li>Combine ideas: find the single salesperson in each category who is
+   <em>farthest</em> below the category average revenue (hint: window <code>avg</code>
+   without <code>orderBy</code>, then subtract and sort).</li>
+</ol>
 
 
 

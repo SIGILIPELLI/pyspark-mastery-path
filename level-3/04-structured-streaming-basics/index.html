@@ -1673,6 +1673,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Structured Streaming Basics
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1689,6 +1707,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-core-mental-model-an-unbounded-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The core mental model: an unbounded table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-actions-dont-work-on-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch actions don't work on streams
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output modes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windowed-aggregation-with-a-watermark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windowed aggregation with a watermark
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkpointing-required-for-fault-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpointing: required for fault tolerance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-the-running-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing the running query
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-running-alert-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a running alert stream
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2389,102 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-core-mental-model-an-unbounded-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The core mental model: an unbounded table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-actions-dont-work-on-streams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch actions don't work on streams
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Output modes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windowed-aggregation-with-a-watermark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windowed aggregation with a watermark
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkpointing-required-for-fault-tolerance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpointing: required for fault tolerance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-the-running-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Managing the running query
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-running-alert-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a running alert stream
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2504,178 @@
 
 
 <h1 id="04-structured-streaming-basics">04 · Structured Streaming Basics<a class="headerlink" href="#04-structured-streaming-basics" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Structured Streaming lets you write the same DataFrame code you already
+know and run it incrementally against an unbounded input — files landing
+in a directory, a Kafka topic, a socket. Spark treats the stream as a
+table that keeps growing, and re-runs your query logic against just the
+new rows on each micro-batch (or, with newer versions, continuously).</p>
+<h2 id="the-core-mental-model-an-unbounded-table">The core mental model: an unbounded table<a class="headerlink" href="#the-core-mental-model-an-unbounded-table" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">TimestampType</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">window</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">count</span> <span class="k">as</span> <span class="n">spark_count</span><span class="p">,</span> <span class="n">avg</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"streaming-basics"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()),</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"device_id"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">()),</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">])</span>
+</code></pre></div>
+<p>Every streaming source declaration looks like a batch <code>read</code>, but
+<code>readStream</code> instead of <code>read</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">raw_stream</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>          <span class="c1"># streaming sources require an explicit schema —</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"maxFilesPerTrigger"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># no schema inference against a moving target</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"/data/incoming_sensor_events/"</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">raw_stream</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">)</span>   <span class="c1"># True</span>
+</code></pre></div>
+<p><code>raw_stream</code> is a DataFrame like any other — you can <code>.select()</code>,
+<code>.filter()</code>, <code>.groupBy()</code> it with the exact same API from Levels 1–2. The
+difference only shows up when you try to <em>run</em> it.</p>
+<h2 id="batch-actions-dont-work-on-streams">Batch actions don't work on streams<a class="headerlink" href="#batch-actions-dont-work-on-streams" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># raw_stream.show()      # AnalysisException: Queries with streaming sources</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1">#                         # must be executed with writeStream.start()</span>
+</code></pre></div>
+<p>Instead of <code>.show()</code>/<code>.collect()</code>, a streaming DataFrame is launched with
+<code>.writeStream</code>, which returns a <code>StreamingQuery</code> handle you manage
+independently of the rest of your script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">raw_stream</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">30.0</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="o">.</span><span class="n">writeStream</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"console"</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">"append"</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">"10 seconds"</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># query.awaitTermination()   # blocks; in a notebook you'd instead call query.stop() later</span>
+</code></pre></div>
+<h2 id="output-modes">Output modes<a class="headerlink" href="#output-modes" title="Permanent link">&para;</a></h2>
+<p>Three output modes govern what gets (re-)written on each trigger:</p>
+<ul>
+<li><strong>append</strong> — only new rows since the last trigger are output. Works for
+  any query without aggregation; for aggregations, only after watermark
+  expiry closes out a window (below).</li>
+<li><strong>complete</strong> — the entire updated result table is rewritten every
+  trigger. Only feasible for aggregations, and only when the result set
+  is small enough to hold entirely (e.g., a running total by category).</li>
+<li><strong>update</strong> — only rows that changed since the last trigger are output;
+  works for aggregations without requiring watermarking.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">counts</span> <span class="o">=</span> <span class="n">raw_stream</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"device_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"event_count"</span><span class="p">))</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">counts</span><span class="o">.</span><span class="n">writeStream</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"console"</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">"complete"</span><span class="p">)</span>   <span class="c1"># required here — no watermark, unbounded aggregation</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">)</span>
+</code></pre></div>
+<h2 id="windowed-aggregation-with-a-watermark">Windowed aggregation with a watermark<a class="headerlink" href="#windowed-aggregation-with-a-watermark" title="Permanent link">&para;</a></h2>
+<p>Event-time windowing groups rows into time buckets based on
+<code>event_time</code>, not wall-clock arrival time. A <strong>watermark</strong> tells Spark how
+long to wait for late-arriving data before finalizing (and evicting from
+state) a given window.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">windowed_avg</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">raw_stream</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"10 minutes"</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">window</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">),</span> <span class="s2">"5 minutes"</span><span class="p">),</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">col</span><span class="p">(</span><span class="s2">"device_id"</span><span class="p">),</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_temp"</span><span class="p">))</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">windowed_avg</span><span class="o">.</span><span class="n">writeStream</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"console"</span><span class="p">)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">"append"</span><span class="p">)</span>     <span class="c1"># append is valid here because the watermark</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="o">.</span><span class="n">start</span><span class="p">()</span>                  <span class="c1"># guarantees a window won't get late data forever</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="p">)</span>
+</code></pre></div>
+<p>With <code>withWatermark("event_time", "10 minutes")</code>, a 5-minute window
+covering <code>12:00–12:05</code> is finalized and emitted once Spark has seen an
+event with <code>event_time</code> past <code>12:15</code> (<code>window end</code> + watermark delay) —
+any row arriving even later than that for that window is silently
+dropped, trading completeness for bounded state size.</p>
+<h2 id="checkpointing-required-for-fault-tolerance">Checkpointing: required for fault tolerance<a class="headerlink" href="#checkpointing-required-for-fault-tolerance" title="Permanent link">&para;</a></h2>
+<p>Every production streaming query needs a checkpoint location so Spark can
+resume from exactly where it left off after a restart, without
+duplicating or dropping data (fault-tolerance semantics covered in depth
+in module 9):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">windowed_avg</span><span class="o">.</span><span class="n">writeStream</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"parquet"</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"path"</span><span class="p">,</span> <span class="s2">"/data/warehouse/device_temp_windows"</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"checkpointLocation"</span><span class="p">,</span> <span class="s2">"/data/checkpoints/device_temp_windows"</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">"append"</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">"1 minute"</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">)</span>
+</code></pre></div>
+<p>The checkpoint directory stores offsets (how far into the source you've
+read) and, for stateful aggregations, the aggregation state itself. Never
+point two different queries at the same checkpoint directory, and never
+delete it unless you intend to reprocess the source from scratch.</p>
+<h2 id="managing-the-running-query">Managing the running query<a class="headerlink" href="#managing-the-running-query" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>                 <span class="c1"># a UUID stable across restarts from the same checkpoint</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>             <span class="c1"># {"message": "Processing new data", "isTriggerActive": true, ...}</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">lastProgress</span><span class="p">)</span>       <span class="c1"># dict with batch duration, input/processing rate, etc.</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">query</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>                    <span class="c1"># graceful stop; safe to call any time</span>
+</code></pre></div>
+<p><code>query.lastProgress["inputRowsPerSecond"]</code> vs
+<code>query.lastProgress["processedRowsPerSecond"]</code> is the first thing to check
+if a stream is falling behind: if input rate consistently exceeds
+processed rate, the query can't keep up and backlog will grow unbounded.</p>
+<h2 id="worked-example-a-running-alert-stream">Worked example: a running alert stream<a class="headerlink" href="#worked-example-a-running-alert-stream" title="Permanent link">&para;</a></h2>
+<p>Task: read sensor JSON files as they land, compute a 5-minute tumbling
+average temperature per device, and flag any window averaging above 35°C
+as <code>is_alert</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">alerts</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">raw_stream</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"10 minutes"</span><span class="p">)</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">window</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">),</span> <span class="s2">"5 minutes"</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"device_id"</span><span class="p">))</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_temp"</span><span class="p">))</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"is_alert"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"avg_temp"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">35.0</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">alerts</span><span class="o">.</span><span class="n">writeStream</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"parquet"</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"path"</span><span class="p">,</span> <span class="s2">"/data/warehouse/temp_alerts"</span><span class="p">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"checkpointLocation"</span><span class="p">,</span> <span class="s2">"/data/checkpoints/temp_alerts"</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">"append"</span><span class="p">)</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">"30 seconds"</span><span class="p">)</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="p">)</span>
+</code></pre></div>
+<p>Downstream, any batch job or BI tool can simply read
+<code>/data/warehouse/temp_alerts</code> as a normal Parquet table and filter
+<code>WHERE is_alert</code> — the streaming complexity is fully contained upstream.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Change the <code>outputMode</code> on <code>windowed_avg</code> from <code>append</code> to <code>update</code>
+   and explain what difference in emitted rows you'd expect to observe
+   for a window that receives a late-but-within-watermark update.</li>
+<li>Given a watermark of <code>"10 minutes"</code> and 5-minute tumbling windows,
+   compute the exact wall-clock cutoff at which the window
+   <code>[12:00, 12:05)</code> is finalized and its state evicted.</li>
+<li>Explain why streaming sources require an explicit <code>schema(...)</code> call
+   while batch <code>spark.read.json(...)</code> can infer one, in terms of what
+   "infer" would require Spark to do against an unbounded input.</li>
+</ol>
 
 
 

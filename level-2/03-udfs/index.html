@@ -1271,6 +1271,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Udfs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1287,6 +1305,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-udfs-are-the-last-resort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why UDFs are the last resort
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-and-registering-a-basic-udf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing and registering a basic UDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-decorator-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The decorator form
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-a-udf-for-use-in-spark-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registering a UDF for use in Spark SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pandas-udfs-the-performance-conscious-alternative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pandas UDFs: the performance-conscious alternative
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-pitfall-udfs-block-optimizer-pushdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance pitfall: UDFs block optimizer pushdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-parsing-a-semi-structured-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: parsing a semi-structured field
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2389,102 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-udfs-are-the-last-resort" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why UDFs are the last resort
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-and-registering-a-basic-udf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing and registering a basic UDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-decorator-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The decorator form
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-a-udf-for-use-in-spark-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registering a UDF for use in Spark SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pandas-udfs-the-performance-conscious-alternative" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pandas UDFs: the performance-conscious alternative
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-pitfall-udfs-block-optimizer-pushdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance pitfall: UDFs block optimizer pushdown
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-parsing-a-semi-structured-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: parsing a semi-structured field
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2504,185 @@
 
 
 <h1 id="03-udfs">03 · Udfs<a class="headerlink" href="#03-udfs" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>A User-Defined Function (UDF) lets you run arbitrary Python code per row
+when the built-in <code>pyspark.sql.functions</code> library doesn't have what you
+need. UDFs are a last resort, not a first choice — this module covers how
+to write them correctly, and why you should reach for something else
+whenever possible.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"  Alice Smith  "</span><span class="p">),</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"bob jones"</span><span class="p">),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"CARLA garcia"</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">]</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"raw_name"</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="why-udfs-are-the-last-resort">Why UDFs are the last resort<a class="headerlink" href="#why-udfs-are-the-last-resort" title="Permanent link">&para;</a></h2>
+<p>Every built-in function in <code>pyspark.sql.functions</code> (<code>upper</code>, <code>trim</code>,
+<code>regexp_replace</code>, <code>when</code>, ...) runs inside the JVM, in Spark's native
+execution engine — vectorized, no serialization overhead, and visible to
+Catalyst's optimizer for further rewriting. A plain Python UDF has none of
+these advantages: for every row, Spark must serialize the row from the
+JVM, send it to a spawned Python process, run your Python function, and
+serialize the result back. This round-trip is often 10-100x slower than an
+equivalent built-in expression, and it's completely opaque to Catalyst —
+the optimizer cannot push filters through it or reorder around it.</p>
+<p>Before writing a UDF, check whether the built-ins can do it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">initcap</span><span class="p">,</span> <span class="n">trim</span><span class="p">,</span> <span class="n">col</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># instead of a Python UDF that strips + title-cases:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"clean_name"</span><span class="p">,</span> <span class="n">initcap</span><span class="p">(</span><span class="n">trim</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"raw_name"</span><span class="p">))))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># +---+----------------+----------+</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># | id|        raw_name|clean_name|</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># +---+----------------+----------+</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># |  1|  Alice Smith   |Alice Smith|</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># |  2|       bob jones|Bob Jones |</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># |  3|    CARLA garcia|Carla Garcia|</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># |  4|            null|      null|</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># +---+----------------+----------+</span>
+</code></pre></div>
+<p><code>initcap</code> + <code>trim</code> solved this with zero Python UDFs. Reach for a UDF only
+when the transformation genuinely can't be expressed with built-ins — a
+niche parsing library, a custom checksum, calling into <code>re</code> with logic too
+complex for <code>regexp_extract</code>.</p>
+<h2 id="writing-and-registering-a-basic-udf">Writing and registering a basic UDF<a class="headerlink" href="#writing-and-registering-a-basic-udf" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringType</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">mask_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="k">return</span> <span class="s2">"*"</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">return</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"*"</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">mask_name_udf</span> <span class="o">=</span> <span class="n">udf</span><span class="p">(</span><span class="n">mask_name</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"masked"</span><span class="p">,</span> <span class="n">mask_name_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"raw_name"</span><span class="p">)))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># +---+----------------+--------------+</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># | id|        raw_name|        masked|</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1"># +---+----------------+--------------+</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="c1"># |  1|  Alice Smith   |A**********h |</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1"># |  2|       bob jones|b*******s     |</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="c1"># |  3|    CARLA garcia|C**********a  |</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># |  4|            null|          null|</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="c1"># +---+----------------+--------------+</span>
+</code></pre></div>
+<p>Two things are mandatory: declaring the return type (<code>StringType()</code> here —
+Spark can't infer it from Python) and handling <code>None</code> explicitly, since
+Spark will call your function with <code>None</code> for null input rather than
+skipping the row.</p>
+<h2 id="the-decorator-form">The decorator form<a class="headerlink" href="#the-decorator-form" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">StringType</span><span class="p">())</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">shout</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="n">name</span> <span class="k">else</span> <span class="kc">None</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"shouted"</span><span class="p">,</span> <span class="n">shout</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"raw_name"</span><span class="p">)))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>Functionally identical to <code>udf(fn, StringType())</code> — pick whichever reads
+better; the decorator form is common when the function is only ever used
+as a UDF.</p>
+<h2 id="registering-a-udf-for-use-in-spark-sql">Registering a UDF for use in Spark SQL<a class="headerlink" href="#registering-a-udf-for-use-in-spark-sql" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">udf</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">"mask_name_sql"</span><span class="p">,</span> <span class="n">mask_name</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">"people"</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"SELECT id, mask_name_sql(raw_name) AS masked FROM people"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><code>spark.udf.register</code> makes the same Python function callable from raw SQL
+strings — useful when a pipeline mixes DataFrame code and <code>spark.sql(...)</code>
+queries.</p>
+<h2 id="pandas-udfs-the-performance-conscious-alternative">Pandas UDFs: the performance-conscious alternative<a class="headerlink" href="#pandas-udfs-the-performance-conscious-alternative" title="Permanent link">&para;</a></h2>
+<p>When you must use Python but need better performance than a row-at-a-time
+UDF, use a <strong>Pandas UDF</strong> (vectorized UDF). Spark still ships data to
+Python, but in Arrow-formatted <em>batches</em> processed with <code>pandas</code>/<code>numpy</code>
+vectorized operations, instead of one Python function call per row —
+typically several times faster than a plain UDF.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">pandas_udf</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nd">@pandas_udf</span><span class="p">(</span><span class="n">StringType</span><span class="p">())</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">clean_name_pandas</span><span class="p">(</span><span class="n">names</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">return</span> <span class="n">names</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"clean_name"</span><span class="p">,</span> <span class="n">clean_name_pandas</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"raw_name"</span><span class="p">)))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>The function signature takes a <code>pandas.Series</code> and returns a
+<code>pandas.Series</code> of the same length — the batching is handled by Spark;
+your code just needs to be a vectorized pandas operation. Pandas UDFs
+require <code>pyarrow</code> installed on both driver and executors.</p>
+<h2 id="performance-pitfall-udfs-block-optimizer-pushdown">Performance pitfall: UDFs block optimizer pushdown<a class="headerlink" href="#performance-pitfall-udfs-block-optimizer-pushdown" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># A filter BEFORE a UDF can be pushed down to the data source (e.g. Parquet</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># predicate pushdown); a filter that depends on a UDF's output cannot be:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">mask_name_udf</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"raw_name"</span><span class="p">))</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"A"</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Catalyst cannot push this filter into a file scan — the UDF is opaque to it.</span>
+</code></pre></div>
+<p>If a filter can be expressed with built-ins, always filter <em>before</em>
+applying a UDF, so the optimizer can push the built-in filter down as
+early as possible (ideally to the file scan itself) and the UDF only runs
+on the smaller, already-filtered set of rows.</p>
+<h2 id="worked-example-parsing-a-semi-structured-field">Worked example: parsing a semi-structured field<a class="headerlink" href="#worked-example-parsing-a-semi-structured-field" title="Permanent link">&para;</a></h2>
+<p>Task: <code>raw_name</code> sometimes has irregular whitespace/casing (as above);
+build a proper <code>first_name</code> / <code>last_name</code> split as a genuine UDF example
+(built-ins alone can't cleanly do multi-value output like this from one
+column, since <code>split</code> + array indexing gets awkward with irregular
+whitespace).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"first_name"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"last_name"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">])</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="nd">@udf</span><span class="p">(</span><span class="n">returnType</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">split_name</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">if</span> <span class="n">raw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="k">return</span> <span class="kc">None</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">parts</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"parsed"</span><span class="p">,</span> <span class="n">split_name</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"raw_name"</span><span class="p">)))</span> \
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>           <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"parsed.first_name"</span><span class="p">,</span> <span class="s2">"parsed.last_name"</span><span class="p">)</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="n">result</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="c1"># +---+----------+---------+</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="c1"># | id|first_name|last_name|</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="c1"># +---+----------+---------+</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="c1"># |  1|     Alice|    Smith|</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="c1"># |  2|       Bob|    Jones|</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="c1"># |  3|     Carla|   Garcia|</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="c1"># |  4|      null|     null|</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="c1"># +---+----------+---------+</span>
+</code></pre></div>
+<p>A UDF returning a <code>StructType</code> produces a single struct column, which you
+then unpack with <code>.select("parsed.first_name", "parsed.last_name")</code> —
+this is the idiomatic way to get "multiple outputs" from one UDF call.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>df</code> from the top of this module:</p>
+<ol>
+<li>Write a plain Python UDF that returns the length of <code>raw_name</code>'s
+   stripped, trimmed value (return <code>0</code> for <code>None</code>), and confirm it matches
+   <code>length(trim(raw_name))</code> computed with the built-in <code>length</code> function.</li>
+<li>Convert that UDF to a Pandas UDF and confirm it produces the same
+   result.</li>
+<li>Explain (in a comment) why <code>df.filter(col("raw_name").isNotNull())</code>
+   should be applied before a UDF call rather than after, referencing
+   optimizer pushdown.</li>
+<li>Write a UDF returning a <code>StructType</code> with <code>is_valid: BooleanType</code> and
+   <code>reason: StringType</code>, flagging rows where <code>raw_name</code> is null or empty
+   after stripping, and unpack it into two top-level columns.</li>
+</ol>
 
 
 

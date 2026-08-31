@@ -1467,6 +1467,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Multi Source Join
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1483,6 +1501,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-cache-the-small-dimension-broadcast-it-into-the-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — cache the small dimension, broadcast it into the join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-flatten-the-nested-pricing-struct-and-clean-nulls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — flatten the nested pricing struct and clean nulls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-window-function-rank-each-customers-orders-by-spend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — window function: rank each customer's orders by spend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-a-small-udf-only-where-the-dataframe-api-cant-help-wrapped-carefully" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — a small UDF only where the DataFrame API can't help, wrapped carefully
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-register-as-a-temp-view-and-finish-the-aggregation-in-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — register as a temp view and finish the aggregation in SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-partition-the-write-for-downstream-consumers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — partition the write for downstream consumers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2389,102 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-cache-the-small-dimension-broadcast-it-into-the-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1 — cache the small dimension, broadcast it into the join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-flatten-the-nested-pricing-struct-and-clean-nulls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2 — flatten the nested pricing struct and clean nulls
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-window-function-rank-each-customers-orders-by-spend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3 — window function: rank each customer's orders by spend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-a-small-udf-only-where-the-dataframe-api-cant-help-wrapped-carefully" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4 — a small UDF only where the DataFrame API can't help, wrapped carefully
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-register-as-a-temp-view-and-finish-the-aggregation-in-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5 — register as a temp view and finish the aggregation in SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-partition-the-write-for-downstream-consumers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6 — partition the write for downstream consumers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2504,203 @@
 
 
 <h1 id="10-capstone-multi-source-join">10 · Capstone Multi Source Join<a class="headerlink" href="#10-capstone-multi-source-join" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>This capstone pulls together everything from Level 2: joins, window
+functions, UDFs (and avoiding them), partitioning, caching, Spark SQL, null
+handling, and nested types. You'll build a small pipeline that combines
+three independent data sources — orders, customers, and a product catalog
+with nested pricing — into one enriched, analysis-ready table.</p>
+<h2 id="the-sources">The sources<a class="headerlink" href="#the-sources" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">ArrayType</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"multi-source-capstone"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">orders</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">[</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="s2">"P1"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"2024-01-05"</span><span class="p">),</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="s2">"P2"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"2024-01-05"</span><span class="p">),</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="s2">"P1"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"2024-01-06"</span><span class="p">),</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="s2">"P3"</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="s2">"P2"</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"2024-01-07"</span><span class="p">),</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="s2">"P4"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"2024-01-08"</span><span class="p">),</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="p">],</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="p">[</span><span class="s2">"order_id"</span><span class="p">,</span> <span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"product_id"</span><span class="p">,</span> <span class="s2">"qty"</span><span class="p">,</span> <span class="s2">"order_date"</span><span class="p">],</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="p">[</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">),</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">),</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="s2">"Carla"</span><span class="p">,</span> <span class="s2">"DE"</span><span class="p">),</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="p">],</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="p">[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">],</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="p">)</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="c1"># Product catalog has a nested "pricing" struct and a "tags" array —</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="c1"># a realistic shape for a document-store export landing as JSON/Parquet.</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="n">products_schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"product_id"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"pricing"</span><span class="p">,</span> <span class="n">StructType</span><span class="p">([</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="n">StructField</span><span class="p">(</span><span class="s2">"unit_price"</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">()),</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="n">StructField</span><span class="p">(</span><span class="s2">"currency"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="p">])),</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="n">ArrayType</span><span class="p">(</span><span class="n">StringType</span><span class="p">())),</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="p">])</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="n">products</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="p">[</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>        <span class="p">(</span><span class="s2">"P1"</span><span class="p">,</span> <span class="s2">"Wireless Mouse"</span><span class="p">,</span> <span class="p">(</span><span class="mf">19.99</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">),</span> <span class="p">[</span><span class="s2">"electronics"</span><span class="p">,</span> <span class="s2">"accessory"</span><span class="p">]),</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="p">(</span><span class="s2">"P2"</span><span class="p">,</span> <span class="s2">"USB-C Hub"</span><span class="p">,</span> <span class="p">(</span><span class="mf">34.50</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">),</span> <span class="p">[</span><span class="s2">"electronics"</span><span class="p">]),</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="p">(</span><span class="s2">"P3"</span><span class="p">,</span> <span class="s2">"Standing Desk"</span><span class="p">,</span> <span class="p">(</span><span class="mf">299.00</span><span class="p">,</span> <span class="s2">"USD"</span><span class="p">),</span> <span class="p">[</span><span class="s2">"furniture"</span><span class="p">,</span> <span class="s2">"office"</span><span class="p">]),</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="p">],</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="n">schema</span><span class="o">=</span><span class="n">products_schema</span><span class="p">,</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="p">)</span>
+</code></pre></div>
+<p>Note the deliberate messiness: <code>orders.order_date</code> has a null, <code>P4</code> has no
+catalog entry, and <code>customer_id=104</code> has no matching customer.</p>
+<h2 id="step-1-cache-the-small-dimension-broadcast-it-into-the-join">Step 1 — cache the small dimension, broadcast it into the join<a class="headerlink" href="#step-1-cache-the-small-dimension-broadcast-it-into-the-join" title="Permanent link">&para;</a></h2>
+<p><code>customers</code> and <code>products</code> are both small dimension tables reused across
+multiple joins, so we cache them once and broadcast at join time.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">customers</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">products</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">customers</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># materialize the cache</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">products</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">enriched</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">orders</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">customers</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">products</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="s2">"product_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">)</span>
+</code></pre></div>
+<h2 id="step-2-flatten-the-nested-pricing-struct-and-clean-nulls">Step 2 — flatten the nested pricing struct and clean nulls<a class="headerlink" href="#step-2-flatten-the-nested-pricing-struct-and-clean-nulls" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="nb">round</span> <span class="k">as</span> <span class="n">spark_round</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">flat</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">enriched</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"unit_price"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"pricing.unit_price"</span><span class="p">))</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"currency"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"pricing.currency"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"USD"</span><span class="p">)))</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"pricing"</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"name"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"UNKNOWN"</span><span class="p">)))</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"country"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"country"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"UNKNOWN"</span><span class="p">)))</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"title"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"title"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"UNKNOWN PRODUCT"</span><span class="p">)))</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"unit_price"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"unit_price"</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)))</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"line_total"</span><span class="p">,</span> <span class="n">spark_round</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"unit_price"</span><span class="p">)</span> <span class="o">*</span> <span class="n">col</span><span class="p">(</span><span class="s2">"qty"</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">)</span>
+</code></pre></div>
+<p><code>order_id=6</code> (product <code>P4</code>, no catalog match) now shows <code>title=UNKNOWN
+PRODUCT</code>, <code>unit_price=0.0</code>, <code>line_total=0.0</code> instead of nulls propagating
+silently through downstream aggregates.</p>
+<h2 id="step-3-window-function-rank-each-customers-orders-by-spend">Step 3 — window function: rank each customer's orders by spend<a class="headerlink" href="#step-3-window-function-rank-each-customers-orders-by-spend" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">rank</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">customer_window</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"line_total"</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">ranked</span> <span class="o">=</span> <span class="n">flat</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"spend_rank"</span><span class="p">,</span> <span class="n">rank</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">customer_window</span><span class="p">))</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">ranked</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"order_id"</span><span class="p">,</span> <span class="s2">"line_total"</span><span class="p">,</span> <span class="s2">"spend_rank"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"spend_rank"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># +-----------+-----+--------+----------+----------+</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># |customer_id| name|order_id|line_total|spend_rank|</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># +-----------+-----+--------+----------+----------+</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># |        101|Alice|       1|     39.98|         1|</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1"># |        101|Alice|       3|     19.99|         2|</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># |        101|Alice|       6|       0.0|         3|</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># |        102|  Bob|       2|      34.5|         1|</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># |        103|Carla|       4|       0.0|         1|</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1"># |        104|UNKNOWN|     5|       0.0|         1|</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># +-----------+-----+--------+----------+----------+</span>
+</code></pre></div>
+<h2 id="step-4-a-small-udf-only-where-the-dataframe-api-cant-help-wrapped-carefully">Step 4 — a small UDF only where the DataFrame API can't help, wrapped carefully<a class="headerlink" href="#step-4-a-small-udf-only-where-the-dataframe-api-cant-help-wrapped-carefully" title="Permanent link">&para;</a></h2>
+<p>Tagging an order as "premium" combines multiple array-membership and
+threshold checks that would be awkward as native expressions here, but we
+prefer <code>array_contains</code> (native) over a Python UDF wherever possible —
+only the final composite label uses a UDF, and even then a <code>pandas_udf</code>
+for vectorization:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">array_contains</span><span class="p">,</span> <span class="n">pandas_udf</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">has_electronics</span> <span class="o">=</span> <span class="n">array_contains</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">),</span> <span class="s2">"electronics"</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nd">@pandas_udf</span><span class="p">(</span><span class="s2">"string"</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">spend_tier</span><span class="p">(</span><span class="n">line_total</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="n">line_total</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"none"</span><span class="p">,</span> <span class="s2">"standard"</span><span class="p">,</span> <span class="s2">"premium"</span><span class="p">],</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">tiered</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="n">ranked</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"is_electronics"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="n">has_electronics</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="kc">False</span><span class="p">)))</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"spend_tier"</span><span class="p">,</span> <span class="n">spend_tier</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"line_total"</span><span class="p">)))</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="p">)</span>
+</code></pre></div>
+<h2 id="step-5-register-as-a-temp-view-and-finish-the-aggregation-in-sql">Step 5 — register as a temp view and finish the aggregation in SQL<a class="headerlink" href="#step-5-register-as-a-temp-view-and-finish-the-aggregation-in-sql" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">tiered</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">"enriched_orders"</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">summary</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"""</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="s2">    SELECT</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="s2">        customer_id,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="s2">        name,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="s2">        country,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="s2">        COUNT(*)                    AS order_count,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="s2">        ROUND(SUM(line_total), 2)   AS total_spend,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="s2">        SUM(CASE WHEN spend_tier = 'premium' THEN 1 ELSE 0 END) AS premium_orders</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="s2">    FROM enriched_orders</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="s2">    GROUP BY customer_id, name, country</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="s2">    ORDER BY total_spend DESC</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="s2">"""</span><span class="p">)</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="n">summary</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># +-----------+-------+-------+-----------+-----------+--------------+</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1"># |customer_id|   name|country|order_count|total_spend|premium_orders|</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1"># +-----------+-------+-------+-----------+-----------+--------------+</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># |        101|  Alice|     US|          3|      59.97|             1|</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># |        102|    Bob|     IN|          1|       34.5|             1|</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="c1"># |        103|  Carla|     DE|          1|        0.0|             0|</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="c1"># |        104|UNKNOWN|UNKNOWN|          1|        0.0|             0|</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="c1"># +-----------+-------+-------+-----------+-----------+--------------+</span>
+</code></pre></div>
+<h2 id="step-6-partition-the-write-for-downstream-consumers">Step 6 — partition the write for downstream consumers<a class="headerlink" href="#step-6-partition-the-write-for-downstream-consumers" title="Permanent link">&para;</a></h2>
+<p>Since <code>country</code> is a low-cardinality, frequently-filtered column, we
+partition the final write on it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">tiered</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="o">.</span><span class="n">write</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/data/warehouse/enriched_orders"</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">customers</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">products</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+</code></pre></div>
+<p>Partitioning by <code>country</code> means a downstream query filtering
+<code>WHERE country = 'US'</code> prunes to a single partition directory instead of
+scanning the whole dataset — the payoff for the extra <code>repartition</code> here.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Add a fourth dimension source — a <code>promotions</code> DataFrame keyed by
+   <code>product_id</code> with a <code>discount_pct</code> column — and join it in, applying
+   the discount to <code>line_total</code> only where a promotion exists.</li>
+<li>Replace the <code>pandas_udf</code> spend-tier logic with an equivalent
+   <code>CASE WHEN</code> expression using native <code>when()/otherwise()</code> calls, and
+   compare <code>.explain()</code> output between the two versions.</li>
+<li>Re-run Step 6 but partition by <code>country</code> <strong>and</strong> the month extracted
+   from <code>order_date</code> — handle the row with a null <code>order_date</code> explicitly
+   rather than letting it silently create a <code>null</code> partition folder.</li>
+</ol>
 
 
 

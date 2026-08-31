@@ -1757,6 +1757,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Broadcast Joins At Scale
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1773,6 +1791,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recap-why-broadcast-at-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recap: why broadcast at all
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-big-is-too-big-to-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How big is "too big" to broadcast?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparksqlbroadcasttimeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        spark.sql.broadcastTimeout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-broadcast-vs-broadcast-hints-in-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicit broadcast vs. broadcast hints in SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-way-broadcast-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-way broadcast chains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-variables-outside-of-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast variables outside of joins
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2378,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recap-why-broadcast-at-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recap: why broadcast at all
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-big-is-too-big-to-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How big is "too big" to broadcast?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparksqlbroadcasttimeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        spark.sql.broadcastTimeout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicit-broadcast-vs-broadcast-hints-in-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicit broadcast vs. broadcast hints in SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-way-broadcast-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-way broadcast chains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-variables-outside-of-joins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast variables outside of joins
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2482,150 @@
 
 
 <h1 id="07-broadcast-joins-at-scale">07 · Broadcast Joins At Scale<a class="headerlink" href="#07-broadcast-joins-at-scale" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Level 2 introduced broadcast joins with small, toy tables. This module
+looks at the operational realities of broadcasting at production scale:
+how big is "too big," what failure modes look like, multi-way broadcast
+chains, and broadcast variables outside of joins.</p>
+<h2 id="recap-why-broadcast-at-all">Recap: why broadcast at all<a class="headerlink" href="#recap-why-broadcast-at-all" title="Permanent link">&para;</a></h2>
+<p>A broadcast join sends a full copy of the small side to every executor
+once, so each executor can do a local hash join with no shuffle of the
+large side. The cost is proportional to <code>(small side size) × (number of
+executors)</code> for the broadcast itself, versus a shuffle join's cost being
+proportional to moving <em>both</em> full datasets across the network.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span><span class="p">,</span> <span class="n">col</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"broadcast-at-scale"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">fact</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2_000_000_000</span><span class="p">)</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"event_id"</span><span class="p">)</span> \
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"dim_key"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"event_id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10_000_000</span><span class="p">))</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">dim</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10_000_000</span><span class="p">)</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"dim_key"</span><span class="p">)</span> \
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"dim_value"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"dim_key"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>At 10 million rows, <code>dim</code> is roughly 100–200 MB depending on schema width
+— broadcastable on a reasonably provisioned cluster but past the default
+10 MB auto-threshold, so it needs either an explicit <code>broadcast()</code> call or
+a raised <code>autoBroadcastJoinThreshold</code>.</p>
+<h2 id="how-big-is-too-big-to-broadcast">How big is "too big" to broadcast?<a class="headerlink" href="#how-big-is-too-big-to-broadcast" title="Permanent link">&para;</a></h2>
+<p>There's no fixed number — it depends on <strong>executor memory</strong> and
+<strong>executor count</strong>, since every executor holds a full copy simultaneously.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Rough capacity check before broadcasting:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">executor_memory_gb</span> <span class="o">=</span> <span class="mi">8</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">memory_overhead_gb</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">safety_margin</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># leave half of overhead free for other broadcast/shuffle buffers</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">max_safe_broadcast_mb</span> <span class="o">=</span> <span class="p">(</span><span class="n">memory_overhead_gb</span> <span class="o">*</span> <span class="n">safety_margin</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1024</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">max_safe_broadcast_mb</span><span class="p">)</span>   <span class="c1"># 1024 MB — a starting ceiling, not a guarantee</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.autoBroadcastJoinThreshold"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">max_safe_broadcast_mb</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">))</span>
+</code></pre></div>
+<p>A broadcast that's too large manifests as executors OOM-ing during the
+<code>BroadcastExchange</code> stage, or the driver itself running out of memory
+collecting the broadcast data before distributing it — the driver builds
+the broadcast variable first, so driver memory matters here too.</p>
+<h2 id="sparksqlbroadcasttimeout"><code>spark.sql.broadcastTimeout</code><a class="headerlink" href="#sparksqlbroadcasttimeout" title="Permanent link">&para;</a></h2>
+<p>Broadcasting a genuinely large table can simply take longer than the
+default timeout allows, especially over a slow network or with many
+executors pulling the same broadcast simultaneously:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"spark.sql.broadcastTimeout"</span><span class="p">)</span>   <span class="c1"># '300' (seconds), default</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># If a legitimately large-but-still-worth-broadcasting table times out</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># building or distributing, raise it rather than assume broadcast is impossible:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.broadcastTimeout"</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+</code></pre></div>
+<p>A <code>BroadcastTimeoutException</code> doesn't necessarily mean "too big to
+broadcast" — check whether it's a genuine size problem (lower the
+threshold, use a shuffle join instead) or just a slow-network timing
+issue (raise the timeout).</p>
+<h2 id="explicit-broadcast-vs-broadcast-hints-in-sql">Explicit broadcast vs. broadcast hints in SQL<a class="headerlink" href="#explicit-broadcast-vs-broadcast-hints-in-sql" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">dim</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">"dim"</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">fact</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">"fact"</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"""</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s2">    SELECT /*+ BROADCAST(dim) */ fact.event_id, dim.dim_value</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s2">    FROM fact JOIN dim ON fact.dim_key = dim.dim_key</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="s2">"""</span><span class="p">)</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># *(2) BroadcastHashJoin [dim_key#..], [dim_key#..], Inner, BuildRight</span>
+</code></pre></div>
+<p>The <code>/*+ BROADCAST(table_alias) */</code> hint is the SQL-API equivalent of
+wrapping a DataFrame in <code>broadcast(...)</code> — useful when the join is
+expressed in raw SQL rather than the DataFrame API, and it takes
+precedence over the size-based auto-broadcast decision either way.</p>
+<h2 id="multi-way-broadcast-chains">Multi-way broadcast chains<a class="headerlink" href="#multi-way-broadcast-chains" title="Permanent link">&para;</a></h2>
+<p>Joining a large fact table against several small dimension tables in
+sequence is one of the most common production patterns — broadcast each
+dimension independently rather than joining dimensions to each other
+first:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">region</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"east"</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"west"</span><span class="p">)],</span> <span class="p">[</span><span class="s2">"region_id"</span><span class="p">,</span> <span class="s2">"region_name"</span><span class="p">])</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">category</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"electronics"</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"home"</span><span class="p">)],</span> <span class="p">[</span><span class="s2">"category_id"</span><span class="p">,</span> <span class="s2">"category_name"</span><span class="p">])</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">fact_wide</span> <span class="o">=</span> <span class="n">fact</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"region_id"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"dim_key"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> \
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"category_id"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"dim_key"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">enriched</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">fact_wide</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">region</span><span class="p">),</span> <span class="s2">"region_id"</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">category</span><span class="p">),</span> <span class="s2">"category_id"</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">dim</span><span class="p">),</span> <span class="s2">"dim_key"</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="n">enriched</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># Three separate BroadcastHashJoin nodes chained together, each with its</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1"># own BroadcastExchange — no shuffle at all in this plan.</span>
+</code></pre></div>
+<p>Chaining broadcasts like this keeps the large <code>fact_wide</code> table's
+partitioning completely untouched through all three joins — a pure
+map-side operation with zero shuffles, which is the ideal shape for a
+star-schema fact/dimension enrichment pipeline.</p>
+<h2 id="broadcast-variables-outside-of-joins">Broadcast variables outside of joins<a class="headerlink" href="#broadcast-variables-outside-of-joins" title="Permanent link">&para;</a></h2>
+<p><code>sc.broadcast()</code> is the lower-level primitive behind <code>broadcast()</code> on
+DataFrames — useful directly when you need to ship a lookup structure
+(e.g., a Python dict) into a UDF without re-serializing it per task:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">lookup_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">"east"</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">"west"</span><span class="p">}</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">bc</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">lookup_dict</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">udf</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringType</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nd">@udf</span><span class="p">(</span><span class="n">StringType</span><span class="p">())</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">lookup_region</span><span class="p">(</span><span class="n">region_id</span><span class="p">):</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">return</span> <span class="n">bc</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">region_id</span><span class="p">,</span> <span class="s2">"unknown"</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">fact_wide</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"region_name"</span><span class="p">,</span> <span class="n">lookup_region</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"region_id"</span><span class="p">)))</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="s2">"region_id"</span><span class="p">,</span> <span class="s2">"region_name"</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># +---------+-----------+</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># |region_id|region_name|</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="c1"># +---------+-----------+</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># |        1|       east|</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1"># |        2|       west|</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1"># +---------+-----------+</span>
+</code></pre></div>
+<p><code>bc.value</code> is fetched once per executor (not per task, not per row) —
+far cheaper than closing over <code>lookup_dict</code> directly in the UDF, which
+Spark would otherwise have to re-serialize into every task's closure.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">bc</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>   <span class="c1"># release the broadcast from executor memory when no longer needed</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">bc</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>     <span class="c1"># release fully, including from the driver — cannot be reused after this</span>
+</code></pre></div>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Given <code>executor.memory=16g</code>, <code>executor.memoryOverhead=4g</code>, and 20
+   executors, estimate a conservative <code>autoBroadcastJoinThreshold</code> value
+   and justify the number.</li>
+<li>Rewrite the three-way broadcast chain above using the SQL API with
+   <code>/*+ BROADCAST(...) */</code> hints on all three joins, and confirm in
+   words that the resulting physical plan should be identical to the
+   DataFrame-API version.</li>
+<li>A broadcast join intermittently fails with
+   <code>BroadcastTimeoutException</code> under network load but succeeds when
+   re-run. Name two different remediations and explain the tradeoff
+   between them.</li>
+</ol>
 
 
 

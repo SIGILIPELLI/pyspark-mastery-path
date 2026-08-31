@@ -1701,6 +1701,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Performance Tuning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1717,6 +1735,124 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executor-sizing-cores-memory-and-count" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executor sizing: cores, memory, and count
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparkexecutormemoryoverhead-and-pyspark-specifically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        spark.executor.memoryOverhead and PySpark specifically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-when-it-helps-when-it-hurts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching: when it helps, when it hurts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-a-storage-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing a storage level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-small-file-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The small-file problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-format-and-compression-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File format and compression choices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-threshold-and-join-strategy-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast threshold and join strategy hints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-tuning-pass-on-a-slow-aggregation-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a tuning pass on a slow aggregation job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2400,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executor-sizing-cores-memory-and-count" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executor sizing: cores, memory, and count
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sparkexecutormemoryoverhead-and-pyspark-specifically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        spark.executor.memoryOverhead and PySpark specifically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-when-it-helps-when-it-hurts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching: when it helps, when it hurts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-a-storage-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing a storage level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-small-file-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The small-file problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-format-and-compression-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File format and compression choices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-threshold-and-join-strategy-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast threshold and join strategy hints
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-tuning-pass-on-a-slow-aggregation-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a tuning pass on a slow aggregation job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2526,161 @@
 
 
 <h1 id="05-performance-tuning">05 · Performance Tuning<a class="headerlink" href="#05-performance-tuning" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>This module pulls together the tuning knobs that don't fit neatly under
+"shuffle" or "skew" alone: memory configuration, executor sizing, file
+layout, and the small-file problem. Treat it as a checklist you run
+through before declaring a job "as fast as it can be."</p>
+<h2 id="executor-sizing-cores-memory-and-count">Executor sizing: cores, memory, and count<a class="headerlink" href="#executor-sizing-cores-memory-and-count" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Typical spark-submit / cluster config, shown here as conf for reference:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">spark_conf</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="s2">"spark.executor.cores"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>       <span class="c1"># parallel tasks per executor</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">"spark.executor.memory"</span><span class="p">:</span> <span class="s2">"8g"</span><span class="p">,</span>     <span class="c1"># JVM heap per executor</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="s2">"spark.executor.memoryOverhead"</span><span class="p">:</span> <span class="s2">"1g"</span><span class="p">,</span>  <span class="c1"># off-heap: shuffle buffers, Python worker memory</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">"spark.executor.instances"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>  <span class="c1"># number of executors</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Rules of thumb:</p>
+<ul>
+<li><strong>5 cores per executor</strong> is a commonly cited sweet spot — beyond that,
+  HDFS/network I/O throughput per executor tends to degrade from
+  contention, and JVM garbage collection pauses get worse with larger
+  heaps holding more concurrent tasks' data.</li>
+<li><strong>Total parallelism</strong> = <code>executor.instances × executor.cores</code>. This
+  should comfortably exceed your <code>shuffle.partitions</code> count, or many
+  shuffle tasks queue up behind a small number of executor slots.</li>
+<li>Leave <strong>1 core and ~1 GB</strong> per node for the OS/YARN NodeManager/cluster
+  manager daemon — don't size executors to consume 100% of a node.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># If a node has 16 cores / 64 GB and you want 5 cores/executor:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">cores_per_executor</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">executors_per_node</span> <span class="o">=</span> <span class="mi">16</span> <span class="o">//</span> <span class="n">cores_per_executor</span>    <span class="c1"># 3, leaving 1 core for the OS</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">mem_per_executor_gb</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">//</span> <span class="n">executors_per_node</span>    <span class="c1"># ~21 GB, split into heap + overhead</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">executors_per_node</span><span class="p">,</span> <span class="n">mem_per_executor_gb</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="sparkexecutormemoryoverhead-and-pyspark-specifically"><code>spark.executor.memoryOverhead</code> and PySpark specifically<a class="headerlink" href="#sparkexecutormemoryoverhead-and-pyspark-specifically" title="Permanent link">&para;</a></h2>
+<p>PySpark UDFs and pandas UDFs run Python worker processes <em>outside</em> the
+JVM heap — their memory comes out of <code>memoryOverhead</code>, not
+<code>executor.memory</code>. A job that's fine in Scala but OOMs in PySpark with
+heavy UDF usage is almost always an under-sized overhead setting:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">spark_conf_pyspark_heavy</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">"spark.executor.memory"</span><span class="p">:</span> <span class="s2">"6g"</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">"spark.executor.memoryOverhead"</span><span class="p">:</span> <span class="s2">"3g"</span><span class="p">,</span>   <span class="c1"># bumped up for Python worker headroom</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="s2">"spark.executor.pyspark.memory"</span><span class="p">:</span> <span class="s2">"2g"</span><span class="p">,</span>   <span class="c1"># explicit cap on Python worker memory (optional)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="caching-when-it-helps-when-it-hurts">Caching: when it helps, when it hurts<a class="headerlink" href="#caching-when-it-helps-when-it-hurts" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"perf-tuning"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">base</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5_000_000</span><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Worth caching: base is read from disk/computed once, then reused</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># across 3 independent downstream actions.</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="n">base</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">base</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># materialize</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">a</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">b</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">c</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="n">base</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+</code></pre></div>
+<p>Caching is wasted (and costs memory pressure / eviction risk) if the
+cached DataFrame is only ever used once — you've paid the cost of
+materializing and storing it for no reuse benefit. Always check <code>.count()</code>
+of distinct action call-sites against the cached DataFrame before adding
+<code>.cache()</code>.</p>
+<h2 id="choosing-a-storage-level">Choosing a storage level<a class="headerlink" href="#choosing-a-storage-level" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageLevel</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Default for .cache(): deserialized objects in memory, spill to disk if it doesn't fit.</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">base</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Serialized: more CPU to (de)serialize, but roughly 2-4x less memory footprint —</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># useful when a DataFrame barely fits and GC pressure is hurting more than CPU cost.</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">base</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK_SER</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Memory only, no disk spill: fastest but rows are simply dropped and</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># recomputed from lineage if they don't fit — risky for very large data.</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">base</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="the-small-file-problem">The small-file problem<a class="headerlink" href="#the-small-file-problem" title="Permanent link">&para;</a></h2>
+<p>Too many tiny output files (from over-partitioned writes) slow down every
+downstream job that has to open each file's metadata separately —
+especially painful on cloud object stores where each file open is a
+network round trip.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Before: 500 shuffle partitions -&gt; up to 500 small files per write</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">skewed_write</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">skewed_write</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/too_many_files"</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># After: coalesce right before the write to consolidate into fewer,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># larger files, without triggering a second full shuffle.</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">skewed_write</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/fewer_files"</span><span class="p">)</span>
+</code></pre></div>
+<p>Target file sizes of roughly 128 MB–1 GB for Parquet on most
+object stores; use <code>.repartition(n)</code> instead of <code>.coalesce(n)</code> if you also
+need to fix a skewed key distribution across the output files (coalesce
+alone can't rebalance, only merge adjacent partitions).</p>
+<h2 id="file-format-and-compression-choices">File format and compression choices<a class="headerlink" href="#file-format-and-compression-choices" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Parquet + Snappy (default) is the standard choice: columnar, splittable,</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># supports predicate/column pruning, low CPU cost to decompress.</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">base</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"compression"</span><span class="p">,</span> <span class="s2">"snappy"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/snappy_out"</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># gzip: smaller files, but NOT splittable within a single file and</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># noticeably more CPU to decompress — usually a poor choice for Spark inputs.</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">base</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"compression"</span><span class="p">,</span> <span class="s2">"gzip"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/gzip_out"</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># zstd: often a good middle ground — better compression ratio than snappy</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1"># at comparable CPU cost, splittable within Parquet's own row-group structure.</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">base</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"compression"</span><span class="p">,</span> <span class="s2">"zstd"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/zstd_out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="broadcast-threshold-and-join-strategy-hints">Broadcast threshold and join strategy hints<a class="headerlink" href="#broadcast-threshold-and-join-strategy-hints" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Covered in Level 2 module 1 and Level 3 module 7 in depth — repeated here</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># as a tuning checklist item:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.autoBroadcastJoinThreshold"</span><span class="p">,</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>  <span class="c1"># 50 MB</span>
+</code></pre></div>
+<h2 id="worked-example-a-tuning-pass-on-a-slow-aggregation-job">Worked example: a tuning pass on a slow aggregation job<a class="headerlink" href="#worked-example-a-tuning-pass-on-a-slow-aggregation-job" title="Permanent link">&para;</a></h2>
+<p>Starting point — default config, job takes 40 minutes on a dataset with
+known skew and 800 shuffle partitions worth of tiny files on output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 1. Right-size shuffle partitions to actual data volume (module 2)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="mi">96</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 2. Turn on AQE so Spark can further split any skewed partitions at runtime (module 6)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.coalescePartitions.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># 3. Bump overhead memory since the pipeline uses a pandas_udf</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">spark_conf_note</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"spark.executor.memoryOverhead"</span><span class="p">:</span> <span class="s2">"2g"</span><span class="p">}</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1"># 4. Coalesce the final write to avoid 800 small files</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">result</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"bucket"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="n">result</span><span class="o">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/data/warehouse/bucket_counts"</span><span class="p">)</span>
+</code></pre></div>
+<p>Each change targets a distinct bottleneck category (parallelism sizing,
+runtime skew, Python memory, file layout) — apply them incrementally and
+re-check the Spark UI (module 8) between changes rather than all at once,
+so you know which change actually moved the needle.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Given a 16-core, 64 GB node and a target of 5 cores per executor,
+   compute executor count per node and a reasonable
+   <code>executor.memory</code> + <code>executor.memoryOverhead</code> split.</li>
+<li>Explain why <code>MEMORY_AND_DISK_SER</code> might outperform <code>MEMORY_ONLY</code> on a
+   cluster experiencing frequent GC pauses, even though it does more CPU
+   work per access.</li>
+<li>A job outputs 4,000 files averaging 3 MB each into a partitioned
+   Parquet table. Propose a specific <code>.coalesce()</code> or <code>.repartition()</code>
+   change (with a target file-size justification) to fix it.</li>
+</ol>
 
 
 

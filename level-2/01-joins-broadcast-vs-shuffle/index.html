@@ -1215,6 +1215,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Joins Broadcast Vs Shuffle
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1231,6 +1249,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-joins-are-expensive-the-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why joins are expensive: the shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-joins-skip-the-shuffle-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast joins: skip the shuffle entirely
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-broadcast-sparksqlautobroadcastjointhreshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic broadcast: spark.sql.autoBroadcastJoinThreshold
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#danger-broadcasting-something-too-large" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Danger: broadcasting something too large
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join-types-recap-with-how" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join types recap, with how=
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-enrich-orders-flag-orphans-pick-the-cheap-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: enrich orders, flag orphans, pick the cheap plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2378,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-joins-are-expensive-the-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why joins are expensive: the shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#broadcast-joins-skip-the-shuffle-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Broadcast joins: skip the shuffle entirely
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-broadcast-sparksqlautobroadcastjointhreshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic broadcast: spark.sql.autoBroadcastJoinThreshold
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#danger-broadcasting-something-too-large" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Danger: broadcasting something too large
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#join-types-recap-with-how" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Join types recap, with how=
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-enrich-orders-flag-orphans-pick-the-cheap-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: enrich orders, flag orphans, pick the cheap plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2482,184 @@
 
 
 <h1 id="01-joins-broadcast-vs-shuffle">01 · Joins Broadcast Vs Shuffle<a class="headerlink" href="#01-joins-broadcast-vs-shuffle" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Joins are the single most expensive operation you'll write in Spark, and
+the difference between a broadcast join and a shuffle join is often the
+difference between a job that finishes in seconds and one that spills to
+disk for an hour. This module covers how Spark actually executes a join,
+and how to steer it toward the cheap plan.</p>
+<p>We'll use two small DataFrames to keep the traced output readable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">orders</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="p">[</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mf">250.00</span><span class="p">),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mf">75.50</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mf">40.00</span><span class="p">),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mf">500.00</span><span class="p">),</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mf">12.25</span><span class="p">),</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="p">],</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">[</span><span class="s2">"order_id"</span><span class="p">,</span> <span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"amount"</span><span class="p">],</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="p">[</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">),</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">),</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="p">(</span><span class="mi">103</span><span class="p">,</span> <span class="s2">"Carla"</span><span class="p">,</span> <span class="s2">"DE"</span><span class="p">),</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="p">],</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="p">[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">],</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">)</span>
+</code></pre></div>
+<p>Note <code>customer_id=104</code> has no match in <code>customers</code> — we'll use this to talk
+about join types below.</p>
+<h2 id="why-joins-are-expensive-the-shuffle">Why joins are expensive: the shuffle<a class="headerlink" href="#why-joins-are-expensive-the-shuffle" title="Permanent link">&para;</a></h2>
+<p>A join needs every row from one side that shares a key to land on the same
+executor as the matching rows from the other side. If the two DataFrames
+are partitioned arbitrarily (which they are, right after a <code>read</code>), Spark
+has to <strong>shuffle</strong> — repartition both sides by the join key across the
+network — before it can compare rows partition-by-partition. This is the
+default strategy, called a <strong>sort-merge join</strong> (or, for small hash tables,
+a <strong>shuffle hash join</strong>), and it's expensive: network I/O, disk spill for
+large partitions, and a stage boundary that blocks pipelining.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">result</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># *(5) SortMergeJoin [customer_id#10], [customer_id#20], Inner</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># :- *(2) Sort [customer_id#10 ASC NULLS FIRST], false, 0</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># :  +- Exchange hashpartitioning(customer_id#10, 200), ...</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># :     +- *(1) Filter isnotnull(customer_id#10)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># +- *(4) Sort [customer_id#20 ASC NULLS FIRST], false, 0</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">#    +- Exchange hashpartitioning(customer_id#20, 200), ...</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">#       +- *(3) Filter isnotnull(customer_id#20)</span>
+</code></pre></div>
+<p>The two <code>Exchange hashpartitioning(...)</code> nodes are the shuffles — one per
+side of the join. <code>explain()</code> is your primary tool for seeing whether Spark
+chose a shuffle or a broadcast; we'll return to it in depth in Level 3.</p>
+<h2 id="broadcast-joins-skip-the-shuffle-entirely">Broadcast joins: skip the shuffle entirely<a class="headerlink" href="#broadcast-joins-skip-the-shuffle-entirely" title="Permanent link">&para;</a></h2>
+<p>If one side of the join is small enough to fit comfortably in each
+executor's memory, Spark can instead <strong>send a full copy of the small
+DataFrame to every executor</strong>, and each executor does a local hash-join
+against its partition of the large side. No shuffle of the large side is
+needed at all.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">customers</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">result</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># *(2) BroadcastHashJoin [customer_id#10], [customer_id#20], Inner, BuildRight</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># :- *(2) Filter isnotnull(customer_id#10)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># +- BroadcastExchange HashedRelationBroadcastMode(...)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1">#    +- *(1) Filter isnotnull(customer_id#20)</span>
+</code></pre></div>
+<p><code>BroadcastHashJoin</code> replaces <code>SortMergeJoin</code>, and there's only one
+<code>BroadcastExchange</code> (sending <code>customers</code> to every executor) instead of two
+full shuffles. This is dramatically cheaper when <code>customers</code> is small — a
+dimension table of a few thousand rows against a fact table of billions,
+for example.</p>
+<h2 id="automatic-broadcast-sparksqlautobroadcastjointhreshold">Automatic broadcast: <code>spark.sql.autoBroadcastJoinThreshold</code><a class="headerlink" href="#automatic-broadcast-sparksqlautobroadcastjointhreshold" title="Permanent link">&para;</a></h2>
+<p>You don't always have to call <code>broadcast()</code> explicitly. Spark's optimizer
+will automatically pick a broadcast join if it estimates a table's size is
+under a threshold, controlled by:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"spark.sql.autoBroadcastJoinThreshold"</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># '10485760'   (10 MB, the default)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Raise it if you know a larger dimension table is still safe to broadcast:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.autoBroadcastJoinThreshold"</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>  <span class="c1"># 100 MB</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Disable auto-broadcast entirely (forces shuffle joins unless you call broadcast() manually):</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.autoBroadcastJoinThreshold"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>The size estimate comes from file statistics or a prior <code>.cache()</code>, and it
+can be wrong — especially after several transformations. When in doubt,
+call <code>broadcast()</code> explicitly rather than trusting the automatic threshold.</p>
+<h2 id="danger-broadcasting-something-too-large">Danger: broadcasting something too large<a class="headerlink" href="#danger-broadcasting-something-too-large" title="Permanent link">&para;</a></h2>
+<p>Broadcasting sends the <em>entire</em> DataFrame to <em>every</em> executor. If you
+broadcast something too big, you can blow past executor memory and fail
+the job with an <code>OutOfMemoryError</code>, or silently degrade performance as
+executors spend most of their time serializing/deserializing a huge
+broadcast var. Never wrap the large ("fact") side of a join in
+<code>broadcast()</code> — only the small ("dimension") side.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># WRONG — orders is the large fact table here, don't broadcast it</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">result</span> <span class="o">=</span> <span class="n">broadcast</span><span class="p">(</span><span class="n">orders</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="join-types-recap-with-how">Join types recap, with <code>how=</code><a class="headerlink" href="#join-types-recap-with-how" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># +-----------+--------+------+-----+-------+</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># |customer_id|order_id|amount| name|country|</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># +-----------+--------+------+-----+-------+</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># |        101|       1|250.00|Alice|     US|</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># |        101|       3| 40.00|Alice|     US|</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># |        102|       2| 75.50|  Bob|     IN|</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># |        103|       4|500.00|Carla|     DE|</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1"># +-----------+--------+------+-----+-------+</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># (customer_id=104 dropped — no match)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># same 4 rows as inner, PLUS:</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># |        104|       5| 12.25| null|   null|</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">customers</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># equivalent semantics to orders.join(customers, how="left") but with</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1"># columns reordered per the base DataFrame</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left_anti"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># rows in orders with NO match in customers:</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="c1"># +-----------+--------+------+</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="c1"># |customer_id|order_id|amount|</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="c1"># +-----------+--------+------+</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="c1"># |        104|       5| 12.25|</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="c1"># +-----------+--------+------+</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left_semi"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="c1"># rows in orders that DO have a match, but only orders' own columns —</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="c1"># useful as an existence filter without duplicating matched rows</span>
+</code></pre></div>
+<p><code>left_semi</code> and <code>left_anti</code> are worth remembering: they answer "does a
+match exist?" without the row-duplication risk of a regular join when the
+right side has multiple matches per key.</p>
+<h2 id="worked-example-enrich-orders-flag-orphans-pick-the-cheap-plan">Worked example: enrich orders, flag orphans, pick the cheap plan<a class="headerlink" href="#worked-example-enrich-orders-flag-orphans-pick-the-cheap-plan" title="Permanent link">&para;</a></h2>
+<p>Task: join <code>orders</code> to <code>customers</code> to attach <code>name</code>/<code>country</code>, keep orders
+without a matching customer (labelled <code>"UNKNOWN"</code>), and force a broadcast
+since <code>customers</code> is a small dimension table.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">coalesce</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="n">broadcast</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">enriched</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">customers</span><span class="p">),</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>          <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"UNKNOWN"</span><span class="p">)))</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>          <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"country"</span><span class="p">,</span> <span class="n">coalesce</span><span class="p">(</span><span class="s2">"country"</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"UNKNOWN"</span><span class="p">)))</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>          <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"order_id"</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">enriched</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1"># +-----------+--------+------+-------+-------+</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="c1"># |customer_id|order_id|amount|   name|country|</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># +-----------+--------+------+-------+-------+</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># |        101|       1|250.00|  Alice|     US|</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="c1"># |        102|       2| 75.50|    Bob|     IN|</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1"># |        101|       3| 40.00|  Alice|     US|</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="c1"># |        103|       4|500.00|  Carla|     DE|</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="c1"># |        104|       5| 12.25|UNKNOWN|UNKNOWN|</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="c1"># +-----------+--------+------+-------+-------+</span>
+</code></pre></div>
+<p><code>enriched.explain()</code> would show <code>BroadcastHashJoin</code> here since we forced
+it — confirm this is the plan you expect any time join performance matters.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>orders</code> and <code>customers</code> from the top of this module:</p>
+<ol>
+<li>Write an inner join and count how many <code>orders</code> rows survive (expect 4).</li>
+<li>Write a <code>left_anti</code> join to list orders with no matching customer
+   (expect the <code>customer_id=104</code> row).</li>
+<li>Explicitly broadcast <code>customers</code> and call <code>.explain()</code> on the result —
+   confirm you see <code>BroadcastHashJoin</code> rather than <code>SortMergeJoin</code>.</li>
+<li>Set <code>spark.sql.autoBroadcastJoinThreshold</code> to <code>-1</code>, re-run a plain
+   (non-explicit-broadcast) join, and explain why the plan now falls back
+   to a shuffle-based join even though <code>customers</code> is tiny.</li>
+</ol>
 
 
 

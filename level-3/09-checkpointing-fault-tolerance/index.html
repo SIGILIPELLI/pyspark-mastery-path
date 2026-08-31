@@ -1813,6 +1813,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Checkpointing Fault Tolerance
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1829,6 +1847,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lineage-recovery-the-default-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lineage recovery: the default mechanism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-checkpointing-truncating-lineage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch checkpointing: truncating lineage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-checkpointing-differs-from-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why checkpointing differs from caching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#streaming-checkpointing-offsets-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Streaming checkpointing: offsets + state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovering-after-a-schema-or-code-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovering after a schema or code change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkpoint-cleanup-and-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint cleanup and lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-choosing-checkpointing-strategy-for-a-long-iterative-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: choosing checkpointing strategy for a long iterative job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2389,102 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lineage-recovery-the-default-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lineage recovery: the default mechanism
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-checkpointing-truncating-lineage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch checkpointing: truncating lineage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-checkpointing-differs-from-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why checkpointing differs from caching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#streaming-checkpointing-offsets-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Streaming checkpointing: offsets + state
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recovering-after-a-schema-or-code-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recovering after a schema or code change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkpoint-cleanup-and-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint cleanup and lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-choosing-checkpointing-strategy-for-a-long-iterative-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: choosing checkpointing strategy for a long iterative job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2504,169 @@
 
 
 <h1 id="09-checkpointing-fault-tolerance">09 · Checkpointing Fault Tolerance<a class="headerlink" href="#09-checkpointing-fault-tolerance" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Spark's fault tolerance is built on <strong>lineage</strong>: every RDD/DataFrame knows
+exactly how to recompute itself from its inputs, so losing an executor
+just means re-running the lost partitions' transformations. Checkpointing
+exists for the cases where lineage-based recovery is too expensive, too
+long, or (for streaming) impossible without persisted state. This module
+covers both batch and streaming checkpointing, and how they differ.</p>
+<h2 id="lineage-recovery-the-default-mechanism">Lineage recovery: the default mechanism<a class="headerlink" href="#lineage-recovery-the-default-mechanism" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"checkpointing"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10_000_000</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">step1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">step2</span> <span class="o">=</span> <span class="n">step1</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">step3</span> <span class="o">=</span> <span class="n">step2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>If an executor dies while computing <code>step3</code>, Spark doesn't fail the job —
+it re-schedules only the lost partitions, re-deriving them by replaying
+<code>step1 → step2 → step3</code> from the original <code>df.range()</code> source, which is
+itself cheaply re-creatable. This works well when the lineage chain is
+short and the source is cheap to re-read. It works poorly when the chain
+is very long (say, 50 chained transformations, several involving
+shuffles) — recomputing from scratch after a late-stage failure can cost
+more than the checkpoint would have.</p>
+<h2 id="batch-checkpointing-truncating-lineage">Batch checkpointing: truncating lineage<a class="headerlink" href="#batch-checkpointing-truncating-lineage" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setCheckpointDir</span><span class="p">(</span><span class="s2">"/data/checkpoints/batch"</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">long_chain</span> <span class="o">=</span> <span class="n">df</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">long_chain</span> <span class="o">=</span> <span class="n">long_chain</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="sa">f</span><span class="s2">"step_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Without checkpointing, a failure late in a 50-step chain re-executes</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># all 50 steps for the lost partitions. checkpoint() writes the current</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># state to reliable storage and truncates lineage back to this point.</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">long_chain</span> <span class="o">=</span> <span class="n">long_chain</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># Any further failure only needs to re-read from the checkpoint files,</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># not replay the 50 preceding transformations.</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">result</span> <span class="o">=</span> <span class="n">long_chain</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</code></pre></div>
+<p><code>.checkpoint()</code> is an <strong>eager</strong> action-like call by default — it triggers
+computation immediately and writes to disk right there, unlike the lazy
+transformations you're used to. There's also a <code>.localCheckpoint()</code>
+variant that writes to executor local disk instead of a reliable
+distributed filesystem — faster, but not fault-tolerant to losing the
+node that holds it, so it truncates lineage without truly guaranteeing
+recovery across node failure.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># localCheckpoint(): faster, uses executor storage, does NOT survive a</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># lost executor — use only to shorten lineage for lineage/query-planner</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># performance, never as a durability guarantee.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">long_chain</span><span class="o">.</span><span class="n">localCheckpoint</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="why-checkpointing-differs-from-caching">Why checkpointing differs from caching<a class="headerlink" href="#why-checkpointing-differs-from-caching" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">long_chain</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>          <span class="c1"># keeps data + FULL lineage; recompute-from-source on eviction</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">long_chain</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span>     <span class="c1"># writes data + TRUNCATES lineage entirely</span>
+</code></pre></div>
+<p>A cached DataFrame that gets evicted from memory falls back to
+recomputing from its original lineage — the lineage graph is preserved
+regardless of caching. A checkpointed DataFrame discards the old lineage
+graph once the checkpoint write succeeds: recovery after that point reads
+the checkpoint files directly, never replays the pre-checkpoint
+transformations again, even if you never explicitly cache it.</p>
+<h2 id="streaming-checkpointing-offsets-state">Streaming checkpointing: offsets + state<a class="headerlink" href="#streaming-checkpointing-offsets-state" title="Permanent link">&para;</a></h2>
+<p>Streaming checkpointing (introduced operationally in module 4) tracks two
+distinct things: <strong>source offsets</strong> (how far into Kafka/files you've
+consumed) and, for stateful operations, the <strong>aggregation state</strong> itself
+(e.g., partial sums for open windows).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">window</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">avg</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">TimestampType</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()),</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"device_id"</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()),</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">()),</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">])</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">stream</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"/data/incoming/"</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">windowed</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="n">stream</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">,</span> <span class="s2">"10 minutes"</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">window</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"event_time"</span><span class="p">),</span> <span class="s2">"5 minutes"</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"device_id"</span><span class="p">))</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"temperature"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_temp"</span><span class="p">))</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">)</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="n">query</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">windowed</span><span class="o">.</span><span class="n">writeStream</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"parquet"</span><span class="p">)</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"path"</span><span class="p">,</span> <span class="s2">"/data/warehouse/device_avg"</span><span class="p">)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"checkpointLocation"</span><span class="p">,</span> <span class="s2">"/data/checkpoints/device_avg"</span><span class="p">)</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">"append"</span><span class="p">)</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>    <span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="p">)</span>
+</code></pre></div>
+<p>If the driver crashes and you restart this exact query pointed at the
+same <code>checkpointLocation</code>, Spark resumes from the last committed offset —
+no reprocessing of already-committed micro-batches, and no data loss for
+anything acknowledged by the source since the last checkpoint commit.
+This is what gives Structured Streaming its <strong>exactly-once</strong> processing
+guarantee for the aggregation logic itself, provided the sink is also
+idempotent or transactional (a Parquet directory sink is "at least once"
+in the presence of certain failure timing unless paired with something
+like Delta Lake, covered in Level 4).</p>
+<h2 id="recovering-after-a-schema-or-code-change">Recovering after a schema or code change<a class="headerlink" href="#recovering-after-a-schema-or-code-change" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># query.stop()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Restarting with the SAME checkpointLocation but a CHANGED aggregation</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># key or window definition can raise:</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">#   "Provided stateful operator was created differently: ..."</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># because Spark can't reconcile old state format with the new logic.</span>
+</code></pre></div>
+<p>Never change the shape of a stateful streaming query (grouping keys,
+window definitions, added/removed stateful operators) while resuming from
+an existing checkpoint — either start a fresh checkpoint directory
+(accepting reprocessing / potential duplicate output) or make the change
+in a way that's backward-compatible with the existing state schema.</p>
+<h2 id="checkpoint-cleanup-and-lifecycle">Checkpoint cleanup and lifecycle<a class="headerlink" href="#checkpoint-cleanup-and-lifecycle" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Checkpoint directories are NOT automatically cleaned up when you stop a</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># query — old offset/state files accumulate. Delete only when you're</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># certain the query will never resume from that checkpoint again:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># dbutils.fs.rm("/data/checkpoints/device_avg", recurse=True)  # example, platform-specific</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># Batch RDD checkpoint files similarly persist after the SparkContext</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># stops -- clean them up explicitly as part of pipeline housekeeping.</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setCheckpointDir</span><span class="p">(</span><span class="s2">"/data/checkpoints/batch"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="worked-example-choosing-checkpointing-strategy-for-a-long-iterative-job">Worked example: choosing checkpointing strategy for a long iterative job<a class="headerlink" href="#worked-example-choosing-checkpointing-strategy-for-a-long-iterative-job" title="Permanent link">&para;</a></h2>
+<p>Task: an iterative algorithm (e.g., PageRank-style) chains 30 rounds of
+transformations on the same DataFrame, each round depending on the
+previous.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">ranks</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">)</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"rank"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"double"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">0</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setCheckpointDir</span><span class="p">(</span><span class="s2">"/data/checkpoints/iterative"</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">ranks</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"rank"</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">"rank"</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.85</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>                       <span class="c1"># checkpoint every 5 rounds</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="n">ranks</span> <span class="o">=</span> <span class="n">ranks</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span>       <span class="c1"># truncate lineage periodically, not every round</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="n">ranks</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>                    <span class="c1"># force materialization of the checkpoint</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">ranks</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<p>Checkpointing every round would add too much I/O overhead for the
+recovery benefit; checkpointing too rarely leaves lineage chains long
+enough that a late failure is expensive to recover from. Every 5th round
+is a reasonable middle ground for a 30-round job — tune the interval
+against observed recovery cost vs. checkpoint I/O cost on your own
+cluster.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Explain, in terms of lineage, why <code>.checkpoint()</code> requires an eager
+   materialization (it can't stay lazy like <code>.filter()</code> or <code>.select()</code>).</li>
+<li>A streaming query's checkpoint directory is accidentally deleted while
+   the query is stopped. What are your two options for resuming
+   processing, and what does each cost you in terms of data
+   duplication/loss?</li>
+<li>For the 30-round iterative example, explain what would go wrong
+   (concretely, in terms of the DAG) if you never checkpointed at all and
+   an executor failed on round 29.</li>
+</ol>
 
 
 

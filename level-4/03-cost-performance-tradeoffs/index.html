@@ -2019,6 +2019,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Cost Performance Tradeoffs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2035,6 +2053,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-basic-cost-model-for-a-cloud-spark-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The basic cost model for a cloud Spark job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-less-obvious-case-scaling-out-vs-scaling-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The less obvious case: scaling out vs. scaling up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-more-tuning-effort-isnt-worth-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When more tuning effort isn't worth it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spotpreemptible-instances-cheap-compute-with-a-durability-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spot/preemptible instances: cheap compute with a durability cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-format-cost-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage format cost implications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-deciding-whether-to-fix-a-known-skew-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: deciding whether to fix a known skew problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2378,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-basic-cost-model-for-a-cloud-spark-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The basic cost model for a cloud Spark job
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-less-obvious-case-scaling-out-vs-scaling-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The less obvious case: scaling out vs. scaling up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-more-tuning-effort-isnt-worth-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When more tuning effort isn't worth it
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spotpreemptible-instances-cheap-compute-with-a-durability-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spot/preemptible instances: cheap compute with a durability cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-format-cost-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage format cost implications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-deciding-whether-to-fix-a-known-skew-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: deciding whether to fix a known skew problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2482,139 @@
 
 
 <h1 id="03-cost-performance-tradeoffs">03 · Cost Performance Tradeoffs<a class="headerlink" href="#03-cost-performance-tradeoffs" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 4 · Master.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Figures below are illustrative reasoning about cost/performance
+tradeoffs, not measurements from a live cluster run here.</p>
+</div>
+<p>Every performance win from Level 3 costs something — cluster size, engineer
+time, or operational complexity. In production, "make it faster" isn't
+free, and the right answer is usually "faster than what, and is it worth
+what it costs." This module is about reasoning explicitly about that
+tradeoff rather than optimizing blindly.</p>
+<h2 id="the-basic-cost-model-for-a-cloud-spark-job">The basic cost model for a cloud Spark job<a class="headerlink" href="#the-basic-cost-model-for-a-cloud-spark-job" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># A rough cost model: cost = (cluster hourly rate) x (job duration in hours)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># for on-demand cluster time, plus storage costs that are usually much smaller</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># for a batch job's transient compute.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">job_cost</span><span class="p">(</span><span class="n">num_executors</span><span class="p">,</span> <span class="n">executor_hourly_rate</span><span class="p">,</span> <span class="n">duration_hours</span><span class="p">,</span> <span class="n">driver_hourly_rate</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">num_executors</span> <span class="o">*</span> <span class="n">executor_hourly_rate</span> <span class="o">+</span> <span class="n">driver_hourly_rate</span><span class="p">)</span> <span class="o">*</span> <span class="n">duration_hours</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># 20 executors at $0.40/hr each, running for 45 minutes:</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">cost_before</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mi">45</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">cost_before</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1"># 6.00</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># After tuning (module 5's changes): same cluster, 12 minutes:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">cost_after</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mi">12</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">cost_after</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>    <span class="c1"># 1.60</span>
+</code></pre></div>
+<p>Reducing wall-clock time on a transient (auto-scaling, pay-per-use)
+cluster directly reduces cost — this is the easy, uncontroversial case:
+performance tuning that shortens a job <em>always</em> pays for itself if the
+cluster is billed by the hour and shuts down after the job.</p>
+<h2 id="the-less-obvious-case-scaling-out-vs-scaling-up">The less obvious case: scaling out vs. scaling up<a class="headerlink" href="#the-less-obvious-case-scaling-out-vs-scaling-up" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Scaling OUT (more executors, same size each): often near-linear speedup</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># for embarrassingly parallel or well-partitioned work, cost roughly flat</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># per unit of work done since (executors x rate x time) ~ constant if</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># time drops proportionally to added executors.</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">scale_out_cost</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="n">num_executors</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">executor_hourly_rate</span><span class="o">=</span><span class="mf">0.40</span><span class="p">,</span> <span class="n">duration_hours</span><span class="o">=</span><span class="mf">22.5</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">scale_out_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1"># 6.00 -- same total cost, half the wall-clock time</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># Scaling UP (fewer, bigger executors): can reduce shuffle volume (fewer</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># network hops for a given partition count) but bigger executors often</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># cost more than linearly per unit of memory/CPU on cloud instance pricing.</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">scale_up_cost</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="n">num_executors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">executor_hourly_rate</span><span class="o">=</span><span class="mf">1.10</span><span class="p">,</span> <span class="n">duration_hours</span><span class="o">=</span><span class="mi">30</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">scale_up_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1"># 5.50 -- cheaper AND faster here, but instance-pricing-dependent</span>
+</code></pre></div>
+<p>Scaling out is usually "free" in cost terms if your job parallelizes well
+(same total cost, less wall-clock latency) — the real question to ask
+before adding executors is whether the job is actually
+parallelism-bound or whether it's bound by a straggler/skew problem
+(module 3) that more executors won't fix at all.</p>
+<h2 id="when-more-tuning-effort-isnt-worth-it">When more tuning effort isn't worth it<a class="headerlink" href="#when-more-tuning-effort-isnt-worth-it" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Engineer time has a cost too. If a senior engineer costs $150k/yr</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># (~$75/hr loaded), and a job runs once a day:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">engineer_hourly</span> <span class="o">=</span> <span class="mi">75</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">tuning_effort_hours</span> <span class="o">=</span> <span class="mi">6</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">tuning_cost</span> <span class="o">=</span> <span class="n">engineer_hourly</span> <span class="o">*</span> <span class="n">tuning_effort_hours</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">tuning_cost</span><span class="p">)</span>   <span class="c1"># 450</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># Savings from the tuning: 15 fewer minutes/day on a 20-executor job</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">daily_savings</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mi">15</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">annual_savings</span> <span class="o">=</span> <span class="n">daily_savings</span> <span class="o">*</span> <span class="mi">365</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">annual_savings</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1"># 730.0</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">payback_days</span> <span class="o">=</span> <span class="n">tuning_cost</span> <span class="o">/</span> <span class="n">daily_savings</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">payback_days</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>   <span class="c1"># 22.5 days</span>
+</code></pre></div>
+<p>A tuning effort with a ~3-week payback on a daily job is usually easy to
+justify. The same 6 hours of tuning effort on a job that runs <em>once a
+month</em> would have a payback measured in years — not obviously worth
+prioritizing over other work. Always compute (or at least estimate) this
+payback before spending days chasing the last 10% of performance.</p>
+<h2 id="spotpreemptible-instances-cheap-compute-with-a-durability-cost">Spot/preemptible instances: cheap compute with a durability cost<a class="headerlink" href="#spotpreemptible-instances-cheap-compute-with-a-durability-cost" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">on_demand_rate</span> <span class="o">=</span> <span class="mf">0.40</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">spot_rate</span> <span class="o">=</span> <span class="mf">0.12</span>          <span class="c1"># ~70% discount, typical order of magnitude</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Spot instances can be reclaimed mid-job. Spark handles executor loss via</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># lineage recomputation (module 9) automatically, but a job using spot</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># executors needs SOME tolerance for retries/recomputation time, and the</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># driver itself should almost always stay on-demand -- losing the driver</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># kills the whole application, not just one executor's work.</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">mixed_fleet_cost</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="n">num_executors</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">executor_hourly_rate</span><span class="o">=</span><span class="n">spot_rate</span><span class="p">,</span> <span class="n">duration_hours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                             <span class="n">driver_hourly_rate</span><span class="o">=</span><span class="n">on_demand_rate</span><span class="p">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">on_demand_fleet_cost</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="n">num_executors</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">executor_hourly_rate</span><span class="o">=</span><span class="n">on_demand_rate</span><span class="p">,</span> <span class="n">duration_hours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                                  <span class="n">driver_hourly_rate</span><span class="o">=</span><span class="n">on_demand_rate</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">mixed_fleet_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">on_demand_fleet_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1"># 2.56 vs 7.6</span>
+</code></pre></div>
+<p>Checkpointing long-lineage stages (module 9) becomes more valuable, not
+less, on a spot fleet — a reclaimed executor triggers lineage recompute,
+and a checkpoint bounds how much work that recompute actually costs.</p>
+<h2 id="storage-format-cost-implications">Storage format cost implications<a class="headerlink" href="#storage-format-cost-implications" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Cheaper to store, more expensive to query repeatedly:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">gzip_storage_cost_per_tb_month</span> <span class="o">=</span> <span class="mi">20</span>    <span class="c1"># illustrative</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">snappy_storage_cost_per_tb_month</span> <span class="o">=</span> <span class="mi">32</span>  <span class="c1"># illustrative, larger files</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># But gzip is NOT splittable and costs more CPU-hours to decompress on</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># every read -- for a table queried dozens of times a day, the extra</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># compute cost from gzip's decompression overhead usually swamps the</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># storage savings within days.</span>
+</code></pre></div>
+<p>The module 5 recommendation (Snappy or zstd, not gzip, for Spark inputs)
+is itself a cost decision, not just a performance one — cheaper storage
+that costs more compute on every read is a bad trade for any
+frequently-queried table.</p>
+<h2 id="worked-example-deciding-whether-to-fix-a-known-skew-problem">Worked example: deciding whether to fix a known skew problem<a class="headerlink" href="#worked-example-deciding-whether-to-fix-a-known-skew-problem" title="Permanent link">&para;</a></h2>
+<p>A job runs nightly, costs $6/night unoptimized (40 min on 20 executors at
+$0.40/hr) due to a known skew issue (module 3). Fixing it (salting, ~1 day
+of engineering) would cut runtime to 12 minutes.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">current_annual_cost</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mi">40</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">fixed_annual_cost</span> <span class="o">=</span> <span class="n">job_cost</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.40</span><span class="p">,</span> <span class="mi">12</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">engineering_cost</span> <span class="o">=</span> <span class="mi">75</span> <span class="o">*</span> <span class="mi">8</span>   <span class="c1"># one engineer-day</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">annual_savings</span> <span class="o">=</span> <span class="n">current_annual_cost</span> <span class="o">-</span> <span class="n">fixed_annual_cost</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">payback_days</span> <span class="o">=</span> <span class="n">engineering_cost</span> <span class="o">/</span> <span class="p">(</span><span class="n">annual_savings</span> <span class="o">/</span> <span class="mi">365</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">current_annual_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">fixed_annual_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>   <span class="c1"># 2190.0, 657.0</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">annual_savings</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">payback_days</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>              <span class="c1"># 1533.0, 142.9</span>
+</code></pre></div>
+<p>A ~143-day payback is still generally worth doing for a job that will keep
+running indefinitely, but it's a noticeably weaker case than the earlier
+22-day example — the decision now depends on what else is competing for
+that engineer's day, which a pure performance-tuning mindset wouldn't
+surface at all.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>A job costs $10/run on a 30-executor on-demand cluster and runs
+   hourly. Estimate the annual cost, then estimate the payback period for
+   a 2-engineer-day tuning effort that would cut runtime by 50%.</li>
+<li>Explain, in cost terms, why moving the <em>driver</em> to a spot instance is a
+   worse idea than moving executors to spot, even though both nominally
+   save the same per-hour rate.</li>
+<li>A table is queried 200 times/day by a BI tool and rewritten once/day
+   by a batch job. Argue for gzip vs. snappy/zstd compression using the
+   cost reasoning from this module, not just "gzip compresses better."</li>
+</ol>
 
 
 

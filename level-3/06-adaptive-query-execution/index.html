@@ -1729,6 +1729,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Adaptive Query Execution
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1745,6 +1763,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#turning-it-on-and-confirming-its-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turning it on (and confirming it's on)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-adaptive-the-problem-with-static-plans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why "adaptive" — the problem with static plans
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coalescing-shuffle-partitions-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coalescing shuffle partitions at runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamically-switching-join-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dynamically switching join strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skew-join-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skew join splitting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-adaptivesparkplan-in-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading AdaptiveSparkPlan in .explain()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-aqe-does-not-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When AQE does not help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2389,102 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#turning-it-on-and-confirming-its-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turning it on (and confirming it's on)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-adaptive-the-problem-with-static-plans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why "adaptive" — the problem with static plans
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coalescing-shuffle-partitions-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coalescing shuffle partitions at runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamically-switching-join-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dynamically switching join strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skew-join-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Skew join splitting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-adaptivesparkplan-in-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading AdaptiveSparkPlan in .explain()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-aqe-does-not-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When AQE does not help
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2504,141 @@
 
 
 <h1 id="06-adaptive-query-execution">06 · Adaptive Query Execution<a class="headerlink" href="#06-adaptive-query-execution" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 3 · Advanced.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Adaptive Query Execution (AQE), enabled by default since Spark 3.2,
+re-optimizes a query plan <em>during</em> execution using actual runtime
+statistics — not just the estimates the optimizer had before running
+anything. This module covers the three AQE features you're most likely
+to rely on: partition coalescing, skew join splitting, and join strategy
+switching.</p>
+<h2 id="turning-it-on-and-confirming-its-on">Turning it on (and confirming it's on)<a class="headerlink" href="#turning-it-on-and-confirming-its-on" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparkSession</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="nb">sum</span> <span class="k">as</span> <span class="n">spark_sum</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"aqe-demo"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>                          <span class="c1"># default True in 3.2+</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.coalescePartitions.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>       <span class="c1"># default True</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>                 <span class="c1"># default True</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.enabled"</span><span class="p">))</span>   <span class="c1"># 'true'</span>
+</code></pre></div>
+<h2 id="why-adaptive-the-problem-with-static-plans">Why "adaptive" — the problem with static plans<a class="headerlink" href="#why-adaptive-the-problem-with-static-plans" title="Permanent link">&para;</a></h2>
+<p>Without AQE, Spark picks join strategies and shuffle partition counts
+<em>before</em> running anything, based on estimated statistics (file sizes,
+<code>ANALYZE TABLE</code> stats if present). Those estimates can be badly wrong
+after several transformations — a <code>.filter()</code> that removes 99% of rows
+isn't reflected in the pre-execution size estimate, so the optimizer might
+pick a shuffle join when a broadcast join would now be cheap.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">customers</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"name_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"US"</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"IN"</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200_000</span><span class="p">)],</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="p">[</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">],</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">orders</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5_000_000</span><span class="p">)</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"order_id"</span><span class="p">)</span> \
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"order_id"</span><span class="p">)</span> <span class="o">%</span> <span class="mi">200_000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># Static plan (pre-AQE) sees customers as 200k rows — too big to</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># auto-broadcast under the default 10MB threshold. But after this filter,</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># far fewer rows remain, and the runtime size could now fit comfortably.</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">filtered_customers</span> <span class="o">=</span> <span class="n">customers</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"US"</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">result</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_customers</span><span class="p">,</span> <span class="s2">"customer_id"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="coalescing-shuffle-partitions-at-runtime">Coalescing shuffle partitions at runtime<a class="headerlink" href="#coalescing-shuffle-partitions-at-runtime" title="Permanent link">&para;</a></h2>
+<p>Instead of guessing <code>spark.sql.shuffle.partitions</code> up front, AQE can
+start with a generous partition count and <em>merge</em> small adjacent
+post-shuffle partitions automatically once it sees their actual sizes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.shuffle.partitions"</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>   <span class="c1"># deliberately generous starting point</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.coalescePartitions.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.advisoryPartitionSizeInBytes"</span><span class="p">,</span> <span class="s2">"64m"</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">agg</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_sum</span><span class="p">(</span><span class="s2">"order_id"</span><span class="p">))</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">agg</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># AdaptiveSparkPlan isFinalPlan=true</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># +- == Final Plan ==</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1">#    *(2) HashAggregate(keys=[customer_id#..], functions=[sum(order_id#..)])</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1">#    +- CustomShuffleReader coalesced</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1">#       +- ShuffleQueryStage ...</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1">#       +- *(1) HashAggregate(keys=[customer_id#..], functions=[partial_sum(order_id#..)])</span>
+</code></pre></div>
+<p><code>CustomShuffleReader coalesced</code> is the tell: AQE merged what would have
+been up to 200 small post-shuffle partitions down to however many are
+actually needed to hit the ~64 MB advisory size, without you having to
+guess the right <code>shuffle.partitions</code> value ahead of time.</p>
+<h2 id="dynamically-switching-join-strategy">Dynamically switching join strategy<a class="headerlink" href="#dynamically-switching-join-strategy" title="Permanent link">&para;</a></h2>
+<p>When a filtered or aggregated intermediate result turns out to be small
+enough at runtime, AQE can convert a planned sort-merge join into a
+broadcast join <em>after</em> seeing the actual size — something a static plan
+can never do:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">result</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># AdaptiveSparkPlan isFinalPlan=true</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># +- == Final Plan ==</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">#    *(2) BroadcastHashJoin [customer_id#..], [customer_id#..], Inner, BuildRight</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1">#    +- ...</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1">#    +- BroadcastQueryStage</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1">#       +- BroadcastExchange HashedRelationBroadcastMode(...)</span>
+</code></pre></div>
+<p>Note this only shows up in the <strong>Final Plan</strong> section — if you call
+<code>.explain()</code> before execution starts, you'd see the <em>initial</em> plan
+(likely <code>SortMergeJoin</code>), because AQE re-plans stage by stage as actual
+data materializes, not before the query starts running at all.</p>
+<h2 id="skew-join-splitting">Skew join splitting<a class="headerlink" href="#skew-join-splitting" title="Permanent link">&para;</a></h2>
+<p>Covered briefly in module 3 — AQE detects a post-shuffle partition
+significantly larger than the median (governed by
+<code>spark.sql.adaptive.skewJoin.skewedPartitionFactor</code>, default <code>5</code>, and a
+minimum size floor <code>skewedPartitionThresholdInBytes</code>) and splits it into
+several smaller sub-partitions handled by separate tasks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.skewedPartitionFactor"</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes"</span><span class="p">,</span> <span class="s2">"256m"</span><span class="p">)</span>
+</code></pre></div>
+<p>With this on, a <code>SortMergeJoin</code> physical plan may show
+<code>CustomShuffleReader skewedPartitionsHandled</code> — AQE split the hot
+partition on one or both sides into pieces small enough to process in
+parallel across multiple tasks instead of one straggler task.</p>
+<h2 id="reading-adaptivesparkplan-in-explain">Reading <code>AdaptiveSparkPlan</code> in <code>.explain()</code><a class="headerlink" href="#reading-adaptivesparkplan-in-explain" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">result</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"formatted"</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># ...</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># (1) AdaptiveSparkPlan</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Output: [customer_id, order_id, name, country]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># Arguments: isFinalPlan=true</span>
+</code></pre></div>
+<p><code>isFinalPlan=false</code> means you're looking at the plan <em>before</em> AQE has
+finished re-optimizing — call <code>.explain()</code> only after triggering an
+action (or on the completed query in the Spark UI's SQL tab) to see the
+plan AQE actually executed.</p>
+<h2 id="when-aqe-does-not-help">When AQE does <em>not</em> help<a class="headerlink" href="#when-aqe-does-not-help" title="Permanent link">&para;</a></h2>
+<p>AQE only re-optimizes at shuffle (stage) boundaries — it cannot fix a
+skewed <code>groupBy</code> key without a shuffle boundary present, and it cannot
+help if statistics collection itself is disabled
+(<code>spark.sql.cbo.enabled</code> / cost-based optimizer stats being stale doesn't
+block AQE, but very small datasets where every plan is already cheap
+won't show a measurable difference). It's also not a substitute for
+fixing genuinely bad partitioning strategy or an under-provisioned
+cluster — it optimizes within the plan space, not around real resource
+constraints.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Given <code>spark.sql.adaptive.advisoryPartitionSizeInBytes=128m</code> and a
+   shuffle stage producing 40 GB of data across 200 initial partitions,
+   estimate roughly how many partitions AQE's coalescing would target.</li>
+<li>Explain, step by step, why calling <code>.explain()</code> <em>before</em> running
+   <code>.collect()</code> on an AQE-eligible join can show a <code>SortMergeJoin</code> even
+   though the job actually executes a <code>BroadcastHashJoin</code>.</li>
+<li><code>spark.sql.adaptive.skewJoin.skewedPartitionFactor</code> is set to <code>5</code>. If
+   the median partition size is 200 MB, at what partition size does AQE
+   consider a partition skewed (assuming it also clears the minimum size
+   threshold)?</li>
+</ol>
 
 
 

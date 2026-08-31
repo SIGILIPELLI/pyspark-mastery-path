@@ -2,186 +2,186 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/privacy/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/01-what-is-spark-distributed-processing/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/02-spark-architecture/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/03-sparksession-first-script/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/04-rdds-vs-dataframes/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/05-reading-data/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/06-dataframe-basics/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/07-schemas-data-types/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/08-basic-aggregations/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/09-writing-data-out/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-1/10-capstone-csv-to-parquet-etl/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/01-joins-broadcast-vs-shuffle/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/02-window-functions/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/03-udfs/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/04-partitioning-strategy/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/05-caching-persistence/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/06-spark-sql-basics/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/07-sql-and-dataframe-api/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/08-nulls-data-cleaning/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/09-nested-complex-types/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-2/10-capstone-multi-source-join/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/01-execution-plan-explain/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/02-shuffle-optimization/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/03-handling-skewed-data/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/04-structured-streaming-basics/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/05-performance-tuning/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/06-adaptive-query-execution/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/07-broadcast-joins-at-scale/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/08-monitoring-spark-ui/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/09-checkpointing-fault-tolerance/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-3/10-capstone-tuned-batch-pipeline/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/01-delta-lake-lakehouse-patterns/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/02-orchestration-airflow-integration/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/03-cost-performance-tradeoffs/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/04-debugging-failed-spark-jobs/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/05-schema-evolution-production/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/06-multi-tenant-cluster-strategy/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/07-data-quality-gates/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/08-cicd-for-spark-jobs/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/09-career-growth-big-data/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/pyspark-mastery-path/level-4/10-capstone-production-lakehouse/</loc>
-         <lastmod>2026-08-29</lastmod>
+         <lastmod>2026-08-31</lastmod>
     </url>
 </urlset>

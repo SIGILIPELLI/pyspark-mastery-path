@@ -1411,6 +1411,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Nulls Data Cleaning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1427,6 +1445,124 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finding-nulls-isnull-isnotnull-per-column-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding nulls: isNull, isNotNull, per-column counts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isnan-vs-isnull-a-common-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isnan vs. isNull: a common trap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dropping-rows-dropna-nadrop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropping rows: dropna / na.drop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filling-nulls-fillna-nafill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filling nulls: fillna / na.fill
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deduplication-dropduplicates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deduplication: dropDuplicates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-value-ranges-catching-bad-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validating value ranges: catching bad data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standardizing-inconsistent-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standardizing inconsistent values
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-full-cleaning-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a full cleaning pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2400,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finding-nulls-isnull-isnotnull-per-column-counts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding nulls: isNull, isNotNull, per-column counts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isnan-vs-isnull-a-common-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        isnan vs. isNull: a common trap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dropping-rows-dropna-nadrop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropping rows: dropna / na.drop
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filling-nulls-fillna-nafill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filling nulls: fillna / na.fill
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deduplication-dropduplicates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deduplication: dropDuplicates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validating-value-ranges-catching-bad-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validating value ranges: catching bad data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standardizing-inconsistent-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standardizing inconsistent values
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-a-full-cleaning-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: a full cleaning pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2526,187 @@
 
 
 <h1 id="08-nulls-data-cleaning">08 · Nulls Data Cleaning<a class="headerlink" href="#08-nulls-data-cleaning" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Real data is messy: missing values, duplicate rows, inconsistent types,
+outliers from bad upstream input. This module covers PySpark's toolkit for
+finding and fixing these problems before they corrupt downstream
+aggregations and joins.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">,</span> <span class="mf">55000.0</span><span class="p">),</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">,</span> <span class="mf">42000.0</span><span class="p">),</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"Deepak"</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">61000.0</span><span class="p">),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">,</span> <span class="mf">55000.0</span><span class="p">),</span>  <span class="c1"># exact duplicate of row 1</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s2">"Elena"</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="s2">"DE"</span><span class="p">,</span> <span class="mf">30000.0</span><span class="p">),</span>  <span class="c1"># invalid age</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">]</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">,</span> <span class="s2">"salary"</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="finding-nulls-isnull-isnotnull-per-column-counts">Finding nulls: isNull, isNotNull, per-column counts<a class="headerlink" href="#finding-nulls-isnull-isnotnull-per-column-counts" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">isnull</span><span class="p">,</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="n">count</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># id=3 row only</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">([</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">count</span><span class="p">(</span><span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">(),</span> <span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># +---+----+---+-------+------+</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># | id|name|age|country|salary|</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># +---+----+---+-------+------+</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># |  0|   1|  1|      1|     1|</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># +---+----+---+-------+------+</span>
+</code></pre></div>
+<p>That last pattern — a list comprehension over <code>df.columns</code>, each producing
+a per-column null count — is the standard "null profile" check to run on
+any new dataset before building a pipeline against it.</p>
+<h2 id="isnan-vs-isnull-a-common-trap">isnan vs. isNull: a common trap<a class="headerlink" href="#isnan-vs-isnull-a-common-trap" title="Permanent link">&para;</a></h2>
+<p><code>isNull()</code> and <code>isnan()</code> are <strong>not the same check</strong>. <code>isNull()</code> detects
+SQL <code>NULL</code>; <code>isnan()</code> detects the floating-point <code>NaN</code> value, which is a
+valid (non-null) numeric value that can appear from certain numeric
+operations (like <code>0.0 / 0.0</code>) or from reading source data with literal
+<code>"NaN"</code> strings.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">nan_df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)],</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"val"</span><span class="p">])</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">nan_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"val"</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   <span class="c1"># only id=2</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">nan_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"val"</span><span class="p">)))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>      <span class="c1"># only id=1</span>
+</code></pre></div>
+<p>Use <code>col("val").isNull() | isnan(col("val"))</code> to catch both if you need a
+combined "not a usable number" check — checking only one is a frequent,
+subtle bug source.</p>
+<h2 id="dropping-rows-dropna-nadrop">Dropping rows: dropna / na.drop<a class="headerlink" href="#dropping-rows-dropna-nadrop" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>          <span class="c1"># drops any row with ANY null column</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">"all"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># drops only rows where EVERY column is null</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># drops rows null in name OR age</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># keeps rows with at least 4 non-null columns</span>
+</code></pre></div>
+<p><code>thresh</code> is useful for wide tables where you want to tolerate a few
+missing optional fields but drop rows that are mostly empty.</p>
+<h2 id="filling-nulls-fillna-nafill">Filling nulls: fillna / na.fill<a class="headerlink" href="#filling-nulls-fillna-nafill" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">({</span><span class="s2">"age"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"UNKNOWN"</span><span class="p">,</span> <span class="s2">"salary"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">})</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># +---+------+---+-------+-------+</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># | id|  name|age|country| salary|</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="c1"># +---+------+---+-------+-------+</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># |  1| Alice| 34|     US|55000.0|</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># |  2|   Bob|  0|     IN|42000.0|</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># |  3|  null| 29|     US|    0.0|</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># |  4|Deepak| 41|UNKNOWN|61000.0|</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># |  5| Alice| 34|     US|55000.0|</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1"># |  6| Elena| -5|     DE|30000.0|</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="c1"># +---+------+---+-------+-------+</span>
+</code></pre></div>
+<p>A dict passed to <code>.fill()</code> lets you specify a different default per
+column, and only fills columns whose type matches the value given (a
+string default won't accidentally get applied to a numeric column). Note
+<code>name</code> (id=3) is <em>not</em> filled here because it wasn't in the dict — filling
+a name with a placeholder is often the wrong choice; dropping or flagging
+is usually better than fabricating a name.</p>
+<p>Filling with an aggregate (e.g. mean imputation) requires computing the
+value first, since <code>.fill()</code> only accepts literals:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">mean_age</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="s2">"age"</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">df</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">({</span><span class="s2">"age"</span><span class="p">:</span> <span class="n">mean_age</span><span class="p">})</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="deduplication-dropduplicates">Deduplication: dropDuplicates<a class="headerlink" href="#deduplication-dropduplicates" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># removes id=5 (exact duplicate of id=1 across ALL columns)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">([</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># removes any row sharing BOTH name and age with an earlier-kept row —</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># more aggressive; keeps only the first-encountered row per (name, age)</span>
+</code></pre></div>
+<p><code>dropDuplicates()</code> with no arguments compares every column; passing a
+subset of columns treats those columns as the identity key and arbitrarily
+keeps one row per key (which row is kept is not guaranteed unless you
+control ordering first, e.g. with a window <code>row_number()</code> ranked by a
+tiebreaker column like <code>id</code>).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Deterministic dedup: keep the row with the LOWEST id per (name, age) key</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.window</span><span class="w"> </span><span class="kn">import</span> <span class="n">Window</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">row_number</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">w</span> <span class="o">=</span> <span class="n">Window</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">deduped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"rn"</span><span class="p">,</span> <span class="n">row_number</span><span class="p">()</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="n">w</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"rn = 1"</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"rn"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="validating-value-ranges-catching-bad-data">Validating value ranges: catching bad data<a class="headerlink" href="#validating-value-ranges-catching-bad-data" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">120</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># id=6, age=-5 — clearly invalid</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Clean invalid ages to null rather than silently keeping a bad value:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="s2">"age"</span><span class="p">,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">120</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">)</span>
+</code></pre></div>
+<p>Turning an invalid value into <code>null</code> (rather than dropping the whole row,
+or leaving the bad value in place) is often the right call: it preserves
+the row for other valid columns while flagging that this one field
+couldn't be trusted.</p>
+<h2 id="standardizing-inconsistent-values">Standardizing inconsistent values<a class="headerlink" href="#standardizing-inconsistent-values" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">upper</span><span class="p">,</span> <span class="n">trim</span><span class="p">,</span> <span class="n">initcap</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Country codes: normalize casing/whitespace inconsistencies</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">messy_countries</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">" us"</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"US"</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"u.s."</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">"United States"</span><span class="p">)],</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"country"</span><span class="p">]</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">)</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">normalized</span> <span class="o">=</span> <span class="n">messy_countries</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="s2">"country_clean"</span><span class="p">,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">when</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">trim</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"country"</span><span class="p">)))</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">"US"</span><span class="p">,</span> <span class="s2">"U.S."</span><span class="p">,</span> <span class="s2">"UNITED STATES"</span><span class="p">),</span> <span class="s2">"US"</span><span class="p">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">upper</span><span class="p">(</span><span class="n">trim</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"country"</span><span class="p">))))</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="p">)</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">normalized</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>Real-world "standardize this categorical column" logic almost always ends
+up as a <code>when/otherwise</code> chain (or a join against a reference/lookup
+table for large numbers of variants) — there's no single built-in that
+handles arbitrary business-specific normalization rules.</p>
+<h2 id="worked-example-a-full-cleaning-pipeline">Worked example: a full cleaning pipeline<a class="headerlink" href="#worked-example-a-full-cleaning-pipeline" title="Permanent link">&para;</a></h2>
+<p>Task: from <code>df</code>, produce a cleaned dataset — invalid ages nulled, missing
+<code>country</code> filled with <code>"UNKNOWN"</code>, exact duplicate rows removed, and rows
+missing <code>name</code> dropped entirely (can't analyze a customer with no
+identity).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">clean</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">df</span><span class="o">.</span><span class="n">dropDuplicates</span><span class="p">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>      <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>      <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"age"</span><span class="p">,</span> <span class="n">when</span><span class="p">((</span><span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">120</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">"age"</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>      <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">({</span><span class="s2">"country"</span><span class="p">:</span> <span class="s2">"UNKNOWN"</span><span class="p">})</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">clean</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># +---+------+----+-------+-------+</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1"># | id|  name| age|country| salary|</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="c1"># +---+------+----+-------+-------+</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="c1"># |  1| Alice|  34|     US|55000.0|</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="c1"># |  2|   Bob|null|     IN|42000.0|</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="c1"># |  4|Deepak|  41|UNKNOWN|61000.0|</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="c1"># |  6| Elena|null|     DE|30000.0|</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="c1"># +---+------+----+-------+-------+</span>
+</code></pre></div>
+<p>Row 3 (<code>name=null</code>) is gone (dropped for missing identity); row 5 (exact
+duplicate of row 1) is gone (deduplicated); row 6's <code>age=-5</code> became <code>null</code>
+rather than being dropped outright, since the rest of that row is usable.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>df</code> from the top of this module:</p>
+<ol>
+<li>Produce a per-column null count for every column, using the list
+   comprehension pattern shown above.</li>
+<li>Write a filter that would catch both <code>NULL</code> and <code>NaN</code> values in a
+   hypothetical float column, using <code>|</code>.</li>
+<li>Deduplicate <code>df</code> on <code>(name, age)</code>, keeping the row with the <strong>highest</strong>
+   <code>salary</code> per key (hint: <code>row_number()</code> over a window ordered by
+   <code>salary</code> descending).</li>
+<li>Build the full cleaning pipeline from the worked example, but change
+   the "missing name" policy to fill with <code>"UNKNOWN_CUSTOMER"</code> instead of
+   dropping, and explain in a comment which choice you think is more
+   appropriate for a real billing dataset and why.</li>
+</ol>
 
 
 

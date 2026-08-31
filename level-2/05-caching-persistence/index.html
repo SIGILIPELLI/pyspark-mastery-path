@@ -1327,6 +1327,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Caching Persistence
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1343,6 +1361,124 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-recomputation-happens-by-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why recomputation happens by default
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-the-default-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cache(): the default persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persist-explicit-storage-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        persist(): explicit storage levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unpersist-freeing-the-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unpersist(): freeing the cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-caching-helps-and-when-it-doesnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When caching helps — and when it doesn't
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-the-dag-verifying-with-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and the DAG: verifying with explain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-correctness-stale-cache-pitfall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and correctness: stale cache pitfall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-multi-branch-report-from-one-cached-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: multi-branch report from one cached base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2264,6 +2400,113 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-recomputation-happens-by-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why recomputation happens by default
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-the-default-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cache(): the default persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persist-explicit-storage-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        persist(): explicit storage levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unpersist-freeing-the-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unpersist(): freeing the cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-caching-helps-and-when-it-doesnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When caching helps — and when it doesn't
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-the-dag-verifying-with-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and the DAG: verifying with explain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-correctness-stale-cache-pitfall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and correctness: stale cache pitfall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-multi-branch-report-from-one-cached-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: multi-branch report from one cached base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2283,8 +2526,217 @@
 
 
 <h1 id="05-caching-persistence">05 · Caching Persistence<a class="headerlink" href="#05-caching-persistence" title="Permanent link">&para;</a></h1>
-<p>This module is part of Level 2 · Intermediate.</p>
-<p>More lessons are on the way — check back soon.</p>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Spark DataFrames are lazily evaluated and, by default, recomputed from
+scratch every time an action touches them. If you reuse a DataFrame
+multiple times, caching avoids repeating expensive upstream work — but
+misused, it can also silently waste memory or produce stale results. This
+module covers when and how to cache correctly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"group_id"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="why-recomputation-happens-by-default">Why recomputation happens by default<a class="headerlink" href="#why-recomputation-happens-by-default" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">log</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">expensive</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"derived"</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">expensive</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 0"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># recomputes `derived` for all rows</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">expensive</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 1"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># recomputes AGAIN from scratch</span>
+</code></pre></div>
+<p>Each <code>.count()</code> is a separate action, and Spark's lazy execution model
+re-runs the entire lineage — including the <code>sqrt</code>/<code>log</code> computation —
+every single time, because nothing told Spark to keep the intermediate
+result around.</p>
+<h2 id="cache-the-default-persistence">cache(): the default persistence<a class="headerlink" href="#cache-the-default-persistence" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">expensive_cached</span> <span class="o">=</span> <span class="n">expensive</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># triggers computation AND materializes the cache</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 0"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># reuses cached data, no recompute</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 1"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># reuses cached data again</span>
+</code></pre></div>
+<p><code>.cache()</code> is a lazy marker — it does nothing by itself until the first
+action runs. That first action computes the DataFrame <em>and</em> stores the
+result (by default, deserialized in executor memory, spilling to disk if
+it doesn't fit). Every subsequent action against <code>expensive_cached</code> reads
+from the cached data instead of recomputing.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">is_cached</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># True</span>
+</code></pre></div>
+<h2 id="persist-explicit-storage-levels">persist(): explicit storage levels<a class="headerlink" href="#persist-explicit-storage-levels" title="Permanent link">&para;</a></h2>
+<p><code>cache()</code> is shorthand for <code>persist(StorageLevel.MEMORY_AND_DISK)</code> (in
+recent PySpark versions). <code>persist()</code> lets you choose the tradeoff
+explicitly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageLevel</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY</span><span class="p">)</span>          <span class="c1"># fastest, lost if it doesn't fit</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK</span><span class="p">)</span>      <span class="c1"># default cache() behavior; spills to disk</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY_SER</span><span class="p">)</span>      <span class="c1"># serialized, less memory, more CPU to deserialize</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">DISK_ONLY</span><span class="p">)</span>            <span class="c1"># no memory pressure, slower reads</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK_2</span><span class="p">)</span>    <span class="c1"># replicated to 2 nodes, resilient to executor loss</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Memory</th>
+<th>Disk</th>
+<th>Serialized</th>
+<th>Replicated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MEMORY_ONLY</code></td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>MEMORY_AND_DISK</code></td>
+<td>yes</td>
+<td>spills</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>MEMORY_ONLY_SER</code></td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>DISK_ONLY</code></td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>MEMORY_AND_DISK_2</code></td>
+<td>yes</td>
+<td>spills</td>
+<td>no</td>
+<td>2x</td>
+</tr>
+</tbody>
+</table>
+<p><code>MEMORY_ONLY</code> risks silently dropping partitions (and recomputing them on
+demand) under memory pressure; <code>MEMORY_AND_DISK</code> is the safer general
+default, trading some speed for guaranteed availability of the cached
+data.</p>
+<h2 id="unpersist-freeing-the-cache">unpersist(): freeing the cache<a class="headerlink" href="#unpersist-freeing-the-cache" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+</code></pre></div>
+<p>Cached data occupies executor memory/disk indefinitely until you call
+<code>unpersist()</code> (or the Spark application ends). In a long-running job that
+caches many intermediate DataFrames in a loop, forgetting to unpersist is
+a common cause of executor memory pressure and eventual <code>OutOfMemoryError</code>
+or excessive disk spill — always unpersist a cached DataFrame once you're
+done reusing it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># unpersist(blocking=True) waits for the cache to actually be cleared</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># before returning, useful right before something else needs that memory:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">unpersist</span><span class="p">(</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="when-caching-helps-and-when-it-doesnt">When caching helps — and when it doesn't<a class="headerlink" href="#when-caching-helps-and-when-it-doesnt" title="Permanent link">&para;</a></h2>
+<p>Caching pays off when:</p>
+<ul>
+<li>The same DataFrame is used as input to <strong>multiple actions</strong> (multiple
+  <code>.show()</code>/<code>.count()</code>/<code>.write()</code> calls, or multiple downstream
+  branches).</li>
+<li>The upstream computation (reads, joins, UDFs, aggregations) is genuinely
+  expensive to repeat.</li>
+</ul>
+<p>Caching does <strong>not</strong> help when:</p>
+<ul>
+<li>The DataFrame is used exactly once — you pay the cache-materialization
+  cost for zero reuse benefit.</li>
+<li>The dataset is far larger than available cluster memory — most
+  partitions spill to disk immediately, and disk-spilled cache is barely
+  faster than just recomputing.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Anti-pattern: caching something used only once</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 2"</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># wasted — no reuse follows</span>
+</code></pre></div>
+<h2 id="caching-and-the-dag-verifying-with-explain">Caching and the DAG: verifying with explain<a class="headerlink" href="#caching-and-the-dag-verifying-with-explain" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">expensive</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">expensive</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 0"</span><span class="p">)</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># *(1) Filter (group_id#3 = 0)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># +- InMemoryTableScan [id#1, group_id#3, value#5, derived#9], [(group_id#3 = 0)]</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1">#       +- InMemoryRelation [...], StorageLevel(disk, memory, deserialized, 1 replicas)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1">#          +- *(1) Project [...]</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1">#             +- *(1) Scan ExistingRDD[...]</span>
+</code></pre></div>
+<p><code>InMemoryTableScan</code> / <code>InMemoryRelation</code> in the plan confirms the cache is
+actually being used for this query, rather than recomputing from the
+underlying scan — a good habit before trusting that a <code>.cache()</code> call is
+paying off.</p>
+<h2 id="caching-and-correctness-stale-cache-pitfall">Caching and correctness: stale cache pitfall<a class="headerlink" href="#caching-and-correctness-stale-cache-pitfall" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>          <span class="c1"># materializes cache</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># new DataFrame, doesn't mutate df's cache</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">df2</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>          <span class="c1"># recomputes from df's CACHED data, then applies *2 — correct</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># But if the UNDERLYING SOURCE changes after caching (e.g. new files land</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># in the source path) and you re-read + cache again under the same</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># variable name, always drop the old cache first:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">df</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/updated_source"</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+</code></pre></div>
+<p>Cached data is a snapshot as of when it was materialized — mutating the
+DataFrame lineage afterward (via <code>withColumn</code>, <code>filter</code>, etc.) is safe
+because those return <em>new</em> DataFrame objects, but re-reading the same
+source path and expecting the cache to reflect new data is not: always
+<code>unpersist()</code> before caching a fresh read under a reused reference.</p>
+<h2 id="worked-example-multi-branch-report-from-one-cached-base">Worked example: multi-branch report from one cached base<a class="headerlink" href="#worked-example-multi-branch-report-from-one-cached-base" title="Permanent link">&para;</a></h2>
+<p>Task: from <code>df</code>, compute three different summaries (per-group count,
+per-group average, and overall total) that all depend on the same derived
+<code>value_bucket</code> column — cache once, since it's used three times.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">when</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="nb">sum</span> <span class="k">as</span> <span class="n">spark_sum</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">base</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="s2">"value_bucket"</span><span class="p">,</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">when</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">"low"</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">"high"</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">base</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># materialize the cache with one action first</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">by_group</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"group_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n"</span><span class="p">))</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">by_bucket</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"value_bucket"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_value"</span><span class="p">))</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">overall</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_sum</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_value"</span><span class="p">))</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="n">by_group</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">by_bucket</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="n">overall</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="n">base</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>   <span class="c1"># done reusing it — free the memory</span>
+</code></pre></div>
+<p>Each of the three downstream <code>.show()</code> calls reuses <code>base</code>'s cached,
+already-<code>withColumn</code>-derived data rather than recomputing the <code>when(...)</code>
+expression three separate times.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>df</code> from the top of this module:</p>
+<ol>
+<li>Build a derived DataFrame with an expensive-looking column (e.g.
+   <code>sqrt(value) * log(value + 1)</code>), cache it, materialize with <code>.count()</code>,
+   then run two different <code>.filter().count()</code> calls and confirm (via
+   <code>.explain()</code>) that <code>InMemoryTableScan</code> appears in both plans.</li>
+<li>Explain in a comment why caching a DataFrame used exactly once provides
+   no benefit and costs materialization time.</li>
+<li>Persist the same base DataFrame with <code>StorageLevel.DISK_ONLY</code> instead
+   of the default, and describe (in a comment) the tradeoff versus
+   <code>MEMORY_AND_DISK</code>.</li>
+<li>After finishing all queries against a cached DataFrame, call
+   <code>unpersist(blocking=True)</code> and explain why <code>blocking=True</code> matters if
+   another expensive job is about to start immediately afterward.</li>
+</ol>
 
 
 
