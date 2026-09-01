@@ -1,8 +1,8 @@
 site_name: PySpark Mastery Path
 site_description: A structured, module-wise training program on Apache Spark's Python API for big-data processing — from your first PySpark script to production-grade Spark jobs, with real code in every module.
-site_url: https://sigilipelli.github.io/pyspark-skillmastery/
-repo_url: https://github.com/SIGILIPELLI/pyspark-skillmastery
-repo_name: pyspark-skillmastery
+site_url: https://sigilipelli.github.io/pyspark-mastery-path/
+repo_url: https://github.com/SIGILIPELLI/pyspark-mastery-path
+repo_name: pyspark-mastery-path
 
 theme:
   name: material
