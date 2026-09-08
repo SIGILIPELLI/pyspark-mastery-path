@@ -1815,6 +1815,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2734,6 +2756,23 @@ the join key naming doesn't matter to the optimizer, only estimated size
 does. If this instead showed <code>SortMergeJoin</code>, that would be the signal to
 check <code>spark.sql.autoBroadcastJoinThreshold</code> or force <code>broadcast()</code>
 explicitly (Level 2, module 1).</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>.explain()</code> prints Catalyst's plan through four stages of transformation,
+and each level tells you something different: the <strong>Parsed Logical Plan</strong> is
+a direct, unresolved translation of your code; the <strong>Analyzed Logical Plan</strong>
+resolves every column and table reference against the catalog (this is where
+"column not found" errors are actually raised); the <strong>Optimized Logical
+Plan</strong> is the result of Catalyst's rule-based rewrites — predicate pushdown,
+constant folding, column pruning — applied repeatedly until the tree stops
+changing; and the <strong>Physical Plan</strong> is the concrete, chosen execution
+strategy (which join algorithm, how many shuffle partitions, whether
+whole-stage codegen applies), annotated with <code>Exchange</code> nodes marking every
+shuffle boundary. <code>.explain("formatted")</code> additionally shows generated-code
+regions grouped by <code>WholeStageCodegen</code> id — rows flowing through operators
+in the same codegen id never leave the CPU's registers/JVM stack for
+intermediate results, which is the mechanism behind Tungsten's speed, and
+seeing where codegen ids break (usually at a shuffle <code>Exchange</code> or a UDF) is
+exactly how you diagnose where your pipeline is paying the most overhead.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Build a three-way join (<code>orders</code> → <code>customers</code> → a third small

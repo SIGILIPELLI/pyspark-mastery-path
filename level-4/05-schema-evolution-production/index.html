@@ -2314,6 +2314,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2791,6 +2813,23 @@ failure at the point where the actual upstream change happened.</p>
 it every time) gives you an audit trail for exactly when an upstream
 schema change landed — useful when a downstream consumer later asks "when
 did this column start existing?"</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Schema evolution is safe or unsafe depending on how it interacts with
+Parquet's <strong>column-by-name, position-independent</strong> storage model: adding a
+new nullable column is safe because old files simply have no data for that
+column and older readers/newer readers both resolve columns by name against
+whatever schema is active, filling missing columns with <code>null</code>. Renaming or
+changing a column's type is unsafe precisely because it breaks that
+name-based resolution — a reader expecting <code>amount: Double</code> reading an
+older file where the column doesn't exist yet under that name (or exists as
+<code>Int</code>) has no automatic reconciliation without an explicit schema-merge
+strategy. <code>mergeSchema=true</code> on read forces Spark to union the schemas of
+all files being scanned in one job — an extra full-metadata pass across
+every file's footer before the actual read begins — which is why the
+production pattern is to write explicit schema-migration steps (with Delta
+Lake's schema enforcement/evolution flags, covered in module 1) rather than
+relying on Spark's runtime schema-merge for every read, since that merge
+cost scales with the number of files being read.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Given a table with a <code>price: FloatType</code> column, write the code to

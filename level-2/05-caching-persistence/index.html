@@ -1573,6 +1573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2606,6 +2617,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2832,6 +2854,21 @@ per-group average, and overall total) that all depend on the same derived
 <p>Each of the three downstream <code>.show()</code> calls reuses <code>base</code>'s cached,
 already-<code>withColumn</code>-derived data rather than recomputing the <code>when(...)</code>
 expression three separate times.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>df.cache()</code> (shorthand for <code>persist(StorageLevel.MEMORY_AND_DISK)</code>) doesn't
+compute anything by itself — it only marks the DataFrame's plan node so that
+the <em>next</em> action materializes each partition's result and stores it in the
+executor's block manager instead of discarding it after use. Internally,
+Spark's <strong>BlockManager</strong> on each executor keeps cached partitions as
+in-memory objects (in Tungsten's binary row format) up to the configured
+memory fraction; if a partition doesn't fit, <code>MEMORY_AND_DISK</code> spills that
+partition to local disk rather than losing it, while <code>MEMORY_ONLY</code> would
+simply recompute it from lineage when needed again. This is why caching only
+helps when a DataFrame is reused across multiple actions — caching something
+used exactly once adds the cost of storing it for no benefit — and why
+<code>unpersist()</code> matters: cached blocks otherwise remain pinned in executor
+memory, reducing the memory available for shuffles and future caches, until
+Spark's least-recently-used eviction or manual <code>unpersist()</code> reclaims it.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>df</code> from the top of this module:</p>
 <ol>

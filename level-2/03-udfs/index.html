@@ -1506,6 +1506,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2779,6 +2801,22 @@ whitespace).</p>
 <p>A UDF returning a <code>StructType</code> produces a single struct column, which you
 then unpack with <code>.select("parsed.first_name", "parsed.last_name")</code> —
 this is the idiomatic way to get "multiple outputs" from one UDF call.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A standard Python UDF is the single biggest performance cliff in PySpark:
+for every batch of rows, the executor JVM must serialize the relevant
+columns, pipe them over a socket to a separate long-running Python worker
+process, have that worker deserialize each row, call your Python function
+row-by-row through the CPython interpreter, then serialize results back
+across the socket for the JVM to deserialize again — and crucially, Catalyst
+treats your UDF as an <strong>opaque black box</strong>: it cannot push filters through
+it, reorder around it, or apply whole-stage code generation across it,
+so it inserts a hard boundary in the generated code at every UDF call.
+<strong>Pandas UDFs</strong> (vectorized UDFs) narrow this gap by using Apache Arrow to
+serialize entire columnar batches at once instead of row-by-row, letting
+your function operate on a <code>pandas.Series</code> per batch — far fewer
+serialization round-trips — but they still can't be optimized <em>through</em> the
+way a native Catalyst expression like <code>col("x") + 1</code> can, which is why the
+course always says "prefer built-in functions when one exists."</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>df</code> from the top of this module:</p>
 <ol>

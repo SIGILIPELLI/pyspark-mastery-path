@@ -1029,6 +1029,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2824,6 +2846,20 @@ further:</p>
 </code></pre></div>
 <p>This is exactly the kind of silent, hard-to-notice bug explicit schemas
 exist to prevent.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A DataFrame's schema is not just documentation — it's the exact binary
+layout Tungsten uses to pack rows into off-heap memory. Each <code>StructField</code>'s
+type determines a fixed or variable byte width in the <code>UnsafeRow</code> format:
+fixed-width types like <code>IntegerType</code>/<code>LongType</code>/<code>DoubleType</code> are stored
+inline in the row's byte array with direct offset access (no pointer chasing,
+no JVM object headers), while variable-length types like <code>StringType</code> store
+an offset+length pointer into a separate variable-length region of the same
+row buffer. This is why explicit schemas outperform <code>inferSchema</code> at scale:
+skipping schema inference avoids an entire extra pass over the data, and a
+correctly-typed schema lets Tungsten generate tighter, type-specialized
+bytecode for expressions (via <strong>whole-stage code generation</strong>) instead of
+falling back to slower, type-generic expression evaluation when types are
+ambiguous or inferred as <code>StringType</code> for everything.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>You're given <code>transactions.json</code> with this shape per line:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span><span class="nt">"txn_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">49.99</span><span class="p">,</span><span class="w"> </span><span class="nt">"is_refund"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"sku_1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sku_2"</span><span class="p">],</span><span class="w"> </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nt">"loyalty_tier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gold"</span><span class="p">}}</span>

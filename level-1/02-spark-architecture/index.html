@@ -856,6 +856,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2518,6 +2529,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2670,6 +2692,21 @@ cluster here, since this module is purely conceptual):</p>
 <li>The driver collects the small, aggregated result (one row per distinct
    <code>page</code>) and prints it via <code>.show()</code>.</li>
 </ol>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The driver process holds the <strong>SparkContext</strong>, which is the entry point that
+talks to the cluster manager to request executor JVMs and tracks every RDD/
+DataFrame lineage you build. When an action triggers execution, the driver's
+<strong>DAGScheduler</strong> walks the logical dependency graph backward from the final
+RDD, splitting it into stages at every <strong>shuffle boundary</strong> (a point where
+data must move between partitions, e.g. after a <code>groupBy</code> or <code>join</code>). Each
+stage is submitted to the <strong>TaskScheduler</strong>, which assigns one task per
+partition to an executor's free CPU core, preferring the executor that
+already holds that partition's data on disk (<strong>data locality</strong>) to avoid
+network transfer. Executors report task completion and any output metadata
+(like which shuffle files they wrote) back to the driver, which is why the
+driver becomes a bottleneck if it has to track millions of tiny tasks — this
+is the practical reason Spark jobs are tuned toward fewer, larger partitions
+rather than many tiny ones.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using the same reasoning as the worked example, trace through this snippet
 by hand (write your answers in a notes file — no cluster needed):</p>

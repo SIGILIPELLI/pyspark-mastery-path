@@ -1674,6 +1674,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2823,6 +2845,21 @@ customer info attached.</p>
 Spark SQL's higher-order <code>aggregate</code> function directly on the array,
 avoiding an <code>explode</code> + <code>groupBy</code> round trip when you only need a
 per-row scalar summary rather than a flattened table.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Nested types (<code>StructType</code>, <code>ArrayType</code>, <code>MapType</code>) are stored in Tungsten's
+row format as offset+length pointers into a variable-length data region,
+much like strings — a <code>struct</code> field is really an inline sub-row with its
+own field offsets, while an <code>array</code>/<code>map</code> stores element count plus offsets
+to each element's serialized bytes within the same row buffer. This matters
+for performance: <code>df.select("address.city")</code> on a struct column doesn't need
+to touch the parent struct's other fields at all — Catalyst resolves it to a
+direct offset read (a <code>GetStructField</code> expression) — but <code>explode()</code> on an
+array column is a genuinely different kind of operation: it's a
+<strong>one-to-many</strong> row-generating operator, meaning the output partition can
+have far more rows than the input partition, which breaks Spark's usual
+one-input-row-to-one-output-row cost assumptions and is why exploding large
+arrays can suddenly balloon partition sizes and trigger spills that weren't
+visible before the explode.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>df</code> from the top of this module:</p>
 <ol>

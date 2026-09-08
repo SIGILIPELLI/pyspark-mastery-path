@@ -828,6 +828,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2518,6 +2529,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2644,6 +2666,26 @@ means for a single <code>filter</code> + <code>count</code> operation on a 3-par
 <p>Every operation you'll write in PySpark compiles down to something like
 this: work split across partitions, computed independently and in parallel,
 then combined.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>When you write <code>df.filter(...).count()</code>, nothing runs immediately. Spark
+builds a <strong>logical plan</strong> — a tree of operations describing <em>what</em> you want,
+not a set of instructions for <em>how</em> to get it. Only when an action like
+<code>count()</code>, <code>collect()</code>, or <code>write()</code> is called does Spark's <strong>Catalyst
+optimizer</strong> turn that logical plan into an optimized <strong>physical plan</strong>, and
+the <strong>DAG scheduler</strong> breaks the physical plan into <strong>stages</strong> (groups of
+tasks that can run without moving data between machines) and <strong>tasks</strong> (one
+unit of work per partition). Those tasks are handed to executors by the
+<strong>cluster manager</strong> (standalone, YARN, or Kubernetes), and each executor JVM
+runs tasks in parallel threads against the partitions of data it holds
+locally on disk or in memory.</p>
+<p>This laziness is exactly why the picture above works: Spark doesn't literally
+run <code>filter</code> three separate times as isolated programs — it compiles one
+physical plan, and the DAG scheduler emits one task per partition that all
+run the <em>same</em> compiled bytecode against different data. The "driver sums
+the partial counts" step you saw is a real operation called a <strong>reduce/merge
+at the driver</strong> — the driver process itself never touches your 500 GB of
+data, it only receives small partial aggregates back from each executor,
+which is why the driver doesn't need nearly as much memory as the dataset.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Without writing any code, answer these for yourself (or in a notes file) —
 they set up ideas used in the next two modules:</p>

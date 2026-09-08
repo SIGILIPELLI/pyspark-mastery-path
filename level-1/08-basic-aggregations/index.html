@@ -1057,6 +1057,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2777,6 +2799,20 @@ combinations exceeding $50 in revenue, sorted by revenue descending.</p>
 results by hand against the source rows, especially while learning — it's
 easy to mis-add and it's exactly the kind of mistake automated tests
 (Level 2/3) exist to catch.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>df.groupBy("country").sum("amount")</code> compiles into a <strong>two-phase
+aggregation</strong> physical plan whenever possible: Spark first performs a
+<strong>partial aggregation</strong> independently on each partition (summing <code>amount</code>
+per country <em>within</em> that partition, producing far fewer rows), then
+<strong>shuffles</strong> those small partial sums by <code>country</code> key across the cluster so
+all partial results for the same key land on one executor, and finally
+performs a <strong>final aggregation</strong> merging the partial sums into the true
+total per country. This partial-then-shuffle-then-final pattern (Spark calls
+it <code>HashAggregate</code> with a partial and final stage in the physical plan,
+visible via <code>.explain()</code>) is why aggregations are dramatically cheaper than
+naively shuffling every raw row first — the amount of data crossing the
+network is bounded by the number of distinct keys times the number of
+partitions, not by the number of raw input rows.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using the <code>df</code> from the top of this module:</p>
 <ol>

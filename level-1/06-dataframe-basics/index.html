@@ -990,6 +990,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2761,6 +2783,20 @@ quantity), and a flag for whether the order qualifies for free shipping
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1"># |   Elena|      15.0|        false|</span>
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="c1"># +--------+----------+-------------+</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Every transformation you chain — <code>select</code>, <code>filter</code>, <code>withColumn</code> — appends
+a node to an immutable logical plan tree rather than mutating any data; you
+can prove this to yourself by calling <code>df.filter(...).explain()</code> and seeing
+the shape of the plan before anything runs. Catalyst applies a fixed set of
+<strong>rule-based optimizations</strong> to this tree before execution: <code>filter</code>
+predicates get pushed as close to the data source as possible (<strong>predicate
+pushdown</strong>), unneeded columns get pruned before any shuffle (<strong>column
+pruning</strong>), and chained <code>select</code>/<code>filter</code> calls on the same underlying
+column get merged into a single pass over the data. Because the plan is
+immutable and declarative, Spark is free to reorder your <code>.filter()</code> before
+your <code>.select()</code> internally even if you wrote them in the opposite order in
+Python — what matters is the final logical plan Catalyst builds, not the
+literal sequence of method calls you typed.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using the same <code>df</code> from the top of this module:</p>
 <ol>

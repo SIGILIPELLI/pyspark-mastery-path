@@ -2387,6 +2387,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2555,6 +2566,17 @@
     <span class="md-ellipsis">
       
         Linting and static checks worth adding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2768,6 +2790,22 @@ structured as pure functions.</p>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>mypy<span class="w"> </span>src/<span class="w"> </span>--ignore-missing-imports<span class="w">   </span><span class="c1"># PySpark's type stubs are partial but still useful</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>black<span class="w"> </span>--check<span class="w"> </span>src/
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Unit-testing Spark transformation logic against a local
+<code>SparkSession.builder.master("local[*]")</code> works because Spark's execution
+engine is identical regardless of cluster manager — <code>local[*]</code> simply runs
+the driver and all "executors" as threads within one JVM process on the
+build machine, so the same DAG scheduler, Catalyst optimizer, and Tungsten
+codegen paths execute exactly as they would on a real cluster, just without
+any network shuffle (a local-mode shuffle writes and reads from local disk
+on the same machine instead of over the network). This is what makes fast,
+deterministic CI tests possible: a <code>local[2]</code>-mode test still exercises real
+stage boundaries and real shuffle read/write code paths for join and
+<code>groupBy</code> logic, catching schema and logic bugs before a job is ever
+submitted to a real cluster, even though it can't catch cluster-scale issues
+like network-bound shuffle contention or data skew across genuinely
+distributed executors — which is why CI tests validate correctness while
+staging/production runs are still needed to validate performance at scale.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Take the <code>quality_gate</code> function from module 7 and write two pytest

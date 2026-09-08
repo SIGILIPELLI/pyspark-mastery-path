@@ -1966,6 +1966,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2737,6 +2759,24 @@ won't show a measurable difference). It's also not a substitute for
 fixing genuinely bad partitioning strategy or an under-provisioned
 cluster — it optimizes within the plan space, not around real resource
 constraints.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Adaptive Query Execution (AQE) exists because Catalyst's initial physical
+plan is chosen from <strong>estimated</strong> statistics (Parquet footer metadata,
+<code>ANALYZE TABLE</code> results) before any data has actually been read — those
+estimates can be badly wrong. AQE re-plans <strong>between stages</strong>, at points
+where a shuffle has already completed and Spark now has <em>actual</em> runtime
+statistics (exact partition sizes, row counts) to work with. Its three main
+optimizations all exploit this: <strong>dynamically coalescing shuffle
+partitions</strong> merges adjacent small post-shuffle partitions into fewer,
+right-sized ones instead of running many tiny tasks; <strong>dynamically switching
+join strategies</strong> can promote a <code>SortMergeJoin</code> to a <code>BroadcastHashJoin</code>
+mid-query if the actual shuffled data turns out smaller than the original
+estimate predicted; and <strong>dynamically optimizing skew joins</strong> detects a
+post-shuffle partition that's disproportionately large compared to its
+peers and automatically splits it into several smaller sub-partitions
+processed independently, without you having to hand-salt the key. All three
+only work at stage boundaries — AQE cannot fix skew or misestimation inside
+a single already-running stage.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Given <code>spark.sql.adaptive.advisoryPartitionSizeInBytes=128m</code> and a

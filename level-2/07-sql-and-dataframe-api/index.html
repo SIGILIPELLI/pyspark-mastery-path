@@ -1607,6 +1607,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2800,6 +2822,20 @@ identical rows" check — a single <code>exceptAll</code> alone only proves one 
 has no extra rows, not that the sets are equal (it wouldn't catch a
 missing row on the same side, for instance if <code>sql_latest</code> had fewer
 rows).</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>spark.sql("SELECT ...")</code> and the equivalent DataFrame method chain are not
+two different execution paths that happen to produce similar results — they
+converge on the <strong>exact same logical plan representation</strong> inside Catalyst.
+The SQL string is first parsed into an unresolved abstract syntax tree by
+Spark's ANTLR-based parser, then run through the identical <strong>analyzer</strong>
+(resolving column/table references against the catalog), the identical
+<strong>rule-based logical optimizer</strong>, and the identical <strong>physical planner</strong> that
+DataFrame method calls produce. You can verify this yourself: a SQL query
+and its DataFrame equivalent will print byte-for-byte identical output from
+<code>.explain()</code>. This is precisely why the course treats SQL and DataFrame
+syntax as "two dialects, one engine" — there is no performance difference
+between them, because by the time Catalyst is done, your choice of syntax
+has already been erased.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>events</code> from the top of this module:</p>
 <ol>

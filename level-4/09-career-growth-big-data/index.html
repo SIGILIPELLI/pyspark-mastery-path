@@ -2415,6 +2415,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2555,6 +2566,17 @@
     <span class="md-ellipsis">
       
         Staying current
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2716,6 +2738,22 @@ the Apache Spark release notes and the engineering blogs of major
 Spark-heavy companies (Databricks, Netflix, Uber, LinkedIn) is a
 low-effort way to keep the mental model current after finishing this
 path.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The skills that separate a working PySpark user from a Spark-savvy engineer
+almost always trace back to the same underlying model this whole course has
+built: reading <code>.explain()</code> output fluently (recognizing <code>Exchange</code> nodes,
+<code>BroadcastHashJoin</code> vs <code>SortMergeJoin</code>, codegen boundaries), diagnosing a
+Spark UI stage page in terms of shuffle read/write and spill metrics rather
+than just "it's slow," and reasoning about a pipeline change in terms of
+which stage boundaries it adds or removes. Interview and on-the-job
+questions about "why is this job slow" are, underneath the specific wording,
+always asking you to trace symptoms back to one of: an unnecessary or
+oversized shuffle, data skew concentrating work on one partition, a UDF
+Catalyst can't optimize through, or a broadcast that's too large or missing
+where it should apply — the same handful of mechanisms covered across
+Levels 2 and 3, which is why deep fluency in <em>those</em> mechanisms transfers
+across nearly every real-world Spark performance problem you'll encounter,
+regardless of the specific business domain.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Pick one of the four role shapes above that most matches your goals,

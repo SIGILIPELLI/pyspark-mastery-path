@@ -1545,6 +1545,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2606,6 +2617,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2794,6 +2816,22 @@ reads filtered on <code>region_id</code>.</p>
 already-aggregated DataFrame (one row per region) — never <code>coalesce(1)</code> a
 large, unaggregated DataFrame before writing, or you'll force everything
 through a single task and lose all parallelism on the write.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>"Partitions" mean two related but different things in Spark, and confusing
+them causes most tuning mistakes: <strong>in-memory/task partitions</strong> are the
+chunks an RDD/DataFrame is split into for parallel execution (controlled by
+<code>spark.sql.shuffle.partitions</code>, <code>repartition()</code>, <code>coalesce()</code>), while
+<strong>on-disk partitions</strong> are directories created by <code>df.write.partitionBy("col")</code>
+that let downstream reads skip entire folders via <strong>partition pruning</strong>
+before even opening a file. <code>repartition(n)</code> triggers a full shuffle because
+it hash-partitions every row by a new partitioning scheme and physically
+moves data between executors; <code>coalesce(n)</code> avoids a shuffle by only merging
+existing partitions together (it can shrink partition count cheaply but
+cannot increase it or rebalance skewed data, since it never redistributes
+individual rows). The DAG scheduler's stage boundaries are literally defined
+by these transitions — every <code>repartition</code>/<code>groupBy</code>/<code>join</code> that changes
+partitioning starts a new stage, while <code>coalesce</code>, <code>map</code>, and <code>filter</code> stay
+within the current stage because no data needs to cross the network.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>df</code> from the top of this module:</p>
 <ol>

@@ -1657,6 +1657,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2606,6 +2617,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2803,6 +2825,20 @@ identity).</p>
 <p>Row 3 (<code>name=null</code>) is gone (dropped for missing identity); row 5 (exact
 duplicate of row 1) is gone (deduplicated); row 6's <code>age=-5</code> became <code>null</code>
 rather than being dropped outright, since the rest of that row is usable.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Spark represents nulls with a dedicated <strong>validity bitset</strong> alongside each
+column's data buffer in Tungsten's <code>UnsafeRow</code>/columnar format, rather than
+using a sentinel value inside the data itself — this is why null-checking
+(<code>isNull</code>, <code>isNotNull</code>) is a cheap bit check rather than a value comparison,
+and why nulls propagate through arithmetic and comparisons following
+three-valued SQL logic (<code>NULL = NULL</code> evaluates to <code>NULL</code>, not <code>true</code>,
+because the engine is checking a bit flag, not comparing values). <code>.na.drop()</code>
+and <code>.na.fill()</code> compile to ordinary <code>Filter</code> and <code>Project</code>/<code>CASE WHEN</code>
+nodes in the logical plan, so they get the same predicate-pushdown treatment
+as any other filter — a <code>.filter(col("x").isNotNull())</code> pushed down to a
+Parquet read can use the file's per-column null-count statistics to skip
+entire row groups that are either all-null or contain no nulls, without
+decompressing them.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>df</code> from the top of this module:</p>
 <ol>

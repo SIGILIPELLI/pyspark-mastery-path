@@ -951,6 +951,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2540,6 +2551,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2689,6 +2711,20 @@ each and checking row count and schema:</p>
 <p>The row counts should always agree (same underlying data); the schemas may
 not, because CSV/JSON schema inference is a best-effort guess while Parquet's
 schema is exact and stored.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>spark.read.csv(...)</code> with no schema forces a <strong>two-pass read</strong> when you set
+<code>inferSchema=True</code>: Spark first scans the entire file (or a sample) to guess
+column types, then re-reads it to actually parse the data — doubling I/O for
+large files. Under the hood, this scan is itself a Spark job: it's split
+into one task per file split (roughly one per HDFS/S3 block, or per file for
+small files), each task independently infers types for its chunk, and the
+driver merges the per-task type guesses into one final schema before the
+real read job runs. Reading Parquet is fundamentally cheaper because Parquet
+files embed their schema and per-column statistics (min/max, null counts) in
+a footer, so Spark reads just that footer metadata to build the DataFrame's
+schema instantly, and later filters on that data can skip entire row groups
+without decompressing them — a technique called <strong>predicate pushdown</strong>, which
+plain CSV cannot support because it has no such metadata to consult upfront.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>You're given a directory <code>sales/</code> containing daily CSV exports named
 <code>sales_2026-01-01.csv</code>, <code>sales_2026-01-02.csv</code>, etc., each with columns

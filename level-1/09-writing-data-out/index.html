@@ -1074,6 +1074,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2730,6 +2752,20 @@ performance instead of helping it.</p>
 <p>Reading the output back and comparing row counts (as the last two lines do)
 is a cheap, worthwhile sanity check any time you write a new pipeline —
 it catches an entire class of silent write bugs immediately.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>df.write.parquet(path)</code> triggers a real distributed job: the DAG scheduler
+emits one write task per partition, and each executor independently writes
+its partition's rows to a separate part-file (<code>part-00000-....parquet</code>,
+etc.) directly to the target path — there is no single process funneling all
+output through one writer, which is exactly how Spark write throughput
+scales with cluster size. Each task also computes and embeds Parquet's
+columnar statistics (per-column min/max/null-count, row-group boundaries)
+into that file's footer as it writes, which is what later lets predicate
+pushdown skip row groups on read. The number of output files exactly equals
+the number of partitions the DataFrame had at write time — this is why an
+unnecessarily high partition count produces the well-known "many tiny files"
+problem, and why <code>coalesce(n)</code> before a write (a narrow transformation that
+avoids a shuffle) is the standard fix.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Given a DataFrame <code>sales_df</code> with columns <code>sale_id</code>, <code>region</code>, <code>product</code>,
 <code>amount</code>, <code>sale_date</code>:</p>

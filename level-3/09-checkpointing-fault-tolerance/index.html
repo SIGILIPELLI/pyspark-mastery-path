@@ -2050,6 +2050,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2766,6 +2788,23 @@ enough that a late failure is expensive to recover from. Every 5th round
 is a reasonable middle ground for a 30-round job — tune the interval
 against observed recovery cost vs. checkpoint I/O cost on your own
 cluster.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Spark's fault tolerance for batch jobs relies on <strong>lineage</strong>: every RDD/
+DataFrame tracks the full chain of transformations that produced it, so if
+an executor holding a partition dies, the DAG scheduler simply resubmits the
+tasks needed to recompute <em>only that lost partition</em> from its lineage,
+re-reading source data and re-running upstream narrow transformations —
+this is the mechanism the very first module's "recompute just that machine's
+lost partitions" claim actually refers to. Lineage recomputation gets
+expensive when the chain is long or crosses many shuffle boundaries, which
+is what <code>checkpoint()</code> addresses: it forces Spark to materialize a
+DataFrame's data to reliable storage (HDFS/S3/local disk) and <strong>truncates
+the lineage</strong> at that point, so future failures only need to re-read the
+checkpointed data rather than replaying dozens of upstream stages. This
+differs from <code>cache()</code>, which keeps data in the (volatile) executor block
+manager and does not shorten lineage at all — a cached partition lost to
+executor failure still falls back to full lineage recomputation, while a
+checkpointed one does not.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Explain, in terms of lineage, why <code>.checkpoint()</code> requires an eager

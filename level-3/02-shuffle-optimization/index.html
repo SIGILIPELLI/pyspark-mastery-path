@@ -1843,6 +1843,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2726,6 +2748,23 @@ choose <code>shuffle.partitions</code> sized for the actual data rather than the
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">())</span>  <span class="c1"># 50, matched to actual cardinality</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A shuffle physically happens in two halves. <strong>Shuffle write</strong>: each task in
+the upstream stage partitions its output rows by the target key's hash (or
+range, for sorted shuffles), and writes them to local disk as a set of
+per-reducer files — this write itself can spill multiple sorted runs to disk
+if a partition's buffered data exceeds <code>spark.shuffle.spill</code> memory limits,
+which then requires a merge pass. <strong>Shuffle read</strong>: each task in the
+downstream stage fetches exactly the file segments meant for it from every
+upstream executor over the network (via the shuffle service), sorts/merges
+what it receives if the operation requires ordering, and only then proceeds.
+<code>spark.sql.shuffle.partitions</code> (200 by default) sets how many reducer-side
+partitions this shuffle produces — too few and each reducer partition is
+huge (spills, slow tasks); too many and per-task scheduling/file overhead
+dominates actual compute, since every partition still means opening a file
+handle on every upstream executor. This is the concrete mechanism behind
+every "reduce shuffle partitions" or "increase shuffle partitions" tuning
+tip you'll see for real workloads.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Given a dataset with 5 distinct grouping keys and 500 GB of data,

@@ -1080,6 +1080,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2518,6 +2529,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2708,6 +2730,20 @@ silently discarding them with no trace.</p>
   called this out as a habit worth having on every pipeline you write, and
   the capstone exercises it for real.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Chaining <code>read → filter → select → write</code> across this pipeline builds one
+continuous logical plan spanning all those steps, and because none of them
+require moving data between partitions (no <code>groupBy</code>, <code>join</code>, or
+<code>repartition</code>), the entire pipeline compiles into a <strong>single stage</strong> of
+tasks — one task per input partition runs read, filter, select, and write
+back-to-back on the same executor with no shuffle in between. Under
+whole-stage code generation, Catalyst actually fuses these row-at-a-time
+operations into one generated Java method per task, avoiding the overhead of
+calling a separate function for each transformation on every row. This is
+the ideal shape for a Spark job: I/O-bound, embarrassingly parallel, and
+shuffle-free — the CSV-to-Parquet conversion you just built scales close to
+linearly with the number of executors precisely because no stage boundary
+forces synchronization across the cluster.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend the capstone script above:</p>
 <ol>

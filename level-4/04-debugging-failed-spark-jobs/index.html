@@ -2297,6 +2297,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2606,6 +2617,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2788,6 +2810,24 @@ more often, simply removing the <code>.collect()</code> that shouldn't have exis
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c1">#         config file, check Environment tab).</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"spark.sql.adaptive.skewJoin.enabled"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A <code>java.lang.OutOfMemoryError</code> on an executor almost always traces back to
+one of three concrete mechanisms you've already learned: a shuffle or sort
+buffering more data in execution memory than the unified memory manager can
+grant before it should have spilled to disk (often from too few shuffle
+partitions making each one too large), a broadcast join broadcasting a
+table far bigger than the threshold assumed, or a UDF/collect operation
+pulling more data into driver memory than expected. Reading a stack trace
+usefully means locating the <strong>stage and task ID</strong> in the error, then cross-
+referencing the Spark UI's Stages tab for that stage's shuffle read/write
+and spill metrics — a huge "shuffle spill (disk)" number on the failing
+task versus its peers is the direct signature of skew, while a failure
+concentrated in the driver's own log rather than any executor's usually
+means a <code>.collect()</code> or broadcast pulled too much data centrally. Because
+tasks are re-attempted automatically (<code>spark.task.maxFailures</code>, default 4)
+before the whole job is marked failed, the <em>first</em> task failure in the
+event log — not the last — is usually the one worth investigating, since
+later failures are often just retries hitting the same root cause.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Given <code>"Container killed by YARN for exceeding memory limits ... 8.2 GB

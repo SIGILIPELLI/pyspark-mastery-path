@@ -2370,6 +2370,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2771,6 +2793,22 @@ job (module 2) fails the task and triggers Airflow's own alerting/retry
 logic — the quality gate and the orchestration layer compose naturally
 this way, with the gate owning "is this data good enough" and Airflow
 owning "what happens when it isn't."</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A quality check like "no nulls in <code>order_id</code>" or "row count matches
+expected" is, mechanically, just another Spark action inserted into the
+pipeline's DAG — <code>df.filter(col("order_id").isNull()).count()</code> triggers its
+own job, complete with its own stages and tasks, separate from the main
+write job, which is why quality gates have a real, measurable cost: each
+one is an extra pass over the data (or a subset via predicate pushdown) with
+its own scheduling overhead. Building gates as <code>.filter()</code>/<code>.count()</code>
+operations on the DataFrame lets them benefit from the same predicate
+pushdown and column pruning as any other query — a null-check on one column
+can skip other columns entirely and use Parquet's per-file null-count
+statistics to short-circuit whole files that are already known to have zero
+nulls, without decompressing them. This is also why quality gates are
+typically placed <em>before</em> an expensive downstream shuffle or write in the
+pipeline: failing fast on a cheap, narrow check avoids paying for a shuffle
+whose output would have been discarded anyway.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Extend <code>checked</code> with a check for duplicate <code>order_id</code> values <em>within

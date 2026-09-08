@@ -895,6 +895,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2540,6 +2551,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2711,6 +2733,20 @@ a shuffle (e.g. after a <code>groupBy</code>). The default of 200 is tuned for c
 workloads; on a laptop with a small dataset, 200 tiny partitions creates more
 scheduling overhead than benefit, so it's common to lower it for local
 development and testing. You'll tune this for real in Level 3.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Creating a <code>SparkSession</code> doesn't just instantiate a Python object — it
+launches (or connects to) a JVM process via <code>py4j</code>, and every DataFrame
+method you call from Python is serialized across that Python-to-JVM bridge
+as a request to build another node in the logical plan tree, which lives
+entirely inside the JVM. This is why PySpark DataFrame code has no Python
+performance penalty for standard operations: the Python object you're
+holding is a thin wrapper around a JVM <code>Dataset</code> reference, and <code>.show()</code> or
+<code>.count()</code> are the first calls that actually cross back into the JVM to
+trigger execution — everything before that (chained <code>.select</code>/<code>.filter</code>
+calls) is just building up plan nodes in memory, with zero data movement or
+computation happening yet. <code>spark.stop()</code> matters because it tears down that
+JVM process and releases any executors held by the cluster manager; skipping
+it in a long-running script leaks cluster resources.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a script (don't need to run it if you don't have Spark installed yet,
 but reason through what it should print) that:</p>

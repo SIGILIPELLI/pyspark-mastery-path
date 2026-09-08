@@ -1439,6 +1439,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2759,6 +2781,23 @@ since <code>customers</code> is a small dimension table.</p>
 </code></pre></div>
 <p><code>enriched.explain()</code> would show <code>BroadcastHashJoin</code> here since we forced
 it — confirm this is the plan you expect any time join performance matters.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A <strong>shuffle join</strong> (the default <code>SortMergeJoin</code> for large tables) requires
+both sides to be repartitioned by the join key so matching keys land on the
+same executor: every row is written to a local shuffle file, hash-partitioned
+by key, executors then pull ("shuffle read") the partitions relevant to them
+across the network, and each side gets sorted before merging matching keys —
+this is expensive because it touches every row of both tables and can spill
+sorted runs to disk if a partition doesn't fit in memory. A <strong>broadcast
+join</strong> sidesteps all of that: Spark collects the entire small table to the
+driver, serializes it once, and sends a full copy to every executor's memory,
+so each executor can join its large-table partitions locally against the
+in-memory broadcast copy with a hash lookup — zero shuffle of the large
+table. Catalyst's optimizer automatically picks <code>BroadcastHashJoin</code> over
+<code>SortMergeJoin</code> when it estimates one side's size is under
+<code>spark.sql.autoBroadcastJoinThreshold</code> (10 MB by default), using table
+statistics gathered from the source (Parquet footers, or <code>ANALYZE TABLE</code>)
+rather than actually running the query first.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Using <code>orders</code> and <code>customers</code> from the top of this module:</p>
 <ol>

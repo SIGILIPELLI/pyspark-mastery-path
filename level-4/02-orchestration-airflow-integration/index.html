@@ -2230,6 +2230,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2794,6 +2816,22 @@ prefer <code>overwrite</code> on a well-defined partition, or a Delta <code>MERG
 <a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>
 <a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>    <span class="n">wait</span> <span class="o">&gt;&gt;</span> <span class="n">ingest</span> <span class="o">&gt;&gt;</span> <span class="n">validate_task</span> <span class="o">&gt;&gt;</span> <span class="n">compact</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>When Airflow submits a Spark job via <code>spark-submit</code> or a <code>SparkSubmitOperator</code>,
+it's launching an entirely new driver process per DAG run — Airflow's
+scheduler has no visibility into Spark's internal DAG scheduler, stages, or
+tasks; it only tracks the external process's exit code and any logs it
+captures. This separation is exactly why idempotency matters at the task
+level: if Airflow retries a failed task, it reruns the <em>entire</em> Spark job
+(a brand-new driver, a brand-new logical plan, brand-new executors) from
+scratch — there's no partial-resume of a half-finished Spark DAG across
+retries, only whatever fault tolerance Spark's own lineage/checkpointing
+provided <em>within</em> that one run. Passing parameters (dates, paths) from
+Airflow to Spark as <code>spark-submit</code> arguments is why capstone pipelines
+parameterize the read/write paths — Airflow orchestrates <em>when</em> and <em>with
+what arguments</em> a job runs, while everything about <em>how</em> it executes
+(partitioning, shuffles, task scheduling) remains entirely internal to that
+one Spark driver's session.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Rewrite the <code>FileSensor</code> to use <code>mode="poke"</code> instead of

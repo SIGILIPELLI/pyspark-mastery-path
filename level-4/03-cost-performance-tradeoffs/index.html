@@ -2247,6 +2247,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2714,6 +2736,22 @@ running indefinitely, but it's a noticeably weaker case than the earlier
 22-day example — the decision now depends on what else is competing for
 that engineer's day, which a pure performance-tuning mindset wouldn't
 surface at all.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Cloud Spark clusters bill primarily for compute time, so the concrete cost
+lever is <strong>stage wall-clock time × number of executor-cores held for that
+long</strong> — an oversized cluster where half the executors sit idle during a
+skewed shuffle stage is paying for cores that Catalyst's plan and the
+DAG scheduler simply have no tasks to give them at that moment. Spot/
+preemptible instances complicate this because losing an executor mid-stage
+triggers exactly the lineage-recomputation path from the fault-tolerance
+module — cheaper compute costs more wall-clock time (and sometimes more
+total compute) if lost partitions must be recomputed repeatedly, which is
+why checkpointing before long-running or preemption-prone stages is a real
+cost-control technique, not just a reliability one. Autoscaling clusters
+interact directly with the DAG scheduler's stage boundaries too: a scale-up
+decision only helps if the <em>current</em> stage has more independent tasks than
+available cores (a wide stage with many partitions benefits; a narrow
+single-partition stage does not, no matter how many executors are added).</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>A job costs $10/run on a 30-executor on-demand cluster and runs

@@ -1871,6 +1871,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2737,6 +2759,23 @@ runtime — covered in depth in module 6 — via:</p>
 sizes and automatically splits oversized ones into smaller sub-tasks,
 often making manual salting unnecessary for join skew specifically (it
 does not help with <code>groupBy</code> skew — salting is still the tool there).</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Data skew happens because Spark's default hash-partitioning sends <em>all</em> rows
+sharing a key to exactly one reducer partition — if one key (say, a
+<code>country</code> value that's 40% of your data) vastly outnumbers others, that one
+partition's task must process far more data and runs on a single executor
+core while every other task on other executors finishes and sits idle,
+stretching the whole stage's wall-clock time to match the slowest task
+(a "straggler"). <strong>Salting</strong> fixes this at the logical-plan level: you
+append a random suffix (e.g. <code>0</code>-<code>9</code>) to the skewed key before the shuffle
+so what was one massive partition becomes ten smaller ones spread across
+different reducers, then aggregate in two phases (partial results per salted
+key, then a final aggregation stripping the salt) — this works because it
+changes the actual hash-partitioning key Spark uses to decide which reducer
+a row lands on. Adaptive Query Execution's <strong>skew join optimization</strong>
+(covered next module) automates a similar idea by detecting oversized
+shuffle partitions at runtime from actual shuffle-write statistics and
+splitting them into smaller sub-partitions before the join reads them.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Using the <code>events</code> DataFrame above, measure the max/median partition

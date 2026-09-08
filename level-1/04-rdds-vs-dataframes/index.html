@@ -934,6 +934,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2738,6 +2760,23 @@ expressed relationally.</p>
 to the intent ("average salary, grouped by department"), and lets Spark
 choose the actual execution strategy — the RDD version hard-codes one
 specific strategy (<code>reduceByKey</code>) that you had to design yourself.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>RDDs execute your Python lambda functions literally: each RDD transformation
+serializes your closure, ships it to the executor, and for PySpark
+specifically the executor JVM has to launch a separate Python worker
+process, pipe each row of the partition through the OS pipe, run your
+Python code row-by-row, and pipe results back — a slow round trip
+called <strong>PySpark serialization overhead</strong>. DataFrames avoid this almost
+entirely: built-in operations like <code>select</code>, <code>filter</code>, and <code>groupBy</code> compile
+to a Catalyst logical plan expressed in terms of Spark SQL's internal
+<code>Expression</code> tree, which the <strong>Tungsten</strong> execution engine turns into JVM
+bytecode operating directly on a compact binary row format (<code>UnsafeRow</code>) —
+no Python process, no per-row (de)serialization, and no JVM object
+allocation per row. This is the concrete reason the course steers you toward
+the DataFrame API: every DataFrame method you call is a plan node the
+optimizer can rewrite, reorder, or push down, while an RDD <code>.map(lambda ...)</code>
+is an opaque black box Catalyst cannot see inside and therefore cannot
+optimize at all.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Given this RDD-style data:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">rdd</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">([</span>

@@ -2089,6 +2089,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2606,6 +2617,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2771,6 +2793,23 @@ UI reasoning (modules 1, 8), fix join strategy first since it's usually
 the biggest lever (module 7), right-size remaining shuffles (module 2),
 lean on AQE as a runtime backstop (module 6), and finish with file-layout
 hygiene on the write (module 5).</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Tuning a full pipeline end-to-end means reasoning about the DAG as a whole,
+not each transformation in isolation: every shuffle boundary (join,
+<code>groupBy</code>, <code>repartition</code>) is a stage cut where the scheduler must wait for
+100% of the upstream stage's tasks to finish before any downstream task can
+start, so one skewed or oversized partition anywhere in the chain stalls the
+entire pipeline at that point regardless of how well-tuned every other stage
+is. This is why the checklist for a production pipeline follows the DAG in
+order: minimize shuffles by filtering/pruning columns before joins so less
+data ever gets shuffled; pick broadcast joins wherever one side is safely
+small; let AQE coalesce and rebalance partitions at runtime rather than
+hand-tuning <code>spark.sql.shuffle.partitions</code> for a fixed cluster size; and
+checkpoint or cache only the specific intermediate results genuinely reused
+downstream. <code>.explain("formatted")</code> on the finished pipeline is how you
+verify the plan actually reflects these decisions — a <code>BroadcastHashJoin</code>
+where you intended one, an absence of unnecessary <code>Exchange</code> nodes, and
+codegen boundaries lining up with the stages you expect.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Re-run Step 1's naive plan but with AQE enabled from the start —

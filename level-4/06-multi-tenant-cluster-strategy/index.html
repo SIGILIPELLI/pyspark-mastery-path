@@ -2353,6 +2353,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2606,6 +2617,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2783,6 +2805,22 @@ guaranteed minimum share (never fully starved even if the other two pools
 are saturated) — <code>nightly_etl</code> and <code>adhoc_analyst</code> compete for the
 remainder proportional to their weights, with ETL prioritized 2:1 over
 ad-hoc work since it has firmer completion-time expectations.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>On a shared cluster, the <strong>cluster manager</strong> (YARN, Kubernetes) is what
+actually enforces isolation between tenants' Spark applications, not Spark
+itself — each Spark application gets its own driver and its own fixed set
+of executor JVMs for its lifetime, and the cluster manager's scheduler
+(YARN's capacity/fair scheduler, or Kubernetes resource quotas/namespaces)
+decides how container/executor requests from competing applications are
+granted against the physical node pool. This is why a "noisy neighbor"
+problem in multi-tenant Spark is really a resource-manager configuration
+problem: without queues/quotas, one application requesting many
+high-memory executors can starve others waiting for the same physical
+nodes, and Spark's own dynamic allocation (which lets an application's
+executor count grow/shrink between stages based on pending task backlog)
+makes this worse without cluster-level limits, since an application will
+happily request more executors the moment a wide stage gives it many
+parallel tasks to run.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Explain, specifically, why <code>spark.shuffle.service.enabled=true</code> is a

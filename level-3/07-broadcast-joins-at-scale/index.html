@@ -1983,6 +1983,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2562,6 +2573,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2723,6 +2745,23 @@ Spark would otherwise have to re-serialize into every task's closure.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">bc</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>   <span class="c1"># release the broadcast from executor memory when no longer needed</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">bc</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>     <span class="c1"># release fully, including from the driver — cannot be reused after this</span>
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>At scale, a broadcast join's cost is dominated by the <strong>collect-and-serialize</strong>
+step: the driver must pull the entire small-side DataFrame into its own
+memory, serialize it once, and then push a full copy of that serialized
+blob to every executor over the network — this is why broadcasting a table
+that's actually too large (or badly underestimated by statistics) can crash
+the driver with an OOM or flood the cluster's network, which is exactly what
+<code>spark.sql.autoBroadcastJoinThreshold</code> guards against by refusing to
+auto-broadcast anything Catalyst estimates above the limit. Once broadcast,
+each executor stores the small table as an in-memory hash table keyed by the
+join column, so every large-table row on that executor does an O(1)
+in-memory hash lookup instead of participating in a shuffle — no network
+traffic for the large side at all, and no <code>Exchange</code> node for it in the
+physical plan. This is also why broadcast joins interact well with
+partition pruning: each large-table partition can be probed against the
+broadcast hash table completely independently, in the same stage, with no
+synchronization needed between executors.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Given <code>executor.memory=16g</code>, <code>executor.memoryOverhead=4g</code>, and 20

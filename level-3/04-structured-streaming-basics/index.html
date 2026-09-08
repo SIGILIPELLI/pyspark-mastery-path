@@ -1910,6 +1910,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,6 +2595,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2775,6 +2797,23 @@ as <code>is_alert</code>.</p>
 <p>Downstream, any batch job or BI tool can simply read
 <code>/data/warehouse/temp_alerts</code> as a normal Parquet table and filter
 <code>WHERE is_alert</code> — the streaming complexity is fully contained upstream.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Structured Streaming is not a separate engine — it reuses the exact same
+Catalyst optimizer and DAG scheduler as batch DataFrames, by modeling a
+stream as an <strong>unbounded table</strong> that grows with each micro-batch. Under the
+<strong>micro-batch</strong> execution model, Spark repeatedly: (1) checks the source for
+new data since the last offset, (2) constructs a new incremental logical
+plan (or reuses a cached one) covering just the new rows, (3) runs it as an
+ordinary batch job through the same DAG scheduler/stage/task machinery
+you've already learned, and (4) commits the new offsets and any updated
+state to a <strong>checkpoint location</strong> only after output is durably written —
+this offset-commit-after-write ordering is what gives Structured Streaming
+its exactly-once guarantees. Stateful operations (streaming aggregations,
+window functions with watermarks) store intermediate state in a versioned
+<strong>state store</strong> on each executor's local disk, checkpointed to durable
+storage between batches, which is how a stateful stream can recover to
+exactly where it left off after an executor failure without reprocessing
+data twice.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Change the <code>outputMode</code> on <code>windowed_avg</code> from <code>append</code> to <code>update</code>
