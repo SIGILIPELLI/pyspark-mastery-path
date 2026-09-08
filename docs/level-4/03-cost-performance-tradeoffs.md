@@ -146,6 +146,24 @@ running indefinitely, but it's a noticeably weaker case than the earlier
 that engineer's day, which a pure performance-tuning mindset wouldn't
 surface at all.
 
+## How It Actually Works
+
+Cloud Spark clusters bill primarily for compute time, so the concrete cost
+lever is **stage wall-clock time × number of executor-cores held for that
+long** — an oversized cluster where half the executors sit idle during a
+skewed shuffle stage is paying for cores that Catalyst's plan and the
+DAG scheduler simply have no tasks to give them at that moment. Spot/
+preemptible instances complicate this because losing an executor mid-stage
+triggers exactly the lineage-recomputation path from the fault-tolerance
+module — cheaper compute costs more wall-clock time (and sometimes more
+total compute) if lost partitions must be recomputed repeatedly, which is
+why checkpointing before long-running or preemption-prone stages is a real
+cost-control technique, not just a reliability one. Autoscaling clusters
+interact directly with the DAG scheduler's stage boundaries too: a scale-up
+decision only helps if the *current* stage has more independent tasks than
+available cores (a wide stage with many partitions benefits; a narrow
+single-partition stage does not, no matter how many executors are added).
+
 ## Exercise
 
 1. A job costs $10/run on a 30-executor on-demand cluster and runs

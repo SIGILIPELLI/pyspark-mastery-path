@@ -180,6 +180,24 @@ are saturated) — `nightly_etl` and `adhoc_analyst` compete for the
 remainder proportional to their weights, with ETL prioritized 2:1 over
 ad-hoc work since it has firmer completion-time expectations.
 
+## How It Actually Works
+
+On a shared cluster, the **cluster manager** (YARN, Kubernetes) is what
+actually enforces isolation between tenants' Spark applications, not Spark
+itself — each Spark application gets its own driver and its own fixed set
+of executor JVMs for its lifetime, and the cluster manager's scheduler
+(YARN's capacity/fair scheduler, or Kubernetes resource quotas/namespaces)
+decides how container/executor requests from competing applications are
+granted against the physical node pool. This is why a "noisy neighbor"
+problem in multi-tenant Spark is really a resource-manager configuration
+problem: without queues/quotas, one application requesting many
+high-memory executors can starve others waiting for the same physical
+nodes, and Spark's own dynamic allocation (which lets an application's
+executor count grow/shrink between stages based on pending task backlog)
+makes this worse without cluster-level limits, since an application will
+happily request more executors the moment a wide stage gives it many
+parallel tasks to run.
+
 ## Exercise
 
 1. Explain, specifically, why `spark.shuffle.service.enabled=true` is a

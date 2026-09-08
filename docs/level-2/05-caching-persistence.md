@@ -194,6 +194,23 @@ Each of the three downstream `.show()` calls reuses `base`'s cached,
 already-`withColumn`-derived data rather than recomputing the `when(...)`
 expression three separate times.
 
+## How It Actually Works
+
+`df.cache()` (shorthand for `persist(StorageLevel.MEMORY_AND_DISK)`) doesn't
+compute anything by itself — it only marks the DataFrame's plan node so that
+the *next* action materializes each partition's result and stores it in the
+executor's block manager instead of discarding it after use. Internally,
+Spark's **BlockManager** on each executor keeps cached partitions as
+in-memory objects (in Tungsten's binary row format) up to the configured
+memory fraction; if a partition doesn't fit, `MEMORY_AND_DISK` spills that
+partition to local disk rather than losing it, while `MEMORY_ONLY` would
+simply recompute it from lineage when needed again. This is why caching only
+helps when a DataFrame is reused across multiple actions — caching something
+used exactly once adds the cost of storing it for no benefit — and why
+`unpersist()` matters: cached blocks otherwise remain pinned in executor
+memory, reducing the memory available for shuffles and future caches, until
+Spark's least-recently-used eviction or manual `unpersist()` reclaims it.
+
 ## Exercise
 
 Using `df` from the top of this module:

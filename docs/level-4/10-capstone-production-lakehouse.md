@@ -233,6 +233,25 @@ for item in production_checklist:
     print("[ ]", item)
 ```
 
+## How It Actually Works
+
+A production lakehouse pipeline is the composition of every mechanism this
+course covered, wired together as one DAG of dependent Spark jobs rather
+than one job in isolation: Delta's transaction log gives each stage a
+consistent, ACID-safe view of its inputs regardless of concurrent writers;
+AQE re-plans shuffle partitions and join strategies between stages using
+real runtime statistics rather than the estimates the job started with;
+broadcast joins eliminate shuffles wherever a dimension table is safely
+small; checkpointing truncates lineage before long stateful or
+preemption-exposed stages; and quality gates run as cheap, pushdown-friendly
+filters before expensive shuffles rather than after. None of these are
+independent add-ons — they interact through the same DAG scheduler and
+Catalyst optimizer covered from Level 1 onward, which is why debugging a
+production incident in a pipeline like this one means walking the same
+`.explain()` plan and Spark UI stage timeline you've been reading all
+course, just across more stages and with more moving pieces committing to
+the transaction log along the way.
+
 ## Exercise
 
 1. Add a fourth Airflow task, downstream of `upsert_events`, that runs

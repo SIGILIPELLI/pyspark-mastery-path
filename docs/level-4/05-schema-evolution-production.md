@@ -206,6 +206,25 @@ it every time) gives you an audit trail for exactly when an upstream
 schema change landed — useful when a downstream consumer later asks "when
 did this column start existing?"
 
+## How It Actually Works
+
+Schema evolution is safe or unsafe depending on how it interacts with
+Parquet's **column-by-name, position-independent** storage model: adding a
+new nullable column is safe because old files simply have no data for that
+column and older readers/newer readers both resolve columns by name against
+whatever schema is active, filling missing columns with `null`. Renaming or
+changing a column's type is unsafe precisely because it breaks that
+name-based resolution — a reader expecting `amount: Double` reading an
+older file where the column doesn't exist yet under that name (or exists as
+`Int`) has no automatic reconciliation without an explicit schema-merge
+strategy. `mergeSchema=true` on read forces Spark to union the schemas of
+all files being scanned in one job — an extra full-metadata pass across
+every file's footer before the actual read begins — which is why the
+production pattern is to write explicit schema-migration steps (with Delta
+Lake's schema enforcement/evolution flags, covered in module 1) rather than
+relying on Spark's runtime schema-merge for every read, since that merge
+cost scales with the number of files being read.
+
 ## Exercise
 
 1. Given a table with a `price: FloatType` column, write the code to

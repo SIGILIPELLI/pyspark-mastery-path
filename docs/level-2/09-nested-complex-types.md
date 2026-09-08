@@ -245,6 +245,23 @@ Spark SQL's higher-order `aggregate` function directly on the array,
 avoiding an `explode` + `groupBy` round trip when you only need a
 per-row scalar summary rather than a flattened table.
 
+## How It Actually Works
+
+Nested types (`StructType`, `ArrayType`, `MapType`) are stored in Tungsten's
+row format as offset+length pointers into a variable-length data region,
+much like strings — a `struct` field is really an inline sub-row with its
+own field offsets, while an `array`/`map` stores element count plus offsets
+to each element's serialized bytes within the same row buffer. This matters
+for performance: `df.select("address.city")` on a struct column doesn't need
+to touch the parent struct's other fields at all — Catalyst resolves it to a
+direct offset read (a `GetStructField` expression) — but `explode()` on an
+array column is a genuinely different kind of operation: it's a
+**one-to-many** row-generating operator, meaning the output partition can
+have far more rows than the input partition, which breaks Spark's usual
+one-input-row-to-one-output-row cost assumptions and is why exploding large
+arrays can suddenly balloon partition sizes and trigger spills that weren't
+visible before the explode.
+
 ## Exercise
 
 Using `df` from the top of this module:

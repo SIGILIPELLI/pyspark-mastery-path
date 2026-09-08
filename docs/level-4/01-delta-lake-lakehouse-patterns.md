@@ -206,6 +206,25 @@ def nightly_upsert(spark, incoming_df, table_path):
 nightly_upsert(spark, updates, "/data/lakehouse/customers")
 ```
 
+## How It Actually Works
+
+Delta Lake adds a **transaction log** (`_delta_log/`, a sequence of JSON and
+periodic Parquet "checkpoint" files) on top of plain Parquet files, and this
+log is what makes ACID guarantees possible on files that Spark's storage
+layer otherwise treats as an unordered pile of objects. Every write
+(`INSERT`, `UPDATE`, `MERGE`, schema change) is recorded as a new,
+atomically-committed log entry listing exactly which Parquet files were
+added and removed — readers always resolve "current table state" by
+replaying the log from the last checkpoint forward, which is how Delta
+achieves **snapshot isolation**: a query that starts reading sees a
+consistent set of files even if a concurrent writer commits mid-query,
+because that writer's new log entry simply isn't part of the snapshot the
+reader already resolved. `MERGE` (upsert) compiles internally to a join
+between the source and target table's existing files, followed by rewriting
+only the affected Parquet files and appending one new log entry — the
+underlying Spark job is still an ordinary DAG of stages and shuffles, Delta
+just adds the log-based commit protocol around it.
+
 ## Exercise
 
 1. Run a `MERGE` that also deletes target rows not present in the source

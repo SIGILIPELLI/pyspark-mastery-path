@@ -202,6 +202,22 @@ results by hand against the source rows, especially while learning — it's
 easy to mis-add and it's exactly the kind of mistake automated tests
 (Level 2/3) exist to catch.
 
+## How It Actually Works
+
+`df.groupBy("country").sum("amount")` compiles into a **two-phase
+aggregation** physical plan whenever possible: Spark first performs a
+**partial aggregation** independently on each partition (summing `amount`
+per country *within* that partition, producing far fewer rows), then
+**shuffles** those small partial sums by `country` key across the cluster so
+all partial results for the same key land on one executor, and finally
+performs a **final aggregation** merging the partial sums into the true
+total per country. This partial-then-shuffle-then-final pattern (Spark calls
+it `HashAggregate` with a partial and final stage in the physical plan,
+visible via `.explain()`) is why aggregations are dramatically cheaper than
+naively shuffling every raw row first — the amount of data crossing the
+network is bounded by the number of distinct keys times the number of
+partitions, not by the number of raw input rows.
+
 ## Exercise
 
 Using the `df` from the top of this module:

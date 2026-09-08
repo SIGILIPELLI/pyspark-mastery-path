@@ -208,6 +208,31 @@ spark.sql(
 interpolation — prefer this pattern any time a query's filter values come
 from outside the literal SQL text.
 
+## How It Actually Works
+
+`spark.sql("...")` doesn't interpret SQL as a separate language runtime —
+Spark's ANTLR-based parser turns the SQL text into an unresolved logical
+plan tree, which then flows through the identical **analyzer**, rule-based
+**optimizer**, and physical planner that a DataFrame method chain produces.
+Registering a temp view via `createOrReplaceTempView` just inserts an entry
+into the current `SparkSession`'s in-memory catalog mapping a name to a
+logical plan — it triggers no computation and copies no data, so
+registering a view over a 500 GB DataFrame is instant regardless of size.
+A **global temp view** is stored in a special `global_temp` database tied
+to the underlying `SparkContext` rather than the session, which is exactly
+why it needs the `global_temp.` prefix and outlives any one `SparkSession`
+built on that context. `spark.sql(...).explain()` and the DataFrame API's
+`.explain()` are guaranteed to print identical plans for equivalent queries
+because Catalyst discards the syntax the moment parsing finishes — by the
+optimizer stage there is no notion of "this came from SQL" left in the
+tree at all, which is the real reason there's no performance difference
+between the two styles. Parameterized queries via `args={...}` bind values
+directly into the resolved plan as literal expression nodes rather than
+splicing text before parsing, which is both why they're SQL-injection-safe
+and why they let Spark reuse a cached, already-parsed query plan across
+calls with different parameter values instead of re-parsing the SQL string
+every time.
+
 ## Exercise
 
 Using `orders` and `customers` from the top of this module:

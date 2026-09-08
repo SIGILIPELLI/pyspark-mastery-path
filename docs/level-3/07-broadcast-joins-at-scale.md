@@ -161,6 +161,25 @@ bc.unpersist()   # release the broadcast from executor memory when no longer nee
 bc.destroy()     # release fully, including from the driver — cannot be reused after this
 ```
 
+## How It Actually Works
+
+At scale, a broadcast join's cost is dominated by the **collect-and-serialize**
+step: the driver must pull the entire small-side DataFrame into its own
+memory, serialize it once, and then push a full copy of that serialized
+blob to every executor over the network — this is why broadcasting a table
+that's actually too large (or badly underestimated by statistics) can crash
+the driver with an OOM or flood the cluster's network, which is exactly what
+`spark.sql.autoBroadcastJoinThreshold` guards against by refusing to
+auto-broadcast anything Catalyst estimates above the limit. Once broadcast,
+each executor stores the small table as an in-memory hash table keyed by the
+join column, so every large-table row on that executor does an O(1)
+in-memory hash lookup instead of participating in a shuffle — no network
+traffic for the large side at all, and no `Exchange` node for it in the
+physical plan. This is also why broadcast joins interact well with
+partition pruning: each large-table partition can be probed against the
+broadcast hash table completely independently, in the same stage, with no
+synchronization needed between executors.
+
 ## Exercise
 
 1. Given `executor.memory=16g`, `executor.memoryOverhead=4g`, and 20

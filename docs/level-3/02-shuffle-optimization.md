@@ -166,6 +166,25 @@ result.explain()
 print(result.rdd.getNumPartitions())  # 50, matched to actual cardinality
 ```
 
+## How It Actually Works
+
+A shuffle physically happens in two halves. **Shuffle write**: each task in
+the upstream stage partitions its output rows by the target key's hash (or
+range, for sorted shuffles), and writes them to local disk as a set of
+per-reducer files — this write itself can spill multiple sorted runs to disk
+if a partition's buffered data exceeds `spark.shuffle.spill` memory limits,
+which then requires a merge pass. **Shuffle read**: each task in the
+downstream stage fetches exactly the file segments meant for it from every
+upstream executor over the network (via the shuffle service), sorts/merges
+what it receives if the operation requires ordering, and only then proceeds.
+`spark.sql.shuffle.partitions` (200 by default) sets how many reducer-side
+partitions this shuffle produces — too few and each reducer partition is
+huge (spills, slow tasks); too many and per-task scheduling/file overhead
+dominates actual compute, since every partition still means opening a file
+handle on every upstream executor. This is the concrete mechanism behind
+every "reduce shuffle partitions" or "increase shuffle partitions" tuning
+tip you'll see for real workloads.
+
 ## Exercise
 
 1. Given a dataset with 5 distinct grouping keys and 500 GB of data,

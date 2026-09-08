@@ -165,6 +165,25 @@ the biggest lever (module 7), right-size remaining shuffles (module 2),
 lean on AQE as a runtime backstop (module 6), and finish with file-layout
 hygiene on the write (module 5).
 
+## How It Actually Works
+
+Tuning a full pipeline end-to-end means reasoning about the DAG as a whole,
+not each transformation in isolation: every shuffle boundary (join,
+`groupBy`, `repartition`) is a stage cut where the scheduler must wait for
+100% of the upstream stage's tasks to finish before any downstream task can
+start, so one skewed or oversized partition anywhere in the chain stalls the
+entire pipeline at that point regardless of how well-tuned every other stage
+is. This is why the checklist for a production pipeline follows the DAG in
+order: minimize shuffles by filtering/pruning columns before joins so less
+data ever gets shuffled; pick broadcast joins wherever one side is safely
+small; let AQE coalesce and rebalance partitions at runtime rather than
+hand-tuning `spark.sql.shuffle.partitions` for a fixed cluster size; and
+checkpoint or cache only the specific intermediate results genuinely reused
+downstream. `.explain("formatted")` on the finished pipeline is how you
+verify the plan actually reflects these decisions — a `BroadcastHashJoin`
+where you intended one, an absence of unnecessary `Exchange` nodes, and
+codegen boundaries lining up with the stages you expect.
+
 ## Exercise
 
 1. Re-run Step 1's naive plan but with AQE enabled from the start —

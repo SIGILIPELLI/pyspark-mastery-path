@@ -151,6 +151,22 @@ Reading the output back and comparing row counts (as the last two lines do)
 is a cheap, worthwhile sanity check any time you write a new pipeline —
 it catches an entire class of silent write bugs immediately.
 
+## How It Actually Works
+
+`df.write.parquet(path)` triggers a real distributed job: the DAG scheduler
+emits one write task per partition, and each executor independently writes
+its partition's rows to a separate part-file (`part-00000-....parquet`,
+etc.) directly to the target path — there is no single process funneling all
+output through one writer, which is exactly how Spark write throughput
+scales with cluster size. Each task also computes and embeds Parquet's
+columnar statistics (per-column min/max/null-count, row-group boundaries)
+into that file's footer as it writes, which is what later lets predicate
+pushdown skip row groups on read. The number of output files exactly equals
+the number of partitions the DataFrame had at write time — this is why an
+unnecessarily high partition count produces the well-known "many tiny files"
+problem, and why `coalesce(n)` before a write (a narrow transformation that
+avoids a shuffle) is the standard fix.
+
 ## Exercise
 
 Given a DataFrame `sales_df` with columns `sale_id`, `region`, `product`,

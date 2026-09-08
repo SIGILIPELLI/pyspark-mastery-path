@@ -195,6 +195,22 @@ report.show()
 # +--------+----------+-------------+
 ```
 
+## How It Actually Works
+
+Every transformation you chain — `select`, `filter`, `withColumn` — appends
+a node to an immutable logical plan tree rather than mutating any data; you
+can prove this to yourself by calling `df.filter(...).explain()` and seeing
+the shape of the plan before anything runs. Catalyst applies a fixed set of
+**rule-based optimizations** to this tree before execution: `filter`
+predicates get pushed as close to the data source as possible (**predicate
+pushdown**), unneeded columns get pruned before any shuffle (**column
+pruning**), and chained `select`/`filter` calls on the same underlying
+column get merged into a single pass over the data. Because the plan is
+immutable and declarative, Spark is free to reorder your `.filter()` before
+your `.select()` internally even if you wrote them in the opposite order in
+Python — what matters is the final logical plan Catalyst builds, not the
+literal sequence of method calls you typed.
+
 ## Exercise
 
 Using the same `df` from the top of this module:

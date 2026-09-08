@@ -182,6 +182,25 @@ is a reasonable middle ground for a 30-round job — tune the interval
 against observed recovery cost vs. checkpoint I/O cost on your own
 cluster.
 
+## How It Actually Works
+
+Spark's fault tolerance for batch jobs relies on **lineage**: every RDD/
+DataFrame tracks the full chain of transformations that produced it, so if
+an executor holding a partition dies, the DAG scheduler simply resubmits the
+tasks needed to recompute *only that lost partition* from its lineage,
+re-reading source data and re-running upstream narrow transformations —
+this is the mechanism the very first module's "recompute just that machine's
+lost partitions" claim actually refers to. Lineage recomputation gets
+expensive when the chain is long or crosses many shuffle boundaries, which
+is what `checkpoint()` addresses: it forces Spark to materialize a
+DataFrame's data to reliable storage (HDFS/S3/local disk) and **truncates
+the lineage** at that point, so future failures only need to re-read the
+checkpointed data rather than replaying dozens of upstream stages. This
+differs from `cache()`, which keeps data in the (volatile) executor block
+manager and does not shorten lineage at all — a cached partition lost to
+executor failure still falls back to full lineage recomputation, while a
+checkpointed one does not.
+
 ## Exercise
 
 1. Explain, in terms of lineage, why `.checkpoint()` requires an eager

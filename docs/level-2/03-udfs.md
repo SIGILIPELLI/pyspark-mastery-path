@@ -198,6 +198,24 @@ A UDF returning a `StructType` produces a single struct column, which you
 then unpack with `.select("parsed.first_name", "parsed.last_name")` —
 this is the idiomatic way to get "multiple outputs" from one UDF call.
 
+## How It Actually Works
+
+A standard Python UDF is the single biggest performance cliff in PySpark:
+for every batch of rows, the executor JVM must serialize the relevant
+columns, pipe them over a socket to a separate long-running Python worker
+process, have that worker deserialize each row, call your Python function
+row-by-row through the CPython interpreter, then serialize results back
+across the socket for the JVM to deserialize again — and crucially, Catalyst
+treats your UDF as an **opaque black box**: it cannot push filters through
+it, reorder around it, or apply whole-stage code generation across it,
+so it inserts a hard boundary in the generated code at every UDF call.
+**Pandas UDFs** (vectorized UDFs) narrow this gap by using Apache Arrow to
+serialize entire columnar batches at once instead of row-by-row, letting
+your function operate on a `pandas.Series` per batch — far fewer
+serialization round-trips — but they still can't be optimized *through* the
+way a native Catalyst expression like `col("x") + 1` can, which is why the
+course always says "prefer built-in functions when one exists."
+
 ## Exercise
 
 Using `df` from the top of this module:

@@ -134,6 +134,23 @@ Tracing it against the concepts above:
 5. The driver collects the small, aggregated result (one row per distinct
    `page`) and prints it via `.show()`.
 
+## How It Actually Works
+
+The driver process holds the **SparkContext**, which is the entry point that
+talks to the cluster manager to request executor JVMs and tracks every RDD/
+DataFrame lineage you build. When an action triggers execution, the driver's
+**DAGScheduler** walks the logical dependency graph backward from the final
+RDD, splitting it into stages at every **shuffle boundary** (a point where
+data must move between partitions, e.g. after a `groupBy` or `join`). Each
+stage is submitted to the **TaskScheduler**, which assigns one task per
+partition to an executor's free CPU core, preferring the executor that
+already holds that partition's data on disk (**data locality**) to avoid
+network transfer. Executors report task completion and any output metadata
+(like which shuffle files they wrote) back to the driver, which is why the
+driver becomes a bottleneck if it has to track millions of tiny tasks — this
+is the practical reason Spark jobs are tuned toward fewer, larger partitions
+rather than many tiny ones.
+
 ## Exercise
 
 Using the same reasoning as the worked example, trace through this snippet

@@ -205,6 +205,24 @@ with DAG(
     wait >> ingest >> validate_task >> compact
 ```
 
+## How It Actually Works
+
+When Airflow submits a Spark job via `spark-submit` or a `SparkSubmitOperator`,
+it's launching an entirely new driver process per DAG run — Airflow's
+scheduler has no visibility into Spark's internal DAG scheduler, stages, or
+tasks; it only tracks the external process's exit code and any logs it
+captures. This separation is exactly why idempotency matters at the task
+level: if Airflow retries a failed task, it reruns the *entire* Spark job
+(a brand-new driver, a brand-new logical plan, brand-new executors) from
+scratch — there's no partial-resume of a half-finished Spark DAG across
+retries, only whatever fault tolerance Spark's own lineage/checkpointing
+provided *within* that one run. Passing parameters (dates, paths) from
+Airflow to Spark as `spark-submit` arguments is why capstone pipelines
+parameterize the read/write paths — Airflow orchestrates *when* and *with
+what arguments* a job runs, while everything about *how* it executes
+(partitioning, shuffles, task scheduling) remains entirely internal to that
+one Spark driver's session.
+
 ## Exercise
 
 1. Rewrite the `FileSensor` to use `mode="poke"` instead of

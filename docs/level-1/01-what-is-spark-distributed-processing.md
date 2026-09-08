@@ -108,6 +108,29 @@ Every operation you'll write in PySpark compiles down to something like
 this: work split across partitions, computed independently and in parallel,
 then combined.
 
+## How It Actually Works
+
+When you write `df.filter(...).count()`, nothing runs immediately. Spark
+builds a **logical plan** — a tree of operations describing *what* you want,
+not a set of instructions for *how* to get it. Only when an action like
+`count()`, `collect()`, or `write()` is called does Spark's **Catalyst
+optimizer** turn that logical plan into an optimized **physical plan**, and
+the **DAG scheduler** breaks the physical plan into **stages** (groups of
+tasks that can run without moving data between machines) and **tasks** (one
+unit of work per partition). Those tasks are handed to executors by the
+**cluster manager** (standalone, YARN, or Kubernetes), and each executor JVM
+runs tasks in parallel threads against the partitions of data it holds
+locally on disk or in memory.
+
+This laziness is exactly why the picture above works: Spark doesn't literally
+run `filter` three separate times as isolated programs — it compiles one
+physical plan, and the DAG scheduler emits one task per partition that all
+run the *same* compiled bytecode against different data. The "driver sums
+the partial counts" step you saw is a real operation called a **reduce/merge
+at the driver** — the driver process itself never touches your 500 GB of
+data, it only receives small partial aggregates back from each executor,
+which is why the driver doesn't need nearly as much memory as the dataset.
+
 ## Exercise
 
 Without writing any code, answer these for yourself (or in a notes file) —

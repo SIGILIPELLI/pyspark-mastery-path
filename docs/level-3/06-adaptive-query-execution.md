@@ -150,6 +150,26 @@ fixing genuinely bad partitioning strategy or an under-provisioned
 cluster — it optimizes within the plan space, not around real resource
 constraints.
 
+## How It Actually Works
+
+Adaptive Query Execution (AQE) exists because Catalyst's initial physical
+plan is chosen from **estimated** statistics (Parquet footer metadata,
+`ANALYZE TABLE` results) before any data has actually been read — those
+estimates can be badly wrong. AQE re-plans **between stages**, at points
+where a shuffle has already completed and Spark now has *actual* runtime
+statistics (exact partition sizes, row counts) to work with. Its three main
+optimizations all exploit this: **dynamically coalescing shuffle
+partitions** merges adjacent small post-shuffle partitions into fewer,
+right-sized ones instead of running many tiny tasks; **dynamically switching
+join strategies** can promote a `SortMergeJoin` to a `BroadcastHashJoin`
+mid-query if the actual shuffled data turns out smaller than the original
+estimate predicted; and **dynamically optimizing skew joins** detects a
+post-shuffle partition that's disproportionately large compared to its
+peers and automatically splits it into several smaller sub-partitions
+processed independently, without you having to hand-salt the key. All three
+only work at stage boundaries — AQE cannot fix skew or misestimation inside
+a single already-running stage.
+
 ## Exercise
 
 1. Given `spark.sql.adaptive.advisoryPartitionSizeInBytes=128m` and a

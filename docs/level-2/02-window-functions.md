@@ -181,6 +181,22 @@ Note `category_total` has no `orderBy` — because we want the sum over the
 *entire* partition, not a running total, and the default frame for an
 aggregate window function with no `orderBy` is the whole partition.
 
+## How It Actually Works
+
+A window function like `row_number().over(Window.partitionBy("dept").orderBy("salary"))`
+compiles to a physical `Window` operator that first shuffles rows so all
+rows sharing a `PARTITION BY` key land on the same executor (much like a
+`groupBy`), then **sorts each partition's rows** by the `ORDER BY` columns,
+and finally slides a frame across the sorted rows within each partition,
+computing the ranking/aggregate incrementally as it scans forward — this is
+why window functions require both a shuffle and a sort even though they
+don't reduce the row count the way `groupBy` does. Because each partition
+key's rows must fit and be sorted together on one executor, a `PARTITION BY`
+column with extreme skew (one department holding most rows) creates a
+classic **data skew** bottleneck: one executor sorts a huge partition while
+others sit idle, which is the exact problem Level 3's skew-handling module
+addresses.
+
 ## Exercise
 
 Using `df` from the top of this module:

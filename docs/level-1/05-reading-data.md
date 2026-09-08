@@ -153,6 +153,22 @@ The row counts should always agree (same underlying data); the schemas may
 not, because CSV/JSON schema inference is a best-effort guess while Parquet's
 schema is exact and stored.
 
+## How It Actually Works
+
+`spark.read.csv(...)` with no schema forces a **two-pass read** when you set
+`inferSchema=True`: Spark first scans the entire file (or a sample) to guess
+column types, then re-reads it to actually parse the data — doubling I/O for
+large files. Under the hood, this scan is itself a Spark job: it's split
+into one task per file split (roughly one per HDFS/S3 block, or per file for
+small files), each task independently infers types for its chunk, and the
+driver merges the per-task type guesses into one final schema before the
+real read job runs. Reading Parquet is fundamentally cheaper because Parquet
+files embed their schema and per-column statistics (min/max, null counts) in
+a footer, so Spark reads just that footer metadata to build the DataFrame's
+schema instantly, and later filters on that data can skip entire row groups
+without decompressing them — a technique called **predicate pushdown**, which
+plain CSV cannot support because it has no such metadata to consult upfront.
+
 ## Exercise
 
 You're given a directory `sales/` containing daily CSV exports named

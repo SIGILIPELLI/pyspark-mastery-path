@@ -138,6 +138,24 @@ Spark-heavy companies (Databricks, Netflix, Uber, LinkedIn) is a
 low-effort way to keep the mental model current after finishing this
 path.
 
+## How It Actually Works
+
+The skills that separate a working PySpark user from a Spark-savvy engineer
+almost always trace back to the same underlying model this whole course has
+built: reading `.explain()` output fluently (recognizing `Exchange` nodes,
+`BroadcastHashJoin` vs `SortMergeJoin`, codegen boundaries), diagnosing a
+Spark UI stage page in terms of shuffle read/write and spill metrics rather
+than just "it's slow," and reasoning about a pipeline change in terms of
+which stage boundaries it adds or removes. Interview and on-the-job
+questions about "why is this job slow" are, underneath the specific wording,
+always asking you to trace symptoms back to one of: an unnecessary or
+oversized shuffle, data skew concentrating work on one partition, a UDF
+Catalyst can't optimize through, or a broadcast that's too large or missing
+where it should apply — the same handful of mechanisms covered across
+Levels 2 and 3, which is why deep fluency in *those* mechanisms transfers
+across nearly every real-world Spark performance problem you'll encounter,
+regardless of the specific business domain.
+
 ## Exercise
 
 1. Pick one of the four role shapes above that most matches your goals,

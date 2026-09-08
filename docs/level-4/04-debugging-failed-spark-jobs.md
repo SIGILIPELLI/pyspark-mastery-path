@@ -184,6 +184,26 @@ skewed_key_counts.show()
 spark.conf.set("spark.sql.adaptive.skewJoin.enabled", True)
 ```
 
+## How It Actually Works
+
+A `java.lang.OutOfMemoryError` on an executor almost always traces back to
+one of three concrete mechanisms you've already learned: a shuffle or sort
+buffering more data in execution memory than the unified memory manager can
+grant before it should have spilled to disk (often from too few shuffle
+partitions making each one too large), a broadcast join broadcasting a
+table far bigger than the threshold assumed, or a UDF/collect operation
+pulling more data into driver memory than expected. Reading a stack trace
+usefully means locating the **stage and task ID** in the error, then cross-
+referencing the Spark UI's Stages tab for that stage's shuffle read/write
+and spill metrics — a huge "shuffle spill (disk)" number on the failing
+task versus its peers is the direct signature of skew, while a failure
+concentrated in the driver's own log rather than any executor's usually
+means a `.collect()` or broadcast pulled too much data centrally. Because
+tasks are re-attempted automatically (`spark.task.maxFailures`, default 4)
+before the whole job is marked failed, the *first* task failure in the
+event log — not the last — is usually the one worth investigating, since
+later failures are often just retries hitting the same root cause.
+
 ## Exercise
 
 1. Given `"Container killed by YARN for exceeding memory limits ... 8.2 GB

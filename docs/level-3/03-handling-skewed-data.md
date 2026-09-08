@@ -173,6 +173,25 @@ sizes and automatically splits oversized ones into smaller sub-tasks,
 often making manual salting unnecessary for join skew specifically (it
 does not help with `groupBy` skew — salting is still the tool there).
 
+## How It Actually Works
+
+Data skew happens because Spark's default hash-partitioning sends *all* rows
+sharing a key to exactly one reducer partition — if one key (say, a
+`country` value that's 40% of your data) vastly outnumbers others, that one
+partition's task must process far more data and runs on a single executor
+core while every other task on other executors finishes and sits idle,
+stretching the whole stage's wall-clock time to match the slowest task
+(a "straggler"). **Salting** fixes this at the logical-plan level: you
+append a random suffix (e.g. `0`-`9`) to the skewed key before the shuffle
+so what was one massive partition becomes ten smaller ones spread across
+different reducers, then aggregate in two phases (partial results per salted
+key, then a final aggregation stripping the salt) — this works because it
+changes the actual hash-partitioning key Spark uses to decide which reducer
+a row lands on. Adaptive Query Execution's **skew join optimization**
+(covered next module) automates a similar idea by detecting oversized
+shuffle partitions at runtime from actual shuffle-write statistics and
+splitting them into smaller sub-partitions before the join reads them.
+
 ## Exercise
 
 1. Using the `events` DataFrame above, measure the max/median partition

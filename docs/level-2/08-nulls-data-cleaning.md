@@ -207,6 +207,22 @@ Row 3 (`name=null`) is gone (dropped for missing identity); row 5 (exact
 duplicate of row 1) is gone (deduplicated); row 6's `age=-5` became `null`
 rather than being dropped outright, since the rest of that row is usable.
 
+## How It Actually Works
+
+Spark represents nulls with a dedicated **validity bitset** alongside each
+column's data buffer in Tungsten's `UnsafeRow`/columnar format, rather than
+using a sentinel value inside the data itself — this is why null-checking
+(`isNull`, `isNotNull`) is a cheap bit check rather than a value comparison,
+and why nulls propagate through arithmetic and comparisons following
+three-valued SQL logic (`NULL = NULL` evaluates to `NULL`, not `true`,
+because the engine is checking a bit flag, not comparing values). `.na.drop()`
+and `.na.fill()` compile to ordinary `Filter` and `Project`/`CASE WHEN`
+nodes in the logical plan, so they get the same predicate-pushdown treatment
+as any other filter — a `.filter(col("x").isNotNull())` pushed down to a
+Parquet read can use the file's per-column null-count statistics to skip
+entire row groups that are either all-null or contain no nulls, without
+decompressing them.
+
 ## Exercise
 
 Using `df` from the top of this module:

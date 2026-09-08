@@ -166,6 +166,25 @@ does. If this instead showed `SortMergeJoin`, that would be the signal to
 check `spark.sql.autoBroadcastJoinThreshold` or force `broadcast()`
 explicitly (Level 2, module 1).
 
+## How It Actually Works
+
+`.explain()` prints Catalyst's plan through four stages of transformation,
+and each level tells you something different: the **Parsed Logical Plan** is
+a direct, unresolved translation of your code; the **Analyzed Logical Plan**
+resolves every column and table reference against the catalog (this is where
+"column not found" errors are actually raised); the **Optimized Logical
+Plan** is the result of Catalyst's rule-based rewrites — predicate pushdown,
+constant folding, column pruning — applied repeatedly until the tree stops
+changing; and the **Physical Plan** is the concrete, chosen execution
+strategy (which join algorithm, how many shuffle partitions, whether
+whole-stage codegen applies), annotated with `Exchange` nodes marking every
+shuffle boundary. `.explain("formatted")` additionally shows generated-code
+regions grouped by `WholeStageCodegen` id — rows flowing through operators
+in the same codegen id never leave the CPU's registers/JVM stack for
+intermediate results, which is the mechanism behind Tungsten's speed, and
+seeing where codegen ids break (usually at a shuffle `Exchange` or a UDF) is
+exactly how you diagnose where your pipeline is paying the most overhead.
+
 ## Exercise
 
 1. Build a three-way join (`orders` → `customers` → a third small

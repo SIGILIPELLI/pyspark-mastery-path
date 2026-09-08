@@ -175,6 +175,24 @@ already-aggregated DataFrame (one row per region) — never `coalesce(1)` a
 large, unaggregated DataFrame before writing, or you'll force everything
 through a single task and lose all parallelism on the write.
 
+## How It Actually Works
+
+"Partitions" mean two related but different things in Spark, and confusing
+them causes most tuning mistakes: **in-memory/task partitions** are the
+chunks an RDD/DataFrame is split into for parallel execution (controlled by
+`spark.sql.shuffle.partitions`, `repartition()`, `coalesce()`), while
+**on-disk partitions** are directories created by `df.write.partitionBy("col")`
+that let downstream reads skip entire folders via **partition pruning**
+before even opening a file. `repartition(n)` triggers a full shuffle because
+it hash-partitions every row by a new partitioning scheme and physically
+moves data between executors; `coalesce(n)` avoids a shuffle by only merging
+existing partitions together (it can shrink partition count cheaply but
+cannot increase it or rebalance skewed data, since it never redistributes
+individual rows). The DAG scheduler's stage boundaries are literally defined
+by these transitions — every `repartition`/`groupBy`/`join` that changes
+partitioning starts a new stage, while `coalesce`, `map`, and `filter` stay
+within the current stage because no data needs to cross the network.
+
 ## Exercise
 
 Using `df` from the top of this module:

@@ -198,6 +198,25 @@ enriched.show()
 `enriched.explain()` would show `BroadcastHashJoin` here since we forced
 it — confirm this is the plan you expect any time join performance matters.
 
+## How It Actually Works
+
+A **shuffle join** (the default `SortMergeJoin` for large tables) requires
+both sides to be repartitioned by the join key so matching keys land on the
+same executor: every row is written to a local shuffle file, hash-partitioned
+by key, executors then pull ("shuffle read") the partitions relevant to them
+across the network, and each side gets sorted before merging matching keys —
+this is expensive because it touches every row of both tables and can spill
+sorted runs to disk if a partition doesn't fit in memory. A **broadcast
+join** sidesteps all of that: Spark collects the entire small table to the
+driver, serializes it once, and sends a full copy to every executor's memory,
+so each executor can join its large-table partitions locally against the
+in-memory broadcast copy with a hash lookup — zero shuffle of the large
+table. Catalyst's optimizer automatically picks `BroadcastHashJoin` over
+`SortMergeJoin` when it estimates one side's size is under
+`spark.sql.autoBroadcastJoinThreshold` (10 MB by default), using table
+statistics gathered from the source (Parquet footers, or `ANALYZE TABLE`)
+rather than actually running the query first.
+
 ## Exercise
 
 Using `orders` and `customers` from the top of this module:

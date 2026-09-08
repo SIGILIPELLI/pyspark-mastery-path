@@ -168,6 +168,22 @@ workloads; on a laptop with a small dataset, 200 tiny partitions creates more
 scheduling overhead than benefit, so it's common to lower it for local
 development and testing. You'll tune this for real in Level 3.
 
+## How It Actually Works
+
+Creating a `SparkSession` doesn't just instantiate a Python object — it
+launches (or connects to) a JVM process via `py4j`, and every DataFrame
+method you call from Python is serialized across that Python-to-JVM bridge
+as a request to build another node in the logical plan tree, which lives
+entirely inside the JVM. This is why PySpark DataFrame code has no Python
+performance penalty for standard operations: the Python object you're
+holding is a thin wrapper around a JVM `Dataset` reference, and `.show()` or
+`.count()` are the first calls that actually cross back into the JVM to
+trigger execution — everything before that (chained `.select`/`.filter`
+calls) is just building up plan nodes in memory, with zero data movement or
+computation happening yet. `spark.stop()` matters because it tears down that
+JVM process and releases any executors held by the cluster manager; skipping
+it in a long-running script leaks cluster resources.
+
 ## Exercise
 
 Write a script (don't need to run it if you don't have Spark installed yet,

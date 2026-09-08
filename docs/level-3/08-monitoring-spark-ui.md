@@ -147,6 +147,23 @@ stage's progress bar shows 199/200 tasks complete.
    enabled (module 6) and re-run; watch the same Stages tab for a task
    duration histogram that's now tight around the median.
 
+## How It Actually Works
+
+The Spark UI's **Stages** tab is a direct window into the DAG scheduler's
+bookkeeping: each stage boundary you see corresponds exactly to a shuffle
+`Exchange` in the physical plan, and the task-level metrics inside a stage
+(shuffle read/write bytes, spill size, GC time, task duration) are collected
+by each executor and reported back to the driver's listener bus as tasks
+complete. A wide, even spread of task durations within a stage indicates
+balanced partitions; a handful of tasks taking far longer than the rest
+(visible in the event timeline as long tail bars) is the visual signature of
+data skew. The **SQL** tab renders the actual physical plan graph with live
+per-operator row counts and data-size metrics overlaid — this is the same
+plan `.explain()` prints as text, but annotated with real runtime numbers,
+which is why the UI is the practical way to confirm whether AQE's
+runtime re-planning (partition coalescing, join strategy switches, skew
+splits) actually fired for your specific query.
+
 ## Exercise
 
 1. In the Stages tab's Summary Metrics for a stage, you see: Min 1s,

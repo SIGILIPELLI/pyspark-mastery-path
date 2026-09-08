@@ -196,6 +196,22 @@ has no extra rows, not that the sets are equal (it wouldn't catch a
 missing row on the same side, for instance if `sql_latest` had fewer
 rows).
 
+## How It Actually Works
+
+`spark.sql("SELECT ...")` and the equivalent DataFrame method chain are not
+two different execution paths that happen to produce similar results — they
+converge on the **exact same logical plan representation** inside Catalyst.
+The SQL string is first parsed into an unresolved abstract syntax tree by
+Spark's ANTLR-based parser, then run through the identical **analyzer**
+(resolving column/table references against the catalog), the identical
+**rule-based logical optimizer**, and the identical **physical planner** that
+DataFrame method calls produce. You can verify this yourself: a SQL query
+and its DataFrame equivalent will print byte-for-byte identical output from
+`.explain()`. This is precisely why the course treats SQL and DataFrame
+syntax as "two dialects, one engine" — there is no performance difference
+between them, because by the time Catalyst is done, your choice of syntax
+has already been erased.
+
 ## Exercise
 
 Using `events` from the top of this module:

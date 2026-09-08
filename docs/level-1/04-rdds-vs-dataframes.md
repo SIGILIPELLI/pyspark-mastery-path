@@ -143,6 +143,25 @@ to the intent ("average salary, grouped by department"), and lets Spark
 choose the actual execution strategy — the RDD version hard-codes one
 specific strategy (`reduceByKey`) that you had to design yourself.
 
+## How It Actually Works
+
+RDDs execute your Python lambda functions literally: each RDD transformation
+serializes your closure, ships it to the executor, and for PySpark
+specifically the executor JVM has to launch a separate Python worker
+process, pipe each row of the partition through the OS pipe, run your
+Python code row-by-row, and pipe results back — a slow round trip
+called **PySpark serialization overhead**. DataFrames avoid this almost
+entirely: built-in operations like `select`, `filter`, and `groupBy` compile
+to a Catalyst logical plan expressed in terms of Spark SQL's internal
+`Expression` tree, which the **Tungsten** execution engine turns into JVM
+bytecode operating directly on a compact binary row format (`UnsafeRow`) —
+no Python process, no per-row (de)serialization, and no JVM object
+allocation per row. This is the concrete reason the course steers you toward
+the DataFrame API: every DataFrame method you call is a plan node the
+optimizer can rewrite, reorder, or push down, while an RDD `.map(lambda ...)`
+is an opaque black box Catalyst cannot see inside and therefore cannot
+optimize at all.
+
 ## Exercise
 
 Given this RDD-style data:

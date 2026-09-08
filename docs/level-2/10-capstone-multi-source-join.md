@@ -212,6 +212,24 @@ Partitioning by `country` means a downstream query filtering
 `WHERE country = 'US'` prunes to a single partition directory instead of
 scanning the whole dataset — the payoff for the extra `repartition` here.
 
+## How It Actually Works
+
+When you join three or more sources with mixed sizes, Catalyst's **join
+reordering** and **cost-based optimizer (CBO)** (when table statistics are
+available via `ANALYZE TABLE`) choose an execution order and strategy for
+each join independently — small dimension tables get `BroadcastHashJoin`s
+while large fact-to-fact joins fall back to `SortMergeJoin`. Each shuffle
+join in the chain is its own stage boundary, so a pipeline joining four
+tables can produce several sequential shuffle stages, and the DAG scheduler
+must wait for each stage to fully complete before starting the next because
+downstream tasks need the complete, correctly-partitioned output of the
+shuffle before they can begin — this sequential-stage dependency is why join
+order matters so much for wall-clock time: reordering to broadcast the
+smallest tables first and defer the expensive shuffle join to the smallest
+possible intermediate result (via early filtering and column pruning) can
+cut a multi-source pipeline's runtime dramatically without changing what
+data comes out the other end.
+
 ## Exercise
 
 1. Add a fourth dimension source — a `promotions` DataFrame keyed by

@@ -182,6 +182,24 @@ logic — the quality gate and the orchestration layer compose naturally
 this way, with the gate owning "is this data good enough" and Airflow
 owning "what happens when it isn't."
 
+## How It Actually Works
+
+A quality check like "no nulls in `order_id`" or "row count matches
+expected" is, mechanically, just another Spark action inserted into the
+pipeline's DAG — `df.filter(col("order_id").isNull()).count()` triggers its
+own job, complete with its own stages and tasks, separate from the main
+write job, which is why quality gates have a real, measurable cost: each
+one is an extra pass over the data (or a subset via predicate pushdown) with
+its own scheduling overhead. Building gates as `.filter()`/`.count()`
+operations on the DataFrame lets them benefit from the same predicate
+pushdown and column pruning as any other query — a null-check on one column
+can skip other columns entirely and use Parquet's per-file null-count
+statistics to short-circuit whole files that are already known to have zero
+nulls, without decompressing them. This is also why quality gates are
+typically placed *before* an expensive downstream shuffle or write in the
+pipeline: failing fast on a cheap, narrow check avoids paying for a shuffle
+whose output would have been discarded anyway.
+
 ## Exercise
 
 1. Extend `checked` with a check for duplicate `order_id` values *within

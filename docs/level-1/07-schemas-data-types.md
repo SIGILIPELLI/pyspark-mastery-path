@@ -188,6 +188,22 @@ good_df.show()
 This is exactly the kind of silent, hard-to-notice bug explicit schemas
 exist to prevent.
 
+## How It Actually Works
+
+A DataFrame's schema is not just documentation — it's the exact binary
+layout Tungsten uses to pack rows into off-heap memory. Each `StructField`'s
+type determines a fixed or variable byte width in the `UnsafeRow` format:
+fixed-width types like `IntegerType`/`LongType`/`DoubleType` are stored
+inline in the row's byte array with direct offset access (no pointer chasing,
+no JVM object headers), while variable-length types like `StringType` store
+an offset+length pointer into a separate variable-length region of the same
+row buffer. This is why explicit schemas outperform `inferSchema` at scale:
+skipping schema inference avoids an entire extra pass over the data, and a
+correctly-typed schema lets Tungsten generate tighter, type-specialized
+bytecode for expressions (via **whole-stage code generation**) instead of
+falling back to slower, type-generic expression evaluation when types are
+ambiguous or inferred as `StringType` for everything.
+
 ## Exercise
 
 You're given `transactions.json` with this shape per line:

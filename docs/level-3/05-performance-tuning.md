@@ -175,6 +175,25 @@ runtime skew, Python memory, file layout) — apply them incrementally and
 re-check the Spark UI (module 8) between changes rather than all at once,
 so you know which change actually moved the needle.
 
+## How It Actually Works
+
+Most Spark performance tuning reduces to managing three physical resources
+whose exhaustion shows up as different symptoms: **CPU** (idle cores from
+too few partitions, or context-switch overhead from too many small tasks),
+**memory** (executor JVM heap split between execution memory for
+shuffles/sorts/joins and storage memory for caching, under Spark's **unified
+memory manager**, which lets one borrow from the other's unused space up to
+a point before triggering spills or `OutOfMemoryError`), and **network/disk
+I/O** (shuffle read/write and spill traffic). `spark.executor.memory` and
+`spark.executor.cores` jointly determine how many concurrent tasks an
+executor runs and how much heap each one can lean on; setting cores too high
+relative to memory means many tasks compete for the same execution memory
+pool, forcing more spills to disk mid-shuffle or mid-sort. This is why
+tuning is inherently about tradeoffs between these three resources rather
+than a single "make it faster" knob — increasing parallelism (more cores)
+without proportionally more memory just moves the bottleneck from CPU to
+disk I/O from spilling.
+
 ## Exercise
 
 1. Given a 16-core, 64 GB node and a target of 5 cores per executor,

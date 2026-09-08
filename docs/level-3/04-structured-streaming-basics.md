@@ -195,6 +195,25 @@ Downstream, any batch job or BI tool can simply read
 `/data/warehouse/temp_alerts` as a normal Parquet table and filter
 `WHERE is_alert` — the streaming complexity is fully contained upstream.
 
+## How It Actually Works
+
+Structured Streaming is not a separate engine — it reuses the exact same
+Catalyst optimizer and DAG scheduler as batch DataFrames, by modeling a
+stream as an **unbounded table** that grows with each micro-batch. Under the
+**micro-batch** execution model, Spark repeatedly: (1) checks the source for
+new data since the last offset, (2) constructs a new incremental logical
+plan (or reuses a cached one) covering just the new rows, (3) runs it as an
+ordinary batch job through the same DAG scheduler/stage/task machinery
+you've already learned, and (4) commits the new offsets and any updated
+state to a **checkpoint location** only after output is durably written —
+this offset-commit-after-write ordering is what gives Structured Streaming
+its exactly-once guarantees. Stateful operations (streaming aggregations,
+window functions with watermarks) store intermediate state in a versioned
+**state store** on each executor's local disk, checkpointed to durable
+storage between batches, which is how a stateful stream can recover to
+exactly where it left off after an executor failure without reprocessing
+data twice.
+
 ## Exercise
 
 1. Change the `outputMode` on `windowed_avg` from `append` to `update`

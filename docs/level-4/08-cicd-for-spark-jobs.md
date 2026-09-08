@@ -203,6 +203,24 @@ mypy src/ --ignore-missing-imports   # PySpark's type stubs are partial but stil
 black --check src/
 ```
 
+## How It Actually Works
+
+Unit-testing Spark transformation logic against a local
+`SparkSession.builder.master("local[*]")` works because Spark's execution
+engine is identical regardless of cluster manager — `local[*]` simply runs
+the driver and all "executors" as threads within one JVM process on the
+build machine, so the same DAG scheduler, Catalyst optimizer, and Tungsten
+codegen paths execute exactly as they would on a real cluster, just without
+any network shuffle (a local-mode shuffle writes and reads from local disk
+on the same machine instead of over the network). This is what makes fast,
+deterministic CI tests possible: a `local[2]`-mode test still exercises real
+stage boundaries and real shuffle read/write code paths for join and
+`groupBy` logic, catching schema and logic bugs before a job is ever
+submitted to a real cluster, even though it can't catch cluster-scale issues
+like network-bound shuffle contention or data skew across genuinely
+distributed executors — which is why CI tests validate correctness while
+staging/production runs are still needed to validate performance at scale.
+
 ## Exercise
 
 1. Take the `quality_gate` function from module 7 and write two pytest

@@ -168,6 +168,22 @@ spark.stop()
   called this out as a habit worth having on every pipeline you write, and
   the capstone exercises it for real.
 
+## How It Actually Works
+
+Chaining `read → filter → select → write` across this pipeline builds one
+continuous logical plan spanning all those steps, and because none of them
+require moving data between partitions (no `groupBy`, `join`, or
+`repartition`), the entire pipeline compiles into a **single stage** of
+tasks — one task per input partition runs read, filter, select, and write
+back-to-back on the same executor with no shuffle in between. Under
+whole-stage code generation, Catalyst actually fuses these row-at-a-time
+operations into one generated Java method per task, avoiding the overhead of
+calling a separate function for each transformation on every row. This is
+the ideal shape for a Spark job: I/O-bound, embarrassingly parallel, and
+shuffle-free — the CSV-to-Parquet conversion you just built scales close to
+linearly with the number of executors precisely because no stage boundary
+forces synchronization across the cluster.
+
 ## Exercise
 
 Extend the capstone script above:
