@@ -1,3 +1,7 @@
+---
+description: "Capstone Production Lakehouse — This final capstone assembles every Level 4 module into one coherent production pipeline: a Delta lakehouse table…"
+---
+
 # 10 · Capstone Production Lakehouse
 
 !!! note "Not executed against a live cluster in this environment"

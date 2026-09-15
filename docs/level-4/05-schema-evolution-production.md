@@ -1,3 +1,7 @@
+---
+description: "Schema Evolution Production — Production tables outlive the schema you designed them with. New columns get added upstream, types get widened, fields get…"
+---
+
 # 05 · Schema Evolution Production
 
 !!! note "Not executed against a live cluster in this environment"

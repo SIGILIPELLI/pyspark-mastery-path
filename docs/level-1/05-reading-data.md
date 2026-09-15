@@ -1,3 +1,7 @@
+---
+description: "Reading Data (CSV, JSON, Parquet) — Every spark.read call follows the same pattern: pick a format (.csv, .json, .parquet, ...), configure options for that…"
+---
+
 # 05 · Reading Data (CSV, JSON, Parquet)
 
 !!! note "Not executed against a live cluster in this environment"

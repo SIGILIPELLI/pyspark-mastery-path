@@ -1,3 +1,7 @@
+---
+description: "Multi Tenant Cluster Strategy — Once more than one team or job shares a Spark cluster, 'it works on my job' stops being the only requirement — you need…"
+---
+
 # 06 · Multi Tenant Cluster Strategy
 
 !!! note "Not executed against a live cluster in this environment"

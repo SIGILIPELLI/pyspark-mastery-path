@@ -1,3 +1,7 @@
+---
+description: "Joins Broadcast Vs Shuffle — Joins are the single most expensive operation you'll write in Spark, and the difference between a broadcast join and a…"
+---
+
 # 01 · Joins Broadcast Vs Shuffle
 
 !!! note "Not executed against a live cluster in this environment"

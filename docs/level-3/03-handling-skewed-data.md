@@ -1,3 +1,7 @@
+---
+description: "Handling Skewed Data — Data skew is when one or a few keys hold a disproportionate share of the rows. A groupBy or join on a skewed key sends most of the…"
+---
+
 # 03 · Handling Skewed Data
 
 !!! note "Not executed against a live cluster in this environment"

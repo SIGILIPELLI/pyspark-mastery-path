@@ -1,3 +1,7 @@
+---
+description: "SparkSession & Your First PySpark Script — If that fails, install a JDK (e.g. via brew install openjdk@17 on macOS, or your OS's package manager) before…"
+---
+
 # 03 · SparkSession & Your First PySpark Script
 
 ## Installing PySpark

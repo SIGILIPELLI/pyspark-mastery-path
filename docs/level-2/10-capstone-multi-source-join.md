@@ -1,3 +1,7 @@
+---
+description: "Capstone Multi Source Join — This capstone pulls together everything from Level 2: joins, window functions, UDFs (and avoiding them), partitioning…"
+---
+
 # 10 · Capstone Multi Source Join
 
 !!! note "Not executed against a live cluster in this environment"

@@ -1,3 +1,7 @@
+---
+description: "SQL And Dataframe API — Module 06 introduced spark.sql(...); this module goes deeper into translating fluently between the two styles — reading a…"
+---
+
 # 07 · SQL And Dataframe API
 
 !!! note "Not executed against a live cluster in this environment"

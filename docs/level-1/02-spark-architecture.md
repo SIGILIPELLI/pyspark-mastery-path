@@ -1,3 +1,7 @@
+---
+description: "Spark Architecture (Driver, Executors, Cluster Manager) — This matters for building intuition: operations that don't require moving data between…"
+---
+
 # 02 · Spark Architecture (Driver, Executors, Cluster Manager)
 
 ## The three moving parts

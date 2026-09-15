@@ -1,3 +1,7 @@
+---
+description: "What Is Spark & Why Distributed Processing — Imagine you have a 500 GB CSV file of e-commerce orders and you need to compute total revenue per country. A…"
+---
+
 # 01 · What Is Spark & Why Distributed Processing
 
 ## The problem Spark solves

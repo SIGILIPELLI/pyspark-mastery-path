@@ -1,3 +1,7 @@
+---
+description: "DataFrame Basics (select, filter, withColumn) — select returns a new DataFrame with only the columns (or computed expressions) you name — it never mutates…"
+---
+
 # 06 · DataFrame Basics (select, filter, withColumn)
 
 !!! note "Not executed against a live cluster in this environment"

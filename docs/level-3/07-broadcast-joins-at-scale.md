@@ -1,3 +1,7 @@
+---
+description: "Broadcast Joins At Scale — Level 2 introduced broadcast joins with small, toy tables. This module looks at the operational realities of broadcasting at…"
+---
+
 # 07 · Broadcast Joins At Scale
 
 !!! note "Not executed against a live cluster in this environment"

@@ -1,3 +1,7 @@
+---
+description: "Orchestration Airflow Integration — A PySpark script that runs correctly once you launch it manually still needs something to launch it on a schedule…"
+---
+
 # 02 · Orchestration Airflow Integration
 
 !!! note "Not executed against a live cluster/scheduler in this environment"

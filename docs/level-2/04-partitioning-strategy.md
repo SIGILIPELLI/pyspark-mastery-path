@@ -1,3 +1,7 @@
+---
+description: "Partitioning Strategy — Partitioning determines how a DataFrame's rows are split across executors in memory (in-memory partitions) and how output files…"
+---
+
 # 04 · Partitioning Strategy
 
 !!! note "Not executed against a live cluster in this environment"

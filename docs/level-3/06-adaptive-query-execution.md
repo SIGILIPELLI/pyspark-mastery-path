@@ -1,3 +1,7 @@
+---
+description: "Adaptive Query Execution — Adaptive Query Execution (AQE), enabled by default since Spark 3.2, re-optimizes a query plan during execution using actual…"
+---
+
 # 06 · Adaptive Query Execution
 
 !!! note "Not executed against a live cluster in this environment"

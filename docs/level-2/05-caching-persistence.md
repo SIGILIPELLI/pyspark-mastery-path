@@ -1,3 +1,7 @@
+---
+description: "Caching Persistence — Spark DataFrames are lazily evaluated and, by default, recomputed from scratch every time an action touches them. If you reuse a…"
+---
+
 # 05 · Caching Persistence
 
 !!! note "Not executed against a live cluster in this environment"

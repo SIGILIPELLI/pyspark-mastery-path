@@ -1,3 +1,7 @@
+---
+description: "Data Quality Gates — A pipeline that runs successfully and writes wrong data is worse than one that fails loudly — a failure gets noticed and fixed…"
+---
+
 # 07 · Data Quality Gates
 
 !!! note "Not executed against a live cluster in this environment"

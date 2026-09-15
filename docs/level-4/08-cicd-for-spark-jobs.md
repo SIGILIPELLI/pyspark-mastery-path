@@ -1,3 +1,7 @@
+---
+description: "CI/CD for Spark Jobs — Treating a PySpark job like any other piece of software — tested, versioned, deployed through a pipeline rather than hand-copied to…"
+---
+
 # 08 · CI/CD for Spark Jobs
 
 !!! note "Not executed against a live CI system in this environment"

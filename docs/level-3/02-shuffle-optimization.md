@@ -1,3 +1,7 @@
+---
+description: "Shuffle Optimization — Shuffles — repartitioning data across the network so rows with the same key land together — are usually the most expensive stages…"
+---
+
 # 02 · Shuffle Optimization
 
 !!! note "Not executed against a live cluster in this environment"

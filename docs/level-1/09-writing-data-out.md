@@ -1,3 +1,7 @@
+---
+description: "Writing Data Out — Writing is the mirror image of reading (Module 5): df.write gives you a DataFrameWriter, on which you configure format and options…"
+---
+
 # 09 · Writing Data Out
 
 !!! note "Not executed against a live cluster in this environment"

@@ -1,3 +1,7 @@
+---
+description: "Debugging Failed Spark Jobs — A failed Spark job's error message usually shows up wrapped in several layers of Python/Py4J/JVM stack trace, with the…"
+---
+
 # 04 · Debugging Failed Spark Jobs
 
 !!! note "Not executed against a live cluster in this environment"

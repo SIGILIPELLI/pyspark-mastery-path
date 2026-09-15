@@ -1,3 +1,7 @@
+---
+description: "Schemas & Data Types — The fix: define the schema explicitly and pass it to the reader."
+---
+
 # 07 · Schemas & Data Types
 
 !!! note "Not executed against a live cluster in this environment"

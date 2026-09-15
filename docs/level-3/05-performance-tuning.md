@@ -1,3 +1,7 @@
+---
+description: "Performance Tuning — Caching is wasted (and costs memory pressure / eviction risk) if the cached DataFrame is only ever used once — you've paid the cost…"
+---
+
 # 05 · Performance Tuning
 
 !!! note "Not executed against a live cluster in this environment"

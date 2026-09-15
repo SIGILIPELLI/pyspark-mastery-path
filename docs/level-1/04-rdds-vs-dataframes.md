@@ -1,3 +1,7 @@
+---
+description: "RDDs vs. DataFrames — Notice: you access fields by position (row[2]), there's no schema, and the 'transformation' logic is an arbitrary Python lambda that…"
+---
+
 # 04 · RDDs vs. DataFrames
 
 !!! note "Not executed against a live cluster in this environment"

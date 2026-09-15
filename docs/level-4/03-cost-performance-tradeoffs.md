@@ -1,3 +1,7 @@
+---
+description: "Cost Performance Tradeoffs — Every performance win from Level 3 costs something — cluster size, engineer time, or operational complexity. In production…"
+---
+
 # 03 · Cost Performance Tradeoffs
 
 !!! note "Not executed against a live cluster in this environment"

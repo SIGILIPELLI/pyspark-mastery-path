@@ -1,3 +1,7 @@
+---
+description: "Execution Plan Explain — Every transformation you write is lazy — Spark builds up a logical plan and only executes when an action (.show(), .collect()…"
+---
+
 # 01 · Execution Plan Explain
 
 !!! note "Not executed against a live cluster in this environment"

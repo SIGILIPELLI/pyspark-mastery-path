@@ -1,3 +1,7 @@
+---
+description: "Nested Complex Types — Real-world data — JSON APIs, event logs, semi-structured exports — is rarely flat. PySpark models this with three complex types…"
+---
+
 # 09 · Nested Complex Types
 
 !!! note "Not executed against a live cluster in this environment"

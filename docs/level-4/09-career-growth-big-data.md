@@ -1,3 +1,7 @@
+---
+description: "Career Growth Big Data — Having finished Levels 1–4, you can read and write real PySpark, reason about execution plans, tune shuffle-heavy and skewed…"
+---
+
 # 09 · Career Growth Big Data
 
 Having finished Levels 1–4, you can read and write real PySpark, reason

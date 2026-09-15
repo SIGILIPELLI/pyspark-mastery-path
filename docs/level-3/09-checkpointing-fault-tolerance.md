@@ -1,3 +1,7 @@
+---
+description: "Checkpointing Fault Tolerance — Spark's fault tolerance is built on lineage: every RDD/DataFrame knows exactly how to recompute itself from its inputs, so…"
+---
+
 # 09 · Checkpointing Fault Tolerance
 
 !!! note "Not executed against a live cluster in this environment"

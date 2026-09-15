@@ -1,3 +1,7 @@
+---
+description: "Structured Streaming Basics — Structured Streaming lets you write the same DataFrame code you already know and run it incrementally against an unbounded…"
+---
+
 # 04 · Structured Streaming Basics
 
 !!! note "Not executed against a live cluster in this environment"

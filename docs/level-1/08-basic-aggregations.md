@@ -1,3 +1,7 @@
+---
+description: "Basic Aggregations (groupBy, agg) — Note the as spark_sum / as spark_min / as spark_max import aliases — these functions share names with Python's…"
+---
+
 # 08 · Basic Aggregations (groupBy, agg)
 
 !!! note "Not executed against a live cluster in this environment"

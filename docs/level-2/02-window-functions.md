@@ -1,3 +1,7 @@
+---
+description: "Window Functions — Window functions compute a value per row using a 'window' of related rows — e.g. rank within a group, running total, previous row's…"
+---
+
 # 02 · Window Functions
 
 !!! note "Not executed against a live cluster in this environment"

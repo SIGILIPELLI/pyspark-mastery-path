@@ -1,3 +1,7 @@
+---
+description: "Nulls Data Cleaning — Real data is messy: missing values, duplicate rows, inconsistent types, outliers from bad upstream input. This module covers…"
+---
+
 # 08 · Nulls Data Cleaning
 
 !!! note "Not executed against a live cluster in this environment"

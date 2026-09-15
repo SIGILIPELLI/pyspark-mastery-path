@@ -1,3 +1,7 @@
+---
+description: "Udfs — A User-Defined Function (UDF) lets you run arbitrary Python code per row when the built-in pyspark.sql.functions library doesn't have what you…"
+---
+
 # 03 · Udfs
 
 !!! note "Not executed against a live cluster in this environment"

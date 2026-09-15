@@ -1,3 +1,7 @@
+---
+description: "Monitoring Spark UI — Every SparkSession serves a web UI, by default at http://:4040 (incrementing to 4041, 4042, ... if the port is taken). This module…"
+---
+
 # 08 · Monitoring Spark UI
 
 !!! note "Not executed against a live cluster in this environment"

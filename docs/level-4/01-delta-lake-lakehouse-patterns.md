@@ -1,3 +1,7 @@
+---
+description: "Delta Lake Lakehouse Patterns — Plain Parquet on object storage gives you columnar storage and predicate pushdown, but no transactions, no reliable schema…"
+---
+
 # 01 · Delta Lake Lakehouse Patterns
 
 !!! note "Not executed against a live cluster in this environment"

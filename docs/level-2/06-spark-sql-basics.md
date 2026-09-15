@@ -1,3 +1,7 @@
+---
+description: "Spark SQL Basics — Every PySpark DataFrame operation ultimately compiles down to the same Catalyst logical plan that a raw SQL query would produce — the…"
+---
+
 # 06 · Spark SQL Basics
 
 !!! note "Not executed against a live cluster in this environment"
