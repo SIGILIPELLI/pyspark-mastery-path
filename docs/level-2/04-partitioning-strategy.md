@@ -197,6 +197,10 @@ by these transitions — every `repartition`/`groupBy`/`join` that changes
 partitioning starts a new stage, while `coalesce`, `map`, and `filter` stay
 within the current stage because no data needs to cross the network.
 
+## 🔀 Related lessons on other tracks
+
+- [ETL & Data Lake — 03 · Partitioning Strategy for a Data Lake](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/03-partitioning-strategy/)
+
 ## Exercise
 
 Using `df` from the top of this module:

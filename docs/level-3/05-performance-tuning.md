@@ -198,6 +198,12 @@ than a single "make it faster" knob — increasing parallelism (more cores)
 without proportionally more memory just moves the bottleneck from CPU to
 disk I/O from spilling.
 
+## 🔀 Related lessons on other tracks
+
+- [Data Engineering — 07 · Performance Tuning for Pipelines](https://sigilipelli.github.io/data-engineering-mastery-path/level-3/07-performance-tuning/)
+- [Freertos — Performance Tuning & Measurement](https://sigilipelli.github.io/freertos-mastery-path/level-3/08-performance-tuning/)
+- [Tableau — 05 · Advanced Performance Tuning](https://sigilipelli.github.io/tableau-mastery-path/level-3/06-advanced-performance-tuning/)
+
 ## Exercise
 
 1. Given a 16-core, 64 GB node and a target of 5 cores per executor,

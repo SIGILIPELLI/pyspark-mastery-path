@@ -173,6 +173,11 @@ schema instantly, and later filters on that data can skip entire row groups
 without decompressing them — a technique called **predicate pushdown**, which
 plain CSV cannot support because it has no such metadata to consult upfront.
 
+## 🔀 Related lessons on other tracks
+
+- [ETL & Data Lake — 08 · File Formats: CSV, JSON, Parquet, Avro](https://sigilipelli.github.io/etl-datalake-mastery-path/level-1/08-file-formats/)
+- [NodeMCU/IoT — 08 · JSON Data & Config Storage](https://sigilipelli.github.io/nodemcu-mastery-path/level-2/08-json-data-config-storage/)
+
 ## Exercise
 
 You're given a directory `sales/` containing daily CSV exports named

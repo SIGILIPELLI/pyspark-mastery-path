@@ -229,6 +229,10 @@ Lake's schema enforcement/evolution flags, covered in module 1) rather than
 relying on Spark's runtime schema-merge for every read, since that merge
 cost scales with the number of files being read.
 
+## 🔀 Related lessons on other tracks
+
+- [ETL & Data Lake — 04 · Schema Evolution & Handling](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/04-schema-evolution/)
+
 ## Exercise
 
 1. Given a table with a `price: FloatType` column, write the code to

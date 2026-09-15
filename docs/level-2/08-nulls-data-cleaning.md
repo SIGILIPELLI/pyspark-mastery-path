@@ -227,6 +227,11 @@ Parquet read can use the file's per-column null-count statistics to skip
 entire row groups that are either all-null or contain no nulls, without
 decompressing them.
 
+## 🔀 Related lessons on other tracks
+
+- [Data Science — 03 · Data Cleaning & Wrangling](https://sigilipelli.github.io/data-science-mastery-path/level-1/03-data-cleaning-wrangling/)
+- [Excel — 09 · Data Validation & Cleaning](https://sigilipelli.github.io/excel-mastery-path/level-1/09-data-validation-cleaning/)
+
 ## Exercise
 
 Using `df` from the top of this module:

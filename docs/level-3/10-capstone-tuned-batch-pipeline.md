@@ -188,6 +188,10 @@ verify the plan actually reflects these decisions — a `BroadcastHashJoin`
 where you intended one, an absence of unnecessary `Exchange` nodes, and
 codegen boundaries lining up with the stages you expect.
 
+## 🔀 Related lessons on other tracks
+
+- [Data Engineering — 10 · Project — Spark-based Batch Pipeline](https://sigilipelli.github.io/data-engineering-mastery-path/level-3/10-project-spark-batch-pipeline/)
+
 ## Exercise
 
 1. Re-run Step 1's naive plan but with AQE enabled from the start —

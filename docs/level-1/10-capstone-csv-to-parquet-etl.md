@@ -188,6 +188,10 @@ shuffle-free — the CSV-to-Parquet conversion you just built scales close to
 linearly with the number of executors precisely because no stage boundary
 forces synchronization across the cluster.
 
+## 🔀 Related lessons on other tracks
+
+- [ETL & Data Lake — 08 · File Formats: CSV, JSON, Parquet, Avro](https://sigilipelli.github.io/etl-datalake-mastery-path/level-1/08-file-formats/)
+
 ## Exercise
 
 Extend the capstone script above:

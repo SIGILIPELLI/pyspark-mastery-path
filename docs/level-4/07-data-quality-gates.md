@@ -204,6 +204,12 @@ typically placed *before* an expensive downstream shuffle or write in the
 pipeline: failing fast on a cheap, narrow check avoids paying for a shuffle
 whose output would have been discarded anyway.
 
+## 🔀 Related lessons on other tracks
+
+- [Data Engineering — 09 · Data Quality & Validation](https://sigilipelli.github.io/data-engineering-mastery-path/level-1/09-data-quality-validation/)
+- [ETL & Data Lake — 02 · Data Quality Checks & Validation](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/02-data-quality-validation/)
+- [Cpp Testing — 08 · Quality Gates & Metrics](https://sigilipelli.github.io/cpp-testing-mastery-path/level-4/08-quality-gates-metrics/)
+
 ## Exercise
 
 1. Extend `checked` with a check for duplicate `order_id` values *within

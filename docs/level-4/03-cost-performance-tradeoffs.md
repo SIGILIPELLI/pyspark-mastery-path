@@ -168,6 +168,11 @@ decision only helps if the *current* stage has more independent tasks than
 available cores (a wide stage with many partitions benefits; a narrow
 single-partition stage does not, no matter how many executors are added).
 
+## 🔀 Related lessons on other tracks
+
+- [Docker — 08 · Cost & Performance at Scale](https://sigilipelli.github.io/docker-mastery-path/level-4/08-cost-performance-at-scale/)
+- [ETL & Data Lake — 04 · Cost & Performance Optimization for Lake Storage](https://sigilipelli.github.io/etl-datalake-mastery-path/level-3/04-cost-performance-optimization/)
+
 ## Exercise
 
 1. A job costs $10/run on a 30-executor on-demand cluster and runs

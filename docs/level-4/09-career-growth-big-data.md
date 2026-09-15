@@ -160,6 +160,12 @@ Levels 2 and 3, which is why deep fluency in *those* mechanisms transfers
 across nearly every real-world Spark performance problem you'll encounter,
 regardless of the specific business domain.
 
+## 🔀 Related lessons on other tracks
+
+- [Data Engineering — 09 · Career Growth in Data Engineering](https://sigilipelli.github.io/data-engineering-mastery-path/level-4/09-career-growth/)
+- [Data Science — 09 · Career Growth: IC to Principal Data Scientist](https://sigilipelli.github.io/data-science-mastery-path/level-4/09-career-growth/)
+- [Agile — 09 · Career Growth: Scrum Master to Agile Coach/Director](https://sigilipelli.github.io/agile-mastery-path/level-4/09-career-growth-scrum-master-to-coach/)
+
 ## Exercise
 
 1. Pick one of the four role shapes above that most matches your goals,

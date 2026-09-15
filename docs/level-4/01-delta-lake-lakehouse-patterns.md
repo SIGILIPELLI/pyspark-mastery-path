@@ -229,6 +229,10 @@ only the affected Parquet files and appending one new log entry — the
 underlying Spark job is still an ordinary DAG of stages and shuffles, Delta
 just adds the log-based commit protocol around it.
 
+## 🔀 Related lessons on other tracks
+
+- [ETL & Data Lake — 01 · Data Lakehouse Concepts (Delta Lake/Iceberg/Hudi)](https://sigilipelli.github.io/etl-datalake-mastery-path/level-3/01-lakehouse-concepts/)
+
 ## Exercise
 
 1. Run a `MERGE` that also deletes target rows not present in the source

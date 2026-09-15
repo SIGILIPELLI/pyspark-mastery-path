@@ -227,6 +227,10 @@ what arguments* a job runs, while everything about *how* it executes
 (partitioning, shuffles, task scheduling) remains entirely internal to that
 one Spark driver's session.
 
+## 🔀 Related lessons on other tracks
+
+- [ETL & Data Lake — 05 · Orchestration Tools Overview (Airflow DAGs)](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/05-orchestration-tools-airflow/)
+
 ## Exercise
 
 1. Rewrite the `FileSensor` to use `mode="poke"` instead of

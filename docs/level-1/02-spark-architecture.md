@@ -155,6 +155,10 @@ driver becomes a bottleneck if it has to track millions of tiny tasks — this
 is the practical reason Spark jobs are tuned toward fewer, larger partitions
 rather than many tiny ones.
 
+## 🔀 Related lessons on other tracks
+
+- [Kubernetes — 06 · Designing Production-Grade Cluster Architecture](https://sigilipelli.github.io/kubernetes-mastery-path/level-4/06-production-cluster-architecture/)
+
 ## Exercise
 
 Using the same reasoning as the worked example, trace through this snippet

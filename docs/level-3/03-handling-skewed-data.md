@@ -196,6 +196,11 @@ a row lands on. Adaptive Query Execution's **skew join optimization**
 shuffle partitions at runtime from actual shuffle-write statistics and
 splitting them into smaller sub-partitions before the join reads them.
 
+## 🔀 Related lessons on other tracks
+
+- [Claude Training — 07 · Privacy & Data Handling Considerations When Using AI Tools](https://sigilipelli.github.io/claude-training-mastery-path/level-3/07-privacy-data-handling/)
+- [ETL & Data Lake — 05 · Handling Late-Arriving & Out-of-Order Data](https://sigilipelli.github.io/etl-datalake-mastery-path/level-3/05-late-arriving-data/)
+
 ## Exercise
 
 1. Using the `events` DataFrame above, measure the max/median partition

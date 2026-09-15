@@ -135,6 +135,10 @@ at the driver** — the driver process itself never touches your 500 GB of
 data, it only receives small partial aggregates back from each executor,
 which is why the driver doesn't need nearly as much memory as the dataset.
 
+## 🔀 Related lessons on other tracks
+
+- [Data Engineering — 01 · Distributed Processing (Spark Basics)](https://sigilipelli.github.io/data-engineering-mastery-path/level-3/01-distributed-processing-spark/)
+
 ## Exercise
 
 Without writing any code, answer these for yourself (or in a notes file) —
