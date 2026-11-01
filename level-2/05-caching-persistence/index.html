@@ -1,0 +1,3001 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Caching Persistence — Spark DataFrames are lazily evaluated and, by default, recomputed from scratch every time an action touches them. If you reuse a…">
+      
+      
+      
+        <link rel="canonical" href="https://sigilipelli.github.io/pyspark-mastery-path/level-2/05-caching-persistence/">
+      
+      
+        <link rel="prev" href="../04-partitioning-strategy/">
+      
+      
+        <link rel="next" href="../06-spark-sql-basics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>05 · Caching Persistence - PySpark Mastery Path</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/progress-tracker.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PySpark Mastery Path">
+  <meta property="og:title" content="05 · Caching Persistence">
+  <meta property="og:description" content="Caching Persistence — Spark DataFrames are lazily evaluated and, by default, recomputed from scratch every time an action touches them. If you reuse a…">
+  <meta property="og:url" content="https://sigilipelli.github.io/pyspark-mastery-path/level-2/05-caching-persistence/">
+  <meta property="og:image" content="https://sigilipelli.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="05 · Caching Persistence">
+  <meta name="twitter:description" content="Caching Persistence — Spark DataFrames are lazily evaluated and, by default, recomputed from scratch every time an action touches them. If you reuse a…">
+  <meta name="twitter:image" content="https://sigilipelli.github.io/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-9440969811959397",
+      enable_page_level_ads: true
+    });
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "PySpark Mastery Path",
+    "description": "A structured, module-wise training program on Apache Spark's Python API for big-data processing — from your first PySpark script to production-grade Spark jobs.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Mastery Path",
+      "sameAs": "https://sigilipelli.github.io/"
+    },
+    "isAccessibleForFree": true,
+    "url": "https://sigilipelli.github.io/pyspark-mastery-path/level-2/05-caching-persistence/"
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "05 \u00b7 Caching Persistence",
+    "description": "Caching Persistence \u2014 Spark DataFrames are lazily evaluated and, by default, recomputed from scratch every time an action touches them. If you reuse a\u2026",
+    "url": "https://sigilipelli.github.io/pyspark-mastery-path/level-2/05-caching-persistence/",
+    "isPartOf": {
+      "@type": "Course",
+      "name": "PySpark Mastery Path",
+      "url": "https://sigilipelli.github.io/pyspark-mastery-path/"
+    },
+    "isAccessibleForFree": true,
+    "learningResourceType": "Lesson",
+    "inLanguage": "en"
+  }
+  </script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#05-caching-persistence" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="PySpark Mastery Path" class="md-header__button md-logo" aria-label="PySpark Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PySpark Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              05 · Caching Persistence
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/pyspark-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pyspark-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../privacy/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Privacy Policy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../license/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  License
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PySpark Mastery Path" class="md-nav__button md-logo" aria-label="PySpark Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    PySpark Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/pyspark-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pyspark-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/01-what-is-spark-distributed-processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · What Is Spark & Why Distributed Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/02-spark-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Spark Architecture (Driver, Executors, Cluster Manager)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/03-sparksession-first-script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · SparkSession & Your First PySpark Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/04-rdds-vs-dataframes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · RDDs vs. DataFrames
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/05-reading-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Reading Data (CSV, JSON, Parquet)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/06-dataframe-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · DataFrame Basics (select, filter, withColumn)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/07-schemas-data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Schemas & Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/08-basic-aggregations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Basic Aggregations (groupBy, agg)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/09-writing-data-out/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Writing Data Out
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/10-capstone-csv-to-parquet-etl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone — CSV-to-Parquet ETL Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-joins-broadcast-vs-shuffle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Joins Broadcast Vs Shuffle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-window-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Window Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-udfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Udfs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-partitioning-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Partitioning Strategy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Caching Persistence
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Caching Persistence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-recomputation-happens-by-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why recomputation happens by default
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-the-default-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cache(): the default persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persist-explicit-storage-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        persist(): explicit storage levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unpersist-freeing-the-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unpersist(): freeing the cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-caching-helps-and-when-it-doesnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When caching helps — and when it doesn't
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-the-dag-verifying-with-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and the DAG: verifying with explain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-correctness-stale-cache-pitfall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and correctness: stale cache pitfall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-multi-branch-report-from-one-cached-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: multi-branch report from one cached base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-spark-sql-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Spark SQL Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-sql-and-dataframe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · SQL And Dataframe API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-nulls-data-cleaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Nulls Data Cleaning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-nested-complex-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Nested Complex Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-capstone-multi-source-join/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Multi Source Join
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/01-execution-plan-explain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Execution Plan Explain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/02-shuffle-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Shuffle Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/03-handling-skewed-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Handling Skewed Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/04-structured-streaming-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Structured Streaming Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/05-performance-tuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Performance Tuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/06-adaptive-query-execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Adaptive Query Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/07-broadcast-joins-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Broadcast Joins At Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/08-monitoring-spark-ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Monitoring Spark UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/09-checkpointing-fault-tolerance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Checkpointing Fault Tolerance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-3/10-capstone-tuned-batch-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Tuned Batch Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/01-delta-lake-lakehouse-patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Delta Lake Lakehouse Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/02-orchestration-airflow-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Orchestration Airflow Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/03-cost-performance-tradeoffs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Cost Performance Tradeoffs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/04-debugging-failed-spark-jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Debugging Failed Spark Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/05-schema-evolution-production/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Schema Evolution Production
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/06-multi-tenant-cluster-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Multi Tenant Cluster Strategy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/07-data-quality-gates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Data Quality Gates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/08-cicd-for-spark-jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · CI/CD for Spark Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/09-career-growth-big-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Career Growth Big Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-4/10-capstone-production-lakehouse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Production Lakehouse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-recomputation-happens-by-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why recomputation happens by default
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-the-default-persistence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cache(): the default persistence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persist-explicit-storage-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        persist(): explicit storage levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unpersist-freeing-the-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unpersist(): freeing the cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-caching-helps-and-when-it-doesnt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When caching helps — and when it doesn't
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-the-dag-verifying-with-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and the DAG: verifying with explain
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching-and-correctness-stale-cache-pitfall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caching and correctness: stale cache pitfall
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-multi-branch-report-from-one-cached-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example: multi-branch report from one cached base
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="05-caching-persistence">05 · Caching Persistence<a class="headerlink" href="#05-caching-persistence" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Not executed against a live cluster in this environment</p>
+<p>Code and printed outputs below are hand-traced against documented PySpark
+behavior, not run against a live cluster here.</p>
+</div>
+<p>Spark DataFrames are lazily evaluated and, by default, recomputed from
+scratch every time an action touches them. If you reuse a DataFrame
+multiple times, caching avoids repeating expensive upstream work — but
+misused, it can also silently waste memory or produce stale results. This
+module covers when and how to cache correctly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"group_id"</span><span class="p">,</span> <span class="s2">"value"</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="why-recomputation-happens-by-default">Why recomputation happens by default<a class="headerlink" href="#why-recomputation-happens-by-default" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">log</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">expensive</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"derived"</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">expensive</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 0"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># recomputes `derived` for all rows</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">expensive</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 1"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># recomputes AGAIN from scratch</span>
+</code></pre></div>
+<p>Each <code>.count()</code> is a separate action, and Spark's lazy execution model
+re-runs the entire lineage — including the <code>sqrt</code>/<code>log</code> computation —
+every single time, because nothing told Spark to keep the intermediate
+result around.</p>
+<h2 id="cache-the-default-persistence">cache(): the default persistence<a class="headerlink" href="#cache-the-default-persistence" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">expensive_cached</span> <span class="o">=</span> <span class="n">expensive</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># triggers computation AND materializes the cache</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 0"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># reuses cached data, no recompute</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 1"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># reuses cached data again</span>
+</code></pre></div>
+<p><code>.cache()</code> is a lazy marker — it does nothing by itself until the first
+action runs. That first action computes the DataFrame <em>and</em> stores the
+result (by default, deserialized in executor memory, spilling to disk if
+it doesn't fit). Every subsequent action against <code>expensive_cached</code> reads
+from the cached data instead of recomputing.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">is_cached</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># True</span>
+</code></pre></div>
+<h2 id="persist-explicit-storage-levels">persist(): explicit storage levels<a class="headerlink" href="#persist-explicit-storage-levels" title="Permanent link">&para;</a></h2>
+<p><code>cache()</code> is shorthand for <code>persist(StorageLevel.MEMORY_AND_DISK)</code> (in
+recent PySpark versions). <code>persist()</code> lets you choose the tradeoff
+explicitly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageLevel</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY</span><span class="p">)</span>          <span class="c1"># fastest, lost if it doesn't fit</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK</span><span class="p">)</span>      <span class="c1"># default cache() behavior; spills to disk</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY_SER</span><span class="p">)</span>      <span class="c1"># serialized, less memory, more CPU to deserialize</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">DISK_ONLY</span><span class="p">)</span>            <span class="c1"># no memory pressure, slower reads</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK_2</span><span class="p">)</span>    <span class="c1"># replicated to 2 nodes, resilient to executor loss</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Memory</th>
+<th>Disk</th>
+<th>Serialized</th>
+<th>Replicated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MEMORY_ONLY</code></td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>MEMORY_AND_DISK</code></td>
+<td>yes</td>
+<td>spills</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>MEMORY_ONLY_SER</code></td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>DISK_ONLY</code></td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>MEMORY_AND_DISK_2</code></td>
+<td>yes</td>
+<td>spills</td>
+<td>no</td>
+<td>2x</td>
+</tr>
+</tbody>
+</table>
+<p><code>MEMORY_ONLY</code> risks silently dropping partitions (and recomputing them on
+demand) under memory pressure; <code>MEMORY_AND_DISK</code> is the safer general
+default, trading some speed for guaranteed availability of the cached
+data.</p>
+<h2 id="unpersist-freeing-the-cache">unpersist(): freeing the cache<a class="headerlink" href="#unpersist-freeing-the-cache" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+</code></pre></div>
+<p>Cached data occupies executor memory/disk indefinitely until you call
+<code>unpersist()</code> (or the Spark application ends). In a long-running job that
+caches many intermediate DataFrames in a loop, forgetting to unpersist is
+a common cause of executor memory pressure and eventual <code>OutOfMemoryError</code>
+or excessive disk spill — always unpersist a cached DataFrame once you're
+done reusing it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># unpersist(blocking=True) waits for the cache to actually be cleared</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># before returning, useful right before something else needs that memory:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">expensive_cached</span><span class="o">.</span><span class="n">unpersist</span><span class="p">(</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="when-caching-helps-and-when-it-doesnt">When caching helps — and when it doesn't<a class="headerlink" href="#when-caching-helps-and-when-it-doesnt" title="Permanent link">&para;</a></h2>
+<p>Caching pays off when:</p>
+<ul>
+<li>The same DataFrame is used as input to <strong>multiple actions</strong> (multiple
+  <code>.show()</code>/<code>.count()</code>/<code>.write()</code> calls, or multiple downstream
+  branches).</li>
+<li>The upstream computation (reads, joins, UDFs, aggregations) is genuinely
+  expensive to repeat.</li>
+</ul>
+<p>Caching does <strong>not</strong> help when:</p>
+<ul>
+<li>The DataFrame is used exactly once — you pay the cache-materialization
+  cost for zero reuse benefit.</li>
+<li>The dataset is far larger than available cluster memory — most
+  partitions spill to disk immediately, and disk-spilled cache is barely
+  faster than just recomputing.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Anti-pattern: caching something used only once</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 2"</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>   <span class="c1"># wasted — no reuse follows</span>
+</code></pre></div>
+<h2 id="caching-and-the-dag-verifying-with-explain">Caching and the DAG: verifying with explain<a class="headerlink" href="#caching-and-the-dag-verifying-with-explain" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">expensive</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">expensive</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"group_id = 0"</span><span class="p">)</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># == Physical Plan ==</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># *(1) Filter (group_id#3 = 0)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># +- InMemoryTableScan [id#1, group_id#3, value#5, derived#9], [(group_id#3 = 0)]</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1">#       +- InMemoryRelation [...], StorageLevel(disk, memory, deserialized, 1 replicas)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1">#          +- *(1) Project [...]</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1">#             +- *(1) Scan ExistingRDD[...]</span>
+</code></pre></div>
+<p><code>InMemoryTableScan</code> / <code>InMemoryRelation</code> in the plan confirms the cache is
+actually being used for this query, rather than recomputing from the
+underlying scan — a good habit before trusting that a <code>.cache()</code> call is
+paying off.</p>
+<h2 id="caching-and-correctness-stale-cache-pitfall">Caching and correctness: stale cache pitfall<a class="headerlink" href="#caching-and-correctness-stale-cache-pitfall" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>          <span class="c1"># materializes cache</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># new DataFrame, doesn't mutate df's cache</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">df2</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>          <span class="c1"># recomputes from df's CACHED data, then applies *2 — correct</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># But if the UNDERLYING SOURCE changes after caching (e.g. new files land</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># in the source path) and you re-read + cache again under the same</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># variable name, always drop the old cache first:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">df</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"/tmp/updated_source"</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+</code></pre></div>
+<p>Cached data is a snapshot as of when it was materialized — mutating the
+DataFrame lineage afterward (via <code>withColumn</code>, <code>filter</code>, etc.) is safe
+because those return <em>new</em> DataFrame objects, but re-reading the same
+source path and expecting the cache to reflect new data is not: always
+<code>unpersist()</code> before caching a fresh read under a reused reference.</p>
+<h2 id="worked-example-multi-branch-report-from-one-cached-base">Worked example: multi-branch report from one cached base<a class="headerlink" href="#worked-example-multi-branch-report-from-one-cached-base" title="Permanent link">&para;</a></h2>
+<p>Task: from <code>df</code>, compute three different summaries (per-group count,
+per-group average, and overall total) that all depend on the same derived
+<code>value_bucket</code> column — cache once, since it's used three times.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">when</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">avg</span><span class="p">,</span> <span class="nb">sum</span> <span class="k">as</span> <span class="n">spark_sum</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">base</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="s2">"value_bucket"</span><span class="p">,</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">when</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">"low"</span><span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">"high"</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">base</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>  <span class="c1"># materialize the cache with one action first</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">by_group</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"group_id"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"n"</span><span class="p">))</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">by_bucket</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"value_bucket"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_value"</span><span class="p">))</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="n">overall</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">spark_sum</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_value"</span><span class="p">))</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="n">by_group</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="n">by_bucket</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="n">overall</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="n">base</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>   <span class="c1"># done reusing it — free the memory</span>
+</code></pre></div>
+<p>Each of the three downstream <code>.show()</code> calls reuses <code>base</code>'s cached,
+already-<code>withColumn</code>-derived data rather than recomputing the <code>when(...)</code>
+expression three separate times.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>df.cache()</code> (shorthand for <code>persist(StorageLevel.MEMORY_AND_DISK)</code>) doesn't
+compute anything by itself — it only marks the DataFrame's plan node so that
+the <em>next</em> action materializes each partition's result and stores it in the
+executor's block manager instead of discarding it after use. Internally,
+Spark's <strong>BlockManager</strong> on each executor keeps cached partitions as
+in-memory objects (in Tungsten's binary row format) up to the configured
+memory fraction; if a partition doesn't fit, <code>MEMORY_AND_DISK</code> spills that
+partition to local disk rather than losing it, while <code>MEMORY_ONLY</code> would
+simply recompute it from lineage when needed again. This is why caching only
+helps when a DataFrame is reused across multiple actions — caching something
+used exactly once adds the cost of storing it for no benefit — and why
+<code>unpersist()</code> matters: cached blocks otherwise remain pinned in executor
+memory, reducing the memory available for shuffles and future caches, until
+Spark's least-recently-used eviction or manual <code>unpersist()</code> reclaims it.</p>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Using <code>df</code> from the top of this module:</p>
+<ol>
+<li>Build a derived DataFrame with an expensive-looking column (e.g.
+   <code>sqrt(value) * log(value + 1)</code>), cache it, materialize with <code>.count()</code>,
+   then run two different <code>.filter().count()</code> calls and confirm (via
+   <code>.explain()</code>) that <code>InMemoryTableScan</code> appears in both plans.</li>
+<li>Explain in a comment why caching a DataFrame used exactly once provides
+   no benefit and costs materialization time.</li>
+<li>Persist the same base DataFrame with <code>StorageLevel.DISK_ONLY</code> instead
+   of the default, and describe (in a comment) the tradeoff versus
+   <code>MEMORY_AND_DISK</code>.</li>
+<li>After finishing all queries against a cached DataFrame, call
+   <code>unpersist(blocking=True)</code> and explain why <code>blocking=True</code> matters if
+   another expensive job is about to start immediately afterward.</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../04-partitioning-strategy/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 04 · Partitioning Strategy">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                04 · Partitioning Strategy
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../06-spark-sql-basics/" class="md-footer__link md-footer__link--next" aria-label="Next: 06 · Spark SQL Basics">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                06 · Spark SQL Basics
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+        <script src="../../javascripts/progress-tracker.js"></script>
+      
+    
+  </body>
+</html>
