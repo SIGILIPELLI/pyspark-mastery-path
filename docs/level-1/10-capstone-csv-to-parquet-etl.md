@@ -190,7 +190,7 @@ forces synchronization across the cluster.
 
 ## 🔀 Related lessons on other tracks
 
-- [ETL & Data Lake — 08 · File Formats: CSV, JSON, Parquet, Avro](https://sigilipelli.github.io/etl-datalake-mastery-path/level-1/08-file-formats/)
+- [ETL & Data Lake — 08 · File Formats: CSV, JSON, Parquet, Avro](https://learnmasterypath.com/etl-datalake-mastery-path/level-1/08-file-formats/)
 
 ## Exercise
 

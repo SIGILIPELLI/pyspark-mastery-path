@@ -137,7 +137,7 @@ which is why the driver doesn't need nearly as much memory as the dataset.
 
 ## 🔀 Related lessons on other tracks
 
-- [Data Engineering — 01 · Distributed Processing (Spark Basics)](https://sigilipelli.github.io/data-engineering-mastery-path/level-3/01-distributed-processing-spark/)
+- [Data Engineering — 01 · Distributed Processing (Spark Basics)](https://learnmasterypath.com/data-engineering-mastery-path/level-3/01-distributed-processing-spark/)
 
 ## Exercise
 

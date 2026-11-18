@@ -157,7 +157,7 @@ rather than many tiny ones.
 
 ## 🔀 Related lessons on other tracks
 
-- [Kubernetes — 06 · Designing Production-Grade Cluster Architecture](https://sigilipelli.github.io/kubernetes-mastery-path/level-4/06-production-cluster-architecture/)
+- [Kubernetes — 06 · Designing Production-Grade Cluster Architecture](https://learnmasterypath.com/kubernetes-mastery-path/level-4/06-production-cluster-architecture/)
 
 ## Exercise
 

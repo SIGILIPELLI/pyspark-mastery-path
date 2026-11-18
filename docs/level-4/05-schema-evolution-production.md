@@ -231,7 +231,7 @@ cost scales with the number of files being read.
 
 ## 🔀 Related lessons on other tracks
 
-- [ETL & Data Lake — 04 · Schema Evolution & Handling](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/04-schema-evolution/)
+- [ETL & Data Lake — 04 · Schema Evolution & Handling](https://learnmasterypath.com/etl-datalake-mastery-path/level-2/04-schema-evolution/)
 
 ## Exercise
 

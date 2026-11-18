@@ -199,7 +199,7 @@ within the current stage because no data needs to cross the network.
 
 ## 🔀 Related lessons on other tracks
 
-- [ETL & Data Lake — 03 · Partitioning Strategy for a Data Lake](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/03-partitioning-strategy/)
+- [ETL & Data Lake — 03 · Partitioning Strategy for a Data Lake](https://learnmasterypath.com/etl-datalake-mastery-path/level-2/03-partitioning-strategy/)
 
 ## Exercise
 

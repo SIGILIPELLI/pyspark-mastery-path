@@ -190,7 +190,7 @@ codegen boundaries lining up with the stages you expect.
 
 ## 🔀 Related lessons on other tracks
 
-- [Data Engineering — 10 · Project — Spark-based Batch Pipeline](https://sigilipelli.github.io/data-engineering-mastery-path/level-3/10-project-spark-batch-pipeline/)
+- [Data Engineering — 10 · Project — Spark-based Batch Pipeline](https://learnmasterypath.com/data-engineering-mastery-path/level-3/10-project-spark-batch-pipeline/)
 
 ## Exercise
 

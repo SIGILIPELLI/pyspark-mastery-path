@@ -170,8 +170,8 @@ single-partition stage does not, no matter how many executors are added).
 
 ## 🔀 Related lessons on other tracks
 
-- [Docker — 08 · Cost & Performance at Scale](https://sigilipelli.github.io/docker-mastery-path/level-4/08-cost-performance-at-scale/)
-- [ETL & Data Lake — 04 · Cost & Performance Optimization for Lake Storage](https://sigilipelli.github.io/etl-datalake-mastery-path/level-3/04-cost-performance-optimization/)
+- [Docker — 08 · Cost & Performance at Scale](https://learnmasterypath.com/docker-mastery-path/level-4/08-cost-performance-at-scale/)
+- [ETL & Data Lake — 04 · Cost & Performance Optimization for Lake Storage](https://learnmasterypath.com/etl-datalake-mastery-path/level-3/04-cost-performance-optimization/)
 
 ## Exercise
 

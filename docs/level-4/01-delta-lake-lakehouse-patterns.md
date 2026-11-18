@@ -231,7 +231,7 @@ just adds the log-based commit protocol around it.
 
 ## 🔀 Related lessons on other tracks
 
-- [ETL & Data Lake — 01 · Data Lakehouse Concepts (Delta Lake/Iceberg/Hudi)](https://sigilipelli.github.io/etl-datalake-mastery-path/level-3/01-lakehouse-concepts/)
+- [ETL & Data Lake — 01 · Data Lakehouse Concepts (Delta Lake/Iceberg/Hudi)](https://learnmasterypath.com/etl-datalake-mastery-path/level-3/01-lakehouse-concepts/)
 
 ## Exercise
 

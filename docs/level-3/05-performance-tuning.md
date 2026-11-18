@@ -200,9 +200,9 @@ disk I/O from spilling.
 
 ## 🔀 Related lessons on other tracks
 
-- [Data Engineering — 07 · Performance Tuning for Pipelines](https://sigilipelli.github.io/data-engineering-mastery-path/level-3/07-performance-tuning/)
-- [Freertos — Performance Tuning & Measurement](https://sigilipelli.github.io/freertos-mastery-path/level-3/08-performance-tuning/)
-- [Tableau — 05 · Advanced Performance Tuning](https://sigilipelli.github.io/tableau-mastery-path/level-3/06-advanced-performance-tuning/)
+- [Data Engineering — 07 · Performance Tuning for Pipelines](https://learnmasterypath.com/data-engineering-mastery-path/level-3/07-performance-tuning/)
+- [Freertos — Performance Tuning & Measurement](https://learnmasterypath.com/freertos-mastery-path/level-3/08-performance-tuning/)
+- [Tableau — 05 · Advanced Performance Tuning](https://learnmasterypath.com/tableau-mastery-path/level-3/06-advanced-performance-tuning/)
 
 ## Exercise
 

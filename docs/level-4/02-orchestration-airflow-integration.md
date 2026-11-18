@@ -229,7 +229,7 @@ one Spark driver's session.
 
 ## 🔀 Related lessons on other tracks
 
-- [ETL & Data Lake — 05 · Orchestration Tools Overview (Airflow DAGs)](https://sigilipelli.github.io/etl-datalake-mastery-path/level-2/05-orchestration-tools-airflow/)
+- [ETL & Data Lake — 05 · Orchestration Tools Overview (Airflow DAGs)](https://learnmasterypath.com/etl-datalake-mastery-path/level-2/05-orchestration-tools-airflow/)
 
 ## Exercise
 

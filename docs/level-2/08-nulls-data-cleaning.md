@@ -229,8 +229,8 @@ decompressing them.
 
 ## 🔀 Related lessons on other tracks
 
-- [Data Science — 03 · Data Cleaning & Wrangling](https://sigilipelli.github.io/data-science-mastery-path/level-1/03-data-cleaning-wrangling/)
-- [Excel — 09 · Data Validation & Cleaning](https://sigilipelli.github.io/excel-mastery-path/level-1/09-data-validation-cleaning/)
+- [Data Science — 03 · Data Cleaning & Wrangling](https://learnmasterypath.com/data-science-mastery-path/level-1/03-data-cleaning-wrangling/)
+- [Excel — 09 · Data Validation & Cleaning](https://learnmasterypath.com/excel-mastery-path/level-1/09-data-validation-cleaning/)
 
 ## Exercise
 

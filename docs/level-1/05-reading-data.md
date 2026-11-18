@@ -175,8 +175,8 @@ plain CSV cannot support because it has no such metadata to consult upfront.
 
 ## 🔀 Related lessons on other tracks
 
-- [ETL & Data Lake — 08 · File Formats: CSV, JSON, Parquet, Avro](https://sigilipelli.github.io/etl-datalake-mastery-path/level-1/08-file-formats/)
-- [NodeMCU/IoT — 08 · JSON Data & Config Storage](https://sigilipelli.github.io/nodemcu-mastery-path/level-2/08-json-data-config-storage/)
+- [ETL & Data Lake — 08 · File Formats: CSV, JSON, Parquet, Avro](https://learnmasterypath.com/etl-datalake-mastery-path/level-1/08-file-formats/)
+- [NodeMCU/IoT — 08 · JSON Data & Config Storage](https://learnmasterypath.com/nodemcu-mastery-path/level-2/08-json-data-config-storage/)
 
 ## Exercise
 
