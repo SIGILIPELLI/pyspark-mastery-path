@@ -1,3 +1,7 @@
+---
+description: "Level 1 (Entry) of the free PySpark Mastery Path. Understand every moving part of a Spark job — architecture, the SparkSession, RDDs vs. DataFrames, reading…"
+---
+
 # Level 1 · Entry <span class="level-badge">Foundations</span>
 
 Goal: understand every moving part of a Spark job — architecture, the

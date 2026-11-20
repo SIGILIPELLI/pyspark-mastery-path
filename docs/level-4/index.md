@@ -1,3 +1,7 @@
+---
+description: "Level 4 (Master) of the free PySpark Mastery Path: Delta Lake / Lakehouse Patterns with Spark, Production Job Orchestration (Airflow Integration Concepts)…"
+---
+
 # Level 4 · Master
 
 ## Modules

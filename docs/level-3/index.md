@@ -1,3 +1,7 @@
+---
+description: "Level 3 (Advanced) of the free PySpark Mastery Path: Understanding the Execution Plan (explain(), Physical vs. Logical Plan), Shuffle Optimization, Handling…"
+---
+
 # Level 3 · Advanced
 
 ## Modules

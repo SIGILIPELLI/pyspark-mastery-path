@@ -1,3 +1,7 @@
+---
+description: "Level 2 (Intermediate) of the free PySpark Mastery Path: Joins in Spark (Broadcast vs. Shuffle), Window Functions, UDFs (and Why to Avoid Them When…"
+---
+
 # Level 2 · Intermediate
 
 ## Modules
