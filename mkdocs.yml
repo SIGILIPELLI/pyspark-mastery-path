@@ -53,9 +53,11 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
   - stylesheets/progress-tracker.css
+  - stylesheets/final-quiz.css
 
 extra_javascript:
   - javascripts/progress-tracker.js
+  - javascripts/final-quiz.js
 
 
 
@@ -134,3 +136,5 @@ nav:
       - "08 · CI/CD for Spark Jobs": level-4/08-cicd-for-spark-jobs.md
       - "09 · Career Growth Big Data": level-4/09-career-growth-big-data.md
       - "10 · Capstone Production Lakehouse": level-4/10-capstone-production-lakehouse.md
+  - "🎯 Final Quiz": quiz.md
+
