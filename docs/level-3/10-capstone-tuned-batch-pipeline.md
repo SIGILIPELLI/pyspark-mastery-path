@@ -2,7 +2,7 @@
 description: "Capstone Tuned Batch Pipeline — This capstone builds a batch pipeline end-to-end, deliberately introduces the performance problems from Level 3 (bad plan…"
 ---
 
-# 10 · Capstone Tuned Batch Pipeline
+# 10 · Project Tuned Batch Pipeline
 
 !!! note "Not executed against a live cluster in this environment"
     Code and printed outputs below are hand-traced against documented PySpark

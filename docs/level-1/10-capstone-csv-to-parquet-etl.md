@@ -2,7 +2,7 @@
 description: "Capstone — CSV-to-Parquet ETL Script — Bring together everything from this level into one small, real ETL script: read raw order data from CSV, validate…"
 ---
 
-# 10 · Capstone — CSV-to-Parquet ETL Script
+# 10 · Project — CSV-to-Parquet ETL Script
 
 !!! note "Not executed against a live cluster in this environment"
     This script was written and carefully hand-traced for correctness against
