@@ -8,7 +8,7 @@ description: "Free course on PySpark and Apache Spark for big-data processing --
 A structured, module-wise training program on **PySpark**, Apache Spark's Python
 API for distributed, big-data processing — from your first `SparkSession` to
 production-grade Spark jobs, streaming pipelines, and lakehouse patterns — with
-real code in every module and a hands-on project at the end of each level.
+real code in every module and a hands-on project at the end of Levels 1–3 and a capstone at the end of Level 4.
 
 Spark is the engine behind most large-scale data pipelines you'll meet in the
 wild: it takes a dataset too big (or too slow) for a single machine and spreads
@@ -41,7 +41,7 @@ different physical strategies — not just which method to call.
 - Every topic page has real, syntactically-checked PySpark code. Code that was
   reasoned through carefully but not executed against a live cluster in this
   environment is labeled as such, so you always know what you're looking at.
-- Each level ends with a project that combines everything learned in that level.
+- Levels 1–3 each end with a project that combines everything learned in that level, and Level 4 ends with the course capstone.
 - Use the search bar (top of the page) to jump straight to a topic.
 
 Start here → [Level 1 · Entry](level-1/index.md)
